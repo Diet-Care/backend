@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js",
-    "dev": "node index.js"
+    "dev": "node index.js",
+    "db:create_migration": "sequelize-cli migration:generate --name",
+    "db:run_migration": "sequelize-cli db:migrate"
   },
   "author": "dietcare",
   "license": "MIT",
