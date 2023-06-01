@@ -1,18 +1,20 @@
 module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.createTable('comment_olahraga', {
-      id:{
-        type: Sequelize.DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-    },
+      uuid: {
+        type: Sequelize.DataTypes.UUID,
+        defaultValue: Sequelize.DataTypes.UUIDV4,
+        allowNull: false,
+        primaryKey: true
+      },
       id_olahraga:{
-          type: Sequelize.DataTypes.INTEGER,
+          type: Sequelize.DataTypes.UUID,
+          defaultValue: Sequelize.DataTypes.UUIDV4,
           references: {
               model: {
                   tableName: 'olahraga'
               },
-              key: 'id'
+              key: 'uuid'
           }
       },
       bintang:{
@@ -22,8 +24,8 @@ module.exports = {
           type: Sequelize.DataTypes.STRING(255),
       }
     }, {
-    timestamps: false,
-  })
+      timestamps: false,
+    })
   },
 
   async down (queryInterface, Sequelize) {
