@@ -1,4 +1,7 @@
 const { Sequelize } = require("sequelize");
+const dotenv = require("dotenv");
+dotenv.config();
+
 const UserFn = require("./Users");
 const OlahragaFn = require("./Olahraga");
 const KategoriFn = require("./Kategori");
