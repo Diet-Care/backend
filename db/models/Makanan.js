@@ -4,18 +4,20 @@ module.exports = function(connection) {
     class Makanan extends Model {}
 
     Makanan.init({
-        id:{
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true,
-        },
+        uuid: {
+            type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4,
+            allowNull: false,
+            primaryKey: true
+          },
         id_kategori:{
-            type: DataTypes.INTEGER,
+            type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4,
             references: {
                 model: {
                     tableName: 'kategori'
                 },
-                key: 'id'
+                key: 'uuid'
             },
         },
         judul_makanan:{
@@ -34,6 +36,9 @@ module.exports = function(connection) {
             type: DataTypes.STRING(255),
         },
         jumlah_kalori:{
+            type: DataTypes.STRING,
+        },
+        level: {
             type: DataTypes.STRING,
         }
     }, {

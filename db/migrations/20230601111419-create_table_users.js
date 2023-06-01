@@ -1,10 +1,11 @@
 module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.createTable('users', {
-      id:{
-        type: Sequelize.DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
+      uuid: {
+        type: Sequelize.DataTypes.UUID,
+        defaultValue: Sequelize.DataTypes.UUIDV4,
+        allowNull: false,
+        primaryKey: true
       },
       name:{
           type: Sequelize.DataTypes.STRING(255),
@@ -26,7 +27,7 @@ module.exports = {
       }
     }, {
       timestamps: false,
-  });
+    })
   },
 
   async down (queryInterface, Sequelize) {

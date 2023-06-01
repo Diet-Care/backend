@@ -4,18 +4,20 @@ module.exports = function(connection) {
     class Comment_makanan extends Model{}
 
     Comment_makanan.init({
-        id:{
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true,
-        },
+        uuid: {
+            type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4,
+            allowNull: false,
+            primaryKey: true
+          },
         id_olahraga:{
-            type: DataTypes.INTEGER,
+            type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4,
             references: {
                 model: {
                     tableName: 'olahraga'
                 },
-                key: 'id'
+                key: 'uuid'
             }
         },
         bintang:{

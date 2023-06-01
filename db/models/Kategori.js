@@ -4,10 +4,14 @@ module.exports = function(connection){
     class Kategori extends Model {}
 
     Kategori.init({
-        id:{
+        uuid: {
+            type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4,
+            allowNull: false,
+            primaryKey: true
+          },
+        id_kategori:{
             type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true,
         },
         nama_kategori:{
             type: DataTypes.STRING,
