@@ -72,7 +72,7 @@ const handleregister = async (req,res, next) =>{
     });
 
     res.json({
-        message : "successfuly register user",
+        message : "successfuly",
         data : createuser
     });
 }

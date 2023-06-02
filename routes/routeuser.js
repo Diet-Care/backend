@@ -10,7 +10,6 @@ const get = app.get("/", (req, res) => {
 const GetAllUser = app.get("/users", handleuserall);
 const DeleteUser = app.delete('/users/:id', handleuserdelete);
 
-
 module.exports = {
     get,
     GetAllUser,
