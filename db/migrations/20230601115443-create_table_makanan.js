@@ -7,16 +7,6 @@
         allowNull: false,
         primaryKey: true
       },
-      id_kategori:{
-          type: Sequelize.DataTypes.UUID,
-          defaultValue: Sequelize.DataTypes.UUIDV4,
-          references: {
-              model: {
-                  tableName: 'kategori'
-              },
-              key: 'uuid'
-          },
-      },
       judul_makanan:{
           type: Sequelize.DataTypes.STRING,
       },
@@ -37,6 +27,9 @@
       },
       level: {
           type: Sequelize.DataTypes.STRING,
+      },
+      kategori:{
+          type: Sequelize.DataTypes.ENUM('makanan', 'olahraga'),
       }
     }, {
       timestamps: false,

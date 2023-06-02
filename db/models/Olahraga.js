@@ -10,16 +10,6 @@ module.exports = function(connection) {
             allowNull: false,
             primaryKey: true
           },
-          kategori_id:{
-            type: DataTypes.UUID,
-            defaultValue: DataTypes.UUIDV4,
-            references: {
-                model: {
-                    tableName: 'kategori'
-                },
-                key: 'uuid'
-            }
-        },
         judul_olahraga:{
             type: DataTypes.STRING,
         },
@@ -40,6 +30,9 @@ module.exports = function(connection) {
         },
         level: {
             type: DataTypes.STRING,
+        },
+        kategori: {
+            type: DataTypes.ENUM('makanan', 'olahraga'),
         }
     }, {
         sequelize: connection,
