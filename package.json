@@ -8,7 +8,9 @@
     "start": "nodemon index.js",
     "dev": "node index.js",
     "db:create_migration": "sequelize-cli migration:generate --name",
-    "db:run_migration": "sequelize-cli db:migrate"
+    "db:run_migration": "sequelize-cli db:migrate",
+    "db:create_seeders": "sequelize-cli seed:generate --name",
+    "db:run_seeders": "sequelize-cli db:seed:all"
   },
   "author": "dietcare",
   "license": "MIT",
