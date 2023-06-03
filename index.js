@@ -3,7 +3,7 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const upload = require('express-fileupload');
 
-// import file di folder routes
+// tableuser
 const { get, GetAllUser, DeleteUser } = require("./routes/routeuser");
 const { register, login } = require("./routes/routeauth");
 const { getallolahraga, getidolahraga, createolahraga, deleteolahraga } = require("./routes/routeolahraga");
@@ -12,7 +12,6 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 4000;
-
 app.use(upload());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));

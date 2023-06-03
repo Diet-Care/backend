@@ -10,7 +10,7 @@ cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
     api_key: process.env.API_KEY,
     api_secret: process.env.API_SECRET,
-    secure: true
+    // secure: true
   });
 
 const handleolhragaall = async (req, res) => {
@@ -23,6 +23,7 @@ const handleolhragaall = async (req, res) => {
                     total: olahraga.length
                 },
                 data: olahraga,
+                img : cloudinary.url(new Date().getTime())
         }
 
     res.status(created).json(response)
@@ -81,6 +82,7 @@ const handlecreateolhraga = async (req, res) =>{
             status : "Success",
             message : "Create Olahraga",
             data : createolahraga,
+            img : cloudinaryResponse
         }
         res.status(ok).json(response);
     } catch (error) {
