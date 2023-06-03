@@ -10,7 +10,7 @@ const handleuserall = async (req, res) => {
     const users = await Users.findAll();
     const response = {
                 status: "SUCCESS",
-                message: "Get All Todo",
+                message: "Get All Users",
                 meta: {
                     total: users.length
                 },
