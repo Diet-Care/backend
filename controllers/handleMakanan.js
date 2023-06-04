@@ -1,4 +1,4 @@
-require("dotenv").config;
+require("dotenv").config();
 const { Makanan } = require("../db/models");
 const { created, notfound, ok, bad, servererror } = require("./statuscode");
 
