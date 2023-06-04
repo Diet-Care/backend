@@ -17,9 +17,41 @@ const handleuserall = async (req, res) => {
                 data: users
         }
 
-    res.status(created).json(response)
+    res.status(ok).json(response)
     return
 };
+
+const handleUserId = async(req,res) =>{
+    try {
+        const uuid = req.params.id;
+
+        const User = await Users.findOne({
+            where: {
+                uuid : uuid
+            },
+            attributes : ['name', 'email', 'alamat']
+        });
+
+        if(!User) {
+             res.status(notfound);
+            res.json({ 
+                message : "User Not Found" });
+            
+            return;
+        }
+        let response = {
+            status : "Success",
+            message : "Get Detail Users",
+            data : User
+        }
+        res.status(ok).json(response);
+    } catch (error) {
+        res.status(servererror).json({
+            message : error.message
+        });
+    }
+    
+}
 
 const handleuserdelete = async(req,res) =>{   
     const  uuid  = req.params.id;
@@ -44,5 +76,6 @@ const handleuserdelete = async(req,res) =>{
 
 module.exports = {
     handleuserall,
+    handleUserId,
     handleuserdelete
 }
