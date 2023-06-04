@@ -1,4 +1,4 @@
-require("dotenv").config;
+require("dotenv").config();
 const { Makanan } = require("../db/models");
 const { created, notfound, ok, bad, servererror } = require("./statuscode");
 
@@ -49,24 +49,24 @@ const handleMakananGetById = async function(req,res) {
 
 const handleCreateMakanan = async function(req, res) {
     const body = req.body;
-    const kategori = 'olahraga';
+    const kategori = 'makanan';
 
     try {
         const _base64 = Buffer.from(req.files.img_makanan.data, 'base64').toString('base64');
         const base64 = `data:image/jpeg;base64,${_base64}`;
 
-        const cloudinary_Response = await cloudinary.uploader.upload(base64, {
-            public_id: new Date().getTime()
+        const cloudinary_Response = await cloudinary.uploader.upload(base64, 
+            {folder: "edukasi/makanan", public_id: new Date().getTime()
         });
 
-        const imgMakanan = cloudinary_Response. secure_url;
+        const imgMakanan = cloudinary_Response.secure_url;
 
         const createMakanan = await Makanan.create({
             judul_makanan : body.judul_makanan,
             deskripsi_singkat: body.deskripsi_singkat,
             deskripsi_lengkap: body.deskripsi_lengkap,
             tips_makanan: body.tips_makanan,
-            img_makanan: body.img_makanan,
+            img_makanan: imgMakanan,
             jumlah_kalori: body.jumlah_kalori,
             level: body.level,
             kategori: kategori
