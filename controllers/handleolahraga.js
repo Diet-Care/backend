@@ -1,29 +1,24 @@
 
 const { Olahraga } = require("../db/models");
+const { cloudinaryconf } = require("./confcloudinary");
 const cloudinary = require('cloudinary').v2;
 require("dotenv").config;
 
 const { created, ok, notfound, bad, servererror } = require("./statuscode");
 
 // Configuration 
-cloudinary.config({
-    cloud_name: process.env.CLOUD_NAME,
-    api_key: process.env.API_KEY,
-    api_secret: process.env.API_SECRET,
-    // secure: true
-  });
+cloudinaryconf();
 
 const handleolhragaall = async (req, res) => {
    
     const olahraga = await Olahraga.findAll();
     const response = {
                 status: "SUCCESS",
-                message: "Get All Olahraga",
+                message: "Get All sport",
                 meta: {
                     total: olahraga.length
                 },
                 data: olahraga,
-                img : cloudinary.url(new Date().getTime())
         }
 
     res.status(created).json(response)
@@ -40,13 +35,13 @@ const handleolhragaid = async (req, res) => {
     });
    let response = {
             status: "SUCCESS",
-            message: "Get Detail olahraga",
+            message: "Get Detail sport",
             data: olahraga
    }
    if(!olahraga){
     res.status(notfound);
     res.json({
-        message: 'User not Found'
+        message: 'sport not Found'
     });
     }
     res.status(created).json(response)
@@ -59,10 +54,11 @@ const handlecreateolhraga = async (req, res) =>{
     const kategori = 'olahraga';
     
     try {
+
         const _base64 = Buffer.from(req.files.img_olahraga.data, 'base64').toString('base64');
         const base64 = `data:image/jpeg;base64,${_base64}`;
         
-        const cloudinaryResponse = await cloudinary.uploader.upload(base64, { public_id: new Date().getTime() });
+        const cloudinaryResponse = await cloudinary.uploader.upload(base64,{folder: "edukasi/olahraga", public_id: new Date().getTime() });
 
         const imgolahraga = cloudinaryResponse.secure_url;
         
@@ -77,12 +73,10 @@ const handlecreateolhraga = async (req, res) =>{
             kategori : kategori
         });
 
-        console.log(createolahraga);
         response = {
             status : "Success",
-            message : "Create Olahraga",
+            message : "Create Sport",
             data : createolahraga,
-            img : cloudinaryResponse
         }
         res.status(ok).json(response);
     } catch (error) {
@@ -90,7 +84,7 @@ const handlecreateolhraga = async (req, res) =>{
             status : "ERROR",
             message : error
         }
-        res.status(servererror).json(response)
+        res.status(bad).json(response);
     }
 }
 
@@ -103,10 +97,10 @@ const handledeletolahraga = async (req,res) =>{
         });
         if(deleteolahraga){
             return res.status(ok).json({
-                message : "Success data Olahraga Delete"
+                message : "Sport Has Been Delete"
             });
         }else{
-            return res.status(notfound).json({ error: 'Data Olahraga not found' });
+            return res.status(notfound).json({ error: 'Sport not found' });
         }
     } catch (error) {
         console.error(error);
