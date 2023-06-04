@@ -4,48 +4,64 @@ const { cloudinaryconf } = require("./confcloudinary");
 const cloudinary = require('cloudinary').v2;
 require("dotenv").config;
 
-const { created, ok, notfound, bad, servererror } = require("./statuscode");
+const { created, ok, notfound, servererror } = require("./statuscode");
 
 // Configuration 
 cloudinaryconf();
 
 const handleolhragaall = async (req, res) => {
-   
-    const olahraga = await Olahraga.findAll();
-    const response = {
-                status: "SUCCESS",
-                message: "Get All sport",
-                meta: {
-                    total: olahraga.length
-                },
-                data: olahraga,
-        }
+   try {
+        const olahraga = await Olahraga.findAll();
+        const response = {
+                    status: "SUCCESS",
+                    message: "Get All sport",
+                    meta: {
+                        total: olahraga.length
+                    },
+                    data: olahraga,
+        };
 
-    res.status(created).json(response)
-    return
+        res.status(ok).json(response);
+        return;
+   } catch (error) {
+        res.status(servererror).json({
+            message : error.message
+        });
+   };
 };
 
 const handleolhragaid = async (req, res) => {
-    const  uuid  = req.params.id;
+    try {
+        const  uuid  = req.params.id;
 
-    const olahraga = await Olahraga.findAll({
-        where :{
-            uuid : uuid
+        const olahraga = await Olahraga.findOne({
+            where :{
+                uuid : uuid
+            }
+        });
+        
+        if(!olahraga){
+            res.status(notfound);
+            res.json({
+                message: "sport not Found"
+            });
+
+            return;
         }
-    });
-   let response = {
+
+        let response = {
             status: "SUCCESS",
             message: "Get Detail sport",
             data: olahraga
-   }
-   if(!olahraga){
-    res.status(notfound);
-    res.json({
-        message: 'sport not Found'
-    });
-    }
-    res.status(created).json(response)
-    return
+        }
+
+        res.status(ok).json(response);
+        return;
+    } catch (error) {
+        res.status(servererror).json({
+            message : error.message
+        });
+    };
 };
 
 const handlecreateolhraga = async (req, res) =>{
@@ -54,7 +70,6 @@ const handlecreateolhraga = async (req, res) =>{
     const kategori = 'olahraga';
     
     try {
-
         const _base64 = Buffer.from(req.files.img_olahraga.data, 'base64').toString('base64');
         const base64 = `data:image/jpeg;base64,${_base64}`;
         
@@ -77,15 +92,25 @@ const handlecreateolhraga = async (req, res) =>{
             status : "Success",
             message : "Create Sport",
             data : createolahraga,
-        }
-        res.status(ok).json(response);
+        };
+
+        res.status(created).json(response);
     } catch (error) {
         response ={
             status : "ERROR",
-            message : error
+            message : error.message
         }
-        res.status(bad).json(response);
-    }
+        res.status(servererror).json(response);
+    };
+}
+
+const handleupdateolahraga = async(req, res) =>{
+    const uuid = req.params.id;
+    try {
+        
+    } catch (error) {
+        
+    };
 }
 
 const handledeletolahraga = async (req,res) =>{
@@ -100,12 +125,14 @@ const handledeletolahraga = async (req,res) =>{
                 message : "Sport Has Been Delete"
             });
         }else{
-            return res.status(notfound).json({ error: 'Sport not found' });
+            return res.status(notfound).json({ 
+                error: 'Sport not found' 
+            });
         }
     } catch (error) {
-        console.error(error);
-        return res.status(servererror).json({ error: 'Server error' });
-    }   
+        res.status(servererror).json({ 
+            error: error.message });
+    };
 }
 
 module.exports = {
