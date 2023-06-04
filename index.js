@@ -8,6 +8,7 @@ const { get, GetAllUser, DeleteUser } = require("./routes/routeuser");
 const { register, login } = require("./routes/routeauth");
 const { getallolahraga, getidolahraga, createolahraga, deleteolahraga } = require("./routes/routeolahraga");
 const { getallmakanan, getidmakanan, createmakanan, deletemakanan } = require("./routes/routeMakanan.js");
+const { getallcommentolahraga, getidcommentolahraga, createcommentolahraga, deletecommentolahraga } = require("./routes/routecommentolahraga");
 
 
 dotenv.config();
@@ -27,6 +28,8 @@ app.use(register, login);
 app.use(getallolahraga, getidolahraga, createolahraga, deleteolahraga);
 
 app.use(getallmakanan, getidmakanan, createmakanan, deletemakanan);
+
+app.use(getallcommentolahraga, getidcommentolahraga, createcommentolahraga, deletecommentolahraga);
 
 app.listen(port, '0.0.0.0', function() {
     console.log(`Your application is running on the port ${port}`);

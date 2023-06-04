@@ -23,6 +23,18 @@ const Makanan = MakananFn(connection);
 const Comment_makanan = Comment_makananFn(connection);
 const Comment_olahraga = Comment_olahragaFn(connection);
 
+Comment_olahraga.hasOne(Olahraga, {
+    sourceKey: 'id_olahraga',
+    foreignKey: 'uuid',
+    as: 'olahraga'
+});
+
+Olahraga.hasMany(Comment_olahraga, {
+    sourceKey: 'uuid',
+    foreignKey: 'id_olahraga',
+    as: 'comment_olahraga'
+})
+
 module.exports = {
     Users,
     Olahraga,
