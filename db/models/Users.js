@@ -22,6 +22,18 @@ module.exports = function (connection) {
         role:{
             type: DataTypes.ENUM('admin', 'user')
         },
+        gender: {
+            type: DataTypes.STRING,
+        },
+        umur : {
+            type: DataTypes.INTEGER,
+        },
+        geografis: {
+            type: DataTypes.STRING,
+        },
+        profesi: {
+            type: DataTypes.STRING,
+        },
         alamat:{
             type: DataTypes.STRING(255),
         },

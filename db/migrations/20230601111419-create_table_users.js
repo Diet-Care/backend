@@ -19,6 +19,18 @@ module.exports = {
       role:{
           type: Sequelize.DataTypes.ENUM('admin', 'user')
       },
+      gender: {
+          type: Sequelize.DataTypes.STRING,
+      },
+      umur : {
+          type: Sequelize.DataTypes.INTEGER,
+      },
+      geografis: {
+          type: Sequelize.DataTypes.STRING,
+      },
+      profesi: {
+          type: Sequelize.DataTypes.STRING,
+      },
       alamat:{
           type: Sequelize.DataTypes.STRING(255),
       },
