@@ -18,6 +18,7 @@
       },
       img_makanan:{
           type: Sequelize.DataTypes.STRING,
+          allowNull: true,
       },
       tips_makanan:{
           type: Sequelize.DataTypes.STRING(255),

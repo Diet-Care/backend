@@ -39,6 +39,7 @@ module.exports = function (connection) {
         },
         img_profile:{
             type: DataTypes.STRING,
+            allowNull: true,
         }
     }, {
         sequelize: connection,

@@ -36,6 +36,7 @@ module.exports = {
       },
       img_profile:{
           type: Sequelize.DataTypes.STRING,
+          allowNull: true,
       }
     }, {
       timestamps: false,

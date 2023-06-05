@@ -21,6 +21,7 @@ module.exports = function(connection) {
         },
         img_makanan:{
             type: DataTypes.STRING,
+            allowNull: true,
         },
         tips_makanan:{
             type: DataTypes.STRING(255),
