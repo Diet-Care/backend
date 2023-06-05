@@ -48,9 +48,9 @@ const handleCreateCommentOlahraga = async function(req, res) {
     let code = ok;
     try {
     const newComment = await Comment_olahraga.create({
-        uuid_olahraga: req.body.uuid_olahraga,
+        id_olahraga: req.params.id,
         bintang: req.body.bintang,
-        deskripsi_review: req.body.deskripsi_review
+        comment_review: req.body.deskripsi_review
     });
 
     response = {
@@ -58,6 +58,7 @@ const handleCreateCommentOlahraga = async function(req, res) {
         message: "Create New Comment",
         data: newComment
     }
+    return res.status(ok).json(response);
 } catch(error) {
     response = {
         status: "ERROR",

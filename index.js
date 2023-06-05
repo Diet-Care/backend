@@ -5,9 +5,13 @@ const upload = require('express-fileupload');
 
 // tableuser
 const { get, GetAllUser, DeleteUser } = require("./routes/routeuser");
+
 const { register, login } = require("./routes/routeauth");
+
 const { getallolahraga, getidolahraga, createolahraga, deleteolahraga } = require("./routes/routeolahraga");
+
 const { getallmakanan, getidmakanan, createmakanan, deletemakanan } = require("./routes/routeMakanan.js");
+
 const { getallcommentolahraga, getidcommentolahraga, createcommentolahraga, deletecommentolahraga } = require("./routes/routecommentolahraga");
 
 
