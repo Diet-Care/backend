@@ -53,6 +53,10 @@ const handleUserId = async(req,res) =>{
     
 }
 
+const handleUpdateuser= async(req, res) =>{
+    
+}
+
 const handleuserdelete = async(req,res) =>{   
     const  uuid  = req.params.id;
 

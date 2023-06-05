@@ -4,10 +4,10 @@ const { handleCommentOlahragaAll, handleCommentOlahragaById, handleCreateComment
 
 const app = express();
 
-const getallcommentolahraga = app.get("/comment_olahraga", handleCommentOlahragaAll);
-const getidcommentolahraga = app.get("/comment_olahraga/:id", handleCommentOlahragaById);
-const createcommentolahraga = app.post("/comment_olahraga", handleCreateCommentOlahraga);
-const deletecommentolahraga = app.delete("/comment_olahraga/:id", handleDeleteCommentOlahragaById);
+const getallcommentolahraga = app.get("/olahraga/:id/comment", handleCommentOlahragaAll);
+const getidcommentolahraga = app.get("/olahraga/:id/comment/:id", handleCommentOlahragaById);
+const createcommentolahraga = app.post("/olahraga/:id/comment", handleCreateCommentOlahraga);
+const deletecommentolahraga = app.delete("/olahraga/:id/comment/:id", handleDeleteCommentOlahragaById);
 
 module.exports = {
     getallcommentolahraga,
