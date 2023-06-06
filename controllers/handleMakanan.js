@@ -109,9 +109,83 @@ const handleDeleteMakanan = async function(req, res) {
     }
 }
 
+const handleUpdateMakanan = async function(req, res) {
+    try {
+        const uuid = req.params.id;
+        const body = req.body; 
+
+        const makanan = await Makanan.findOne({
+            where: {
+                uuid: uuid
+            }
+        });
+
+        if(!makanan){
+            return res.status(notfound).json({
+                message: "Food You Looking For Is Not Found"
+            });
+        }
+
+        const updateimgmakanan = req.params.img_makanan;
+        const updateimg = await cloudinary.uploader.update(`edukasi/makanan/${updateimgmakanan}`, {type: "fetch", invalidate: true, folder: `edukasi/makanan/${updateimgmakanan}`});
+        console.log(updateimg);
+
+        const judul_makanan = body.judul_makanan;
+        const deskripsi_singkat = body.deskripsi_singkat;
+        const deskripsi_lengkap = body.deskripsi_lengkap;
+        const tips_makanan = body.tips_makanan;
+        const img_makanan = body.img_makanan;
+        const jumlah_kalori = body.jumlah_kalori;
+        const level = body.level;
+
+        const updatemakanan = await Makanan.update({
+            judul_makanan: judul_makanan,
+            deskripsi_singkat: deskripsi_singkat,
+            deskripsi_lengkap: deskripsi_lengkap,
+            tips_makanan: tips_makanan,
+            img_makanan: img_makanan,
+            jumlah_kalori: jumlah_kalori,
+            level: level,
+        }, {
+            where: {
+                uuid: uuid
+            }
+        });
+
+        if(updatemakanan){
+            response = {
+                status: "SUCCESS",
+                message: "Update Success",
+            }
+            return res.status(ok).json(response);
+        }
+    } catch (error) {
+        res.status(servererror).json({
+            error: error.message
+        });
+    };
+
+}
+
+const handleDeleteAllMakanan = async function(req, res) {
+    try {
+        await Makanan.destroy({
+            where: {},
+            truncate: true,
+        });
+        return res.status(ok).send();
+    } catch(error) {
+        console.error(error);
+        return res.status(servererror).json({error: 'Server Error'});
+    }
+};
+
+
 module.exports = {
     handleMakananGetAll,
     handleMakananGetById,
     handleCreateMakanan,
-    handleDeleteMakanan
+    handleDeleteMakanan,
+    handleUpdateMakanan,
+    handleDeleteAllMakanan
 }
