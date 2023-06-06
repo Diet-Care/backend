@@ -46,6 +46,7 @@ const handlelogin = async(req, res) =>{
         exp : parseInt(((new Date()).getTime() / 1000) + 5 * 60 * 60),
     }, process.env.JWT_SECRET);
 
+    console.log(token);
     res.status(ok);
     res.json({
         message : "Login Success",

@@ -124,17 +124,25 @@ const handleupdateolahraga = async(req, res) =>{
             });
         }
 
-        const updateimgolahraga = req.params.img_olahraga;
+        // scriptnya belum bisa dipakai
+        // const imgPublicIdSplit = olahraga.img_olahraga.split('/');
+
+        // const imgPublicId = imgPublicIdSplit[imgPublicIdSplit.length - 1];
+        // const publicId = imgPublicId.split('.')[0];
+        // const updateid = `edukasi/olahraga/${publicId}`
         // update img
-        const updateimg = await cloudinary.uploader.update(`edukasi/olahraga/${updateimgolahraga}`,  {type: "fetch", invalidate: true, folder: `edukasi/olahraga/${updateimgolahraga}`});
-        console.log(updateimg);
+        // const updateimg = await cloudinary.uploader.explicit(publicId,  {type: "fetch", invalidate: true, public_id : updateid });
+        // console.log(imgPublicId);
+        // console.log(publicId);
+        // console.log("0000000000000000");
+        // console.log(updateimg);
 
         // fetch a request body
         const judul_olahraga = body.judul_olahraga;
         const deskripsi_singkat = body.deskripsi_singkat;
         const deskripsi_lengkap = body.deskripsi_lengkap;
         const tips_olahraga = body.tips_olahraga;
-        const imgolahraga =  updateimg;
+        // const imgolahraga =  updateimg;
         const jumlah_kalori= body.jumlah_kalori;
         const level = body.level;
     
@@ -143,7 +151,7 @@ const handleupdateolahraga = async(req, res) =>{
             deskripsi_singkat : deskripsi_singkat,
             deskripsi_lengkap :deskripsi_lengkap,
             tips_olahraga : tips_olahraga,
-            img_olahraga : imgolahraga,
+            // img_olahraga : imgolahraga,
             jumlah_kalori: jumlah_kalori,
             level : level,
         },{

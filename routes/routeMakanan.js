@@ -1,5 +1,11 @@
 const express =  require('express');
-const { handleMakananGetAll, handleMakananGetById, handleCreateMakanan, handleDeleteMakanan, handleUpdateMakanan, handleDeleteAllMakanan } = require('../controllers/handleMakanan');
+const { handleMakananGetAll,
+     handleMakananGetById, 
+    handleCreateMakanan, 
+    handleDeleteMakanan, 
+    handleUpdateMakanan,
+     handleDeleteAllMakanan 
+} = require('../controllers/handleMakanan');
 
 const app = express();
 
