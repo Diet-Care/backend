@@ -8,11 +8,28 @@ const { get, GetAllUser, DeleteUser } = require("./routes/routeuser");
 
 const { register, login } = require("./routes/routeauth");
 
-const { getallolahraga, getidolahraga, createolahraga, deleteolahraga } = require("./routes/routeolahraga");
+const { getallolahraga, 
+    getidolahraga, 
+    createolahraga, 
+    updateolahraga,
+    deleteolahraga 
+} = require("./routes/routeolahraga");
 
-const { getallmakanan, getidmakanan, createmakanan, deletemakanan, updatemakanan, deleteallmakanan } = require("./routes/routeMakanan.js");
+const { getallmakanan, 
+    getidmakanan, 
+    createmakanan, 
+    deletemakanan, 
+    updatemakanan, 
+    deleteallmakanan 
+} = require("./routes/routeMakanan.js");
 
-const { getallcommentolahraga, getidcommentolahraga, createcommentolahraga, deletecommentolahraga, updatecommentolahraga, deleteallcommentolahraga } = require("./routes/routecommentolahraga");
+const { getallcommentolahraga, 
+    getidcommentolahraga, 
+    createcommentolahraga, 
+    deletecommentolahraga, 
+    updatecommentolahraga, 
+    deleteallcommentolahraga 
+} = require("./routes/routecommentolahraga");
 
 
 dotenv.config();
@@ -29,7 +46,7 @@ app.use(get, GetAllUser, DeleteUser);
 
 app.use(register, login);
 
-app.use(getallolahraga, getidolahraga, createolahraga, deleteolahraga);
+app.use(getallolahraga, getidolahraga, createolahraga, updateolahraga, deleteolahraga);
 
 app.use(getallmakanan, getidmakanan, createmakanan, deletemakanan, updatemakanan, deleteallmakanan);
 
