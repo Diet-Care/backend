@@ -18,6 +18,7 @@ module.exports = {
       },
       img_olahraga:{
           type: Sequelize.DataTypes.STRING,
+          allowNull: true,
       },
       tips_olahraga:{
           type: Sequelize.DataTypes.STRING(255),
