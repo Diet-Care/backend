@@ -29,7 +29,7 @@ const handleUserId = async(req,res) =>{
             where: {
                 uuid : uuid
             },
-            attributes : ['name', 'email', 'alamat']
+            attributes : ['name', 'email', 'gender', 'umur',  'alamat', 'img_profile', 'profesi', ]
         });
 
         if(!User) {
@@ -71,21 +71,26 @@ const handleUpdateuser= async(req, res) =>{
             })
         }
     
-        // const name = body.name;
+        const name = body.name;
         const gender = body.gender;
         const umur = body.umur;
-        // const geografis = body.geografis;
-        // const profesi = body.profesi;
+        const geografis = body.geografis;
+        const profesi = body.profesi;
         const alamat = body.alamat;
         // const img_profile = body.img_profile;
         
         const updateUser = await Users.update({
-            // name : name,
+            name : name,
             gender : gender,
             umur : umur,
-            // geografis : geografis,
-            // profesi : profesi,
+            geografis : geografis,
+            profesi : profesi,
             alamat : alamat
+        },
+        {
+            where : {
+                uuid : uuid
+            }
         });
 
         if(updateUser){
