@@ -124,7 +124,6 @@ const handleupdateolahraga = async(req, res) =>{
             });
         }
 
-        // scriptnya belum bisa dipakai
         const imgPublicIdSplit = olahraga.img_olahraga.split('/');
 
         const imgPublicId = imgPublicIdSplit[imgPublicIdSplit.length - 1];
