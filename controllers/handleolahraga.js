@@ -165,7 +165,7 @@ const handleupdateolahraga = async(req, res) =>{
                 status: "Success",
                 message : "Update Sport Success",
             }
-            return res.status(ok).json(response);
+            return res.status(created).json(response);
         }
     } catch (error) {
         res.status(servererror).json({ 
@@ -183,20 +183,22 @@ const handledeletolahraga = async (req,res) =>{
         const deleteolahraga = await Olahraga.destroy({
             where: { uuid: uuid},
         });
-
+        if(!fordeleteolahraga){
+            return res.status(notfound).json({
+                error: 'Olahraga Not Found'
+            })
+        }
         const imgPublicIdSplit = fordeleteolahraga.img_olahraga.split('/');
 
         const imgPublicId = imgPublicIdSplit[imgPublicIdSplit.length - 1];
-        const publicId = imgPublicId.split('.')[0]
+        const publicId = imgPublicId.split('.')[0];
+        
+        // delete img olahraga from cloudinary
         const hapusimg = await cloudinary.uploader.destroy(`edukasi/olahraga/${publicId}`,  {folder: `edukasi/olahraga/${publicId}`});
         if(deleteolahraga){
             return res.status(ok).json({
                 message : "Sport Has Been Delete",
                 img : hapusimg
-            });
-        }else{
-            return res.status(notfound).json({ 
-                error: 'Sport not found' 
             });
         }
     } catch (error) {

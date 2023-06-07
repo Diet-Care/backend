@@ -4,7 +4,7 @@ const cors = require("cors");
 const upload = require('express-fileupload');
 
 // tableuser
-const { get, GetAllUser, DeleteUser } = require("./routes/routeuser");
+const { get, GetAllUser, DeleteUser, updateuser } = require("./routes/routeuser");
 
 const { register, login } = require("./routes/routeauth");
 
@@ -41,15 +41,19 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
 app.use(cors());
 
+// user
+app.use(get, GetAllUser, DeleteUser, updateuser);
 
-app.use(get, GetAllUser, DeleteUser);
-
+// authentikasi
 app.use(register, login);
 
+// olahraga
 app.use(getallolahraga, getidolahraga, createolahraga, updateolahraga, deleteolahraga);
 
+// makanan
 app.use(getallmakanan, getidmakanan, createmakanan, deletemakanan, updatemakanan, deleteallmakanan);
 
+// comment olahraga
 app.use(getallcommentolahraga, getidcommentolahraga, createcommentolahraga, deletecommentolahraga, updatecommentolahraga, deleteallcommentolahraga);
 
 app.listen(port, '0.0.0.0', function() {

@@ -20,7 +20,7 @@ const handleMakananGetAll = async function(req, res) {
         data: makanan,
     }
     res.status(created).json(response)
-    return
+    return;
 };
 
 const handleMakananGetById = async function(req,res) {
@@ -43,7 +43,7 @@ const handleMakananGetById = async function(req,res) {
         });
     }
     res.statu(created).json(response)
-    return
+    return;
 };
 
 const handleCreateMakanan = async function(req, res) {
@@ -75,38 +75,14 @@ const handleCreateMakanan = async function(req, res) {
             message: "Create Makanan",
             data: createMakanan,
         }
-        res.status(ok).json(response);
+        return res.status(ok).json(response);
     } catch (error){
         response = {
-            status: "ERROR",
-            message: error
+            status: "Bad Request",
+            message: error.message
         }
         res.status(bad).json(response)
     } 
-}
-
-const handleDeleteMakanan = async function(req, res) {
-    const uuid = req.params.id;
-
-    try {
-        const deletemakanan = await Makanan.destroy({
-            where: {uuid: uuid},
-        });
-        if(deletemakanan){
-            return res.status(ok).json({
-                message: "FOOD HAS BEEN DELETED"
-            });
-        }else{
-            return res.status(notfound).json({
-                error: 'FOOD NOT FOUND'
-            });
-        }
-    } catch (error) {
-        console.error(error);
-        return res.status(servererror).json({
-            error: 'SERVER ERROR'
-        });
-    }
 }
 
 const handleUpdateMakanan = async function(req, res) {
@@ -126,15 +102,15 @@ const handleUpdateMakanan = async function(req, res) {
             });
         }
 
-        const updateimgmakanan = req.params.img_makanan;
-        const updateimg = await cloudinary.uploader.update(`edukasi/makanan/${updateimgmakanan}`, {type: "fetch", invalidate: true, folder: `edukasi/makanan/${updateimgmakanan}`});
-        console.log(updateimg);
+        // const updateimgmakanan = req.params.img_makanan;
+        // const updateimg = await cloudinary.uploader.update(`edukasi/makanan/${updateimgmakanan}`, {type: "fetch", invalidate: true, folder: `edukasi/makanan/${updateimgmakanan}`});
+        // console.log(updateimg);
 
         const judul_makanan = body.judul_makanan;
         const deskripsi_singkat = body.deskripsi_singkat;
         const deskripsi_lengkap = body.deskripsi_lengkap;
         const tips_makanan = body.tips_makanan;
-        const img_makanan = body.img_makanan;
+        // const img_makanan = body.img_makanan;
         const jumlah_kalori = body.jumlah_kalori;
         const level = body.level;
 
@@ -143,7 +119,6 @@ const handleUpdateMakanan = async function(req, res) {
             deskripsi_singkat: deskripsi_singkat,
             deskripsi_lengkap: deskripsi_lengkap,
             tips_makanan: tips_makanan,
-            img_makanan: img_makanan,
             jumlah_kalori: jumlah_kalori,
             level: level,
         }, {
@@ -157,14 +132,53 @@ const handleUpdateMakanan = async function(req, res) {
                 status: "SUCCESS",
                 message: "Update Success",
             }
-            return res.status(ok).json(response);
+            return res.status(created).json(response);
         }
     } catch (error) {
-        res.status(servererror).json({
+        return res.status(servererror).json({
             error: error.message
         });
     };
 
+}
+
+const handleDeleteMakanan = async function(req, res) {
+    const uuid = req.params.id;
+
+    try {
+        const fordeletemakanan = await Makanan.findOne({
+            where: { uuid : uuid }
+        });
+
+        const deletemakanan = await Makanan.destroy({
+            where: {uuid: uuid},
+        });
+
+        if(!fordeletemakanan){
+            return res.status(notfound).json({
+                error: 'Makanan Not Found'
+            })
+        }
+
+        const imgPublicIdSplit = fordeletemakanan.img_makanan.split('/');
+
+        const imgPublicId = imgPublicIdSplit[imgPublicIdSplit.length - 1];
+        const publicId = imgPublicId.split('.')[0]
+        const hapusimg = await cloudinary.uploader.destroy(`edukasi/makanan/${publicId}`,  {folder: `edukasi/makanan/${publicId}`});
+
+        if(deletemakanan){
+            return res.status(ok).json({
+                message: "FOOD HAS BEEN DELETED",
+                img: hapusimg
+            });
+        } 
+    } catch (error) {
+        console.error(error);
+        return res.status(servererror).json({
+            error: 'SERVER ERROR',
+            message: error.message
+        });
+    }
 }
 
 const handleDeleteAllMakanan = async function(req, res) {
@@ -176,7 +190,10 @@ const handleDeleteAllMakanan = async function(req, res) {
         return res.status(ok).send();
     } catch(error) {
         console.error(error);
-        return res.status(servererror).json({error: 'Server Error'});
+        return res.status(servererror).json({
+            error: 'Server Error',
+            message: error.message
+        });
     }
 };
 

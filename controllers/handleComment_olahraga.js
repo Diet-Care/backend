@@ -38,6 +38,7 @@ const handleCommentOlahragaById = async (req, res) => {
         res.json({
             message: 'Comment not Found'
         });
+        return;
     }
     res.status(created).json(response)
     return
@@ -62,10 +63,38 @@ const handleCreateCommentOlahraga = async function(req, res) {
 } catch(error) {
     response = {
         status: "ERROR",
-        message: error
+        message: error.message
     }
-        res.status(bad).json(response)
+       return res.status(bad).json(response)
     }
+}
+
+const handleUpdateCommentOlahraga = async function(req,res) {
+    let response = {}
+    const comment_olahraga = Comment_olahraga.findOne({
+        where: {
+            uuid: req.params.id
+        }
+    });
+
+    if(!comment_olahraga){
+        response = {
+            status: "SUCCESS",
+            message: "Comment not Found"
+        }
+        return;
+    } else {
+        comment_olahraga.bintang = req.body.bintang
+        comment_olahraga.comment_review = req.body.comment_review
+        comment_olahraga.save()
+        response = {
+            status: "SUCCESS",
+            message: "Update Comment",
+            data: comment_olahraga
+        }
+    }
+    res.status(created).json(response)
+    return
 }
 
 const handleDeleteCommentOlahragaById = async function(req, res){
@@ -89,36 +118,10 @@ const handleDeleteCommentOlahragaById = async function(req, res){
     }catch (error){
         console.error(error);
         return res.status(servererror).json({
-            error: 'Server error'
+            error: 'Server error',
+            message: error.message
         });
     }
-}
-
-const handleUpdateCommentOlahraga = async function(req,res) {
-    let response = {}
-    const comment_olahraga = Comment_olahraga.findOne({
-        where: {
-            uuid: req.params.id
-        }
-    });
-
-    if(!comment_olahraga){
-        response = {
-            status: "SUCCESS",
-            message: "Comment not Found"
-        }
-    } else {
-        comment_olahraga.bintang = req.body.bintang
-        comment_olahraga.comment_review = req.body.comment_review
-        comment_olahraga.save()
-        response = {
-            status: "SUCCESS",
-            message: "Update Comment",
-            data: comment_olahraga
-        }
-    }
-    res.status(ok).json(response)
-    return
 }
 
 const handleDeleteAllCommentOlahraga = async function(req, res){
@@ -129,16 +132,18 @@ const handleDeleteAllCommentOlahraga = async function(req, res){
         });
         return res.status(ok).send();
     } catch (error){
-        console.error(error);
-        return res.status(servererror).json({error: 'Server Error'});
+        return res.status(servererror).json({
+            error: 'Server Error',
+            message: error.message
+        });
     }
 };
 
 module.exports = {
     handleCreateCommentOlahraga,
-    handleDeleteCommentOlahragaById,
     handleCommentOlahragaAll,
     handleCommentOlahragaById,
     handleUpdateCommentOlahraga,
+    handleDeleteCommentOlahragaById,
     handleDeleteAllCommentOlahraga
 }
