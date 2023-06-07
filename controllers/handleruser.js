@@ -54,6 +54,52 @@ const handleUserId = async(req,res) =>{
 }
 
 const handleUpdateuser= async(req, res) =>{
+    const uuid = req.params.id;
+    const body = req.body;
+
+    try {
+        const user = await Users.findOne({
+            where: {
+                uuid : uuid
+            }
+        });
+        // console.log(user);
+        console.log(user);
+        if(!user){
+            return res.status(notfound).json({
+                message : "User Not Found"
+            })
+        }
+    
+        // const name = body.name;
+        const gender = body.gender;
+        const umur = body.umur;
+        // const geografis = body.geografis;
+        // const profesi = body.profesi;
+        const alamat = body.alamat;
+        // const img_profile = body.img_profile;
+        
+        const updateUser = await Users.update({
+            // name : name,
+            gender : gender,
+            umur : umur,
+            // geografis : geografis,
+            // profesi : profesi,
+            alamat : alamat
+        });
+
+        if(updateUser){
+            let response = {
+                status : "Sucess",
+                message : "Sucess Update User"
+            }
+            return res.status(created).json(response);
+        }
+    } catch (error) {
+        return res.status(servererror).json({
+            error: error.message
+        });
+    }
     
 }
 
@@ -81,5 +127,6 @@ const handleuserdelete = async(req,res) =>{
 module.exports = {
     handleuserall,
     handleUserId,
+    handleUpdateuser,
     handleuserdelete
 }
