@@ -46,12 +46,11 @@ const handleCommentOlahragaById = async (req, res) => {
 
 const handleCreateCommentOlahraga = async function(req, res) {
     let response = {}
-    let code = ok;
     try {
     const newComment = await Comment_olahraga.create({
-        id_olahraga: req.params.id,
+        id_olahraga: req.body.id,
         bintang: req.body.bintang,
-        comment_review: req.body.deskripsi_review
+        comment_review: req.body.comment_review
     });
 
     response = {
@@ -108,7 +107,7 @@ const handleDeleteCommentOlahragaById = async function(req, res){
         });
         if(deleteCommentOlahraga){
             return res.status(ok).json({
-                message: "Comment Has Been Delete"
+                message: "Comment Has Been Deleted"
             });
         }else{
             return res.status(notfound).json({

@@ -30,6 +30,7 @@ const { getallcommentolahraga,
     updatecommentolahraga, 
     deleteallcommentolahraga 
 } = require("./routes/routecommentolahraga");
+const { getallcommentmakanan, getidcommentmakanan, createcommentmakanan, deleteallcommentmakanan, deletecommentmakananid, updatecommentmakanan } = require("./routes/routecommentmakanan");
 
 
 dotenv.config();
@@ -55,6 +56,9 @@ app.use(getallmakanan, getidmakanan, createmakanan, deletemakanan, updatemakanan
 
 // comment olahraga
 app.use(getallcommentolahraga, getidcommentolahraga, createcommentolahraga, deletecommentolahraga, updatecommentolahraga, deleteallcommentolahraga);
+
+//comment makanan
+app.use(getallcommentmakanan, getidcommentmakanan, createcommentmakanan, deleteallcommentmakanan, deletecommentmakananid, updatecommentmakanan);
 
 app.listen(port, '0.0.0.0', function() {
     console.log(`Your application is running on the port ${port}`);
