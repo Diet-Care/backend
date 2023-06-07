@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs');
 const SALT = Number(process.env.PASSWORD_SALT);
 
 const { Users } = require("../db/models");
-const { bad, notfound, ok, created } = require("./statuscode");
+const { bad, notfound, ok, created, servererror } = require("./statuscode");
 
 
 const handlelogin = async(req, res) =>{
@@ -96,11 +96,53 @@ const handleregister = async (req,res) =>{
     
 }
 
-// const handlechangepassword = async (req,res, next) =>{
-    
-// }
+
+const handlechangepassword = async (req,res, next) =>{
+    try {
+        const email = req.query.email;
+        const password = req.body.password;
+        
+       
+            const user = await Users.findOne({
+                where:{
+                    email,
+                }
+            });
+            if(!user){
+                res.status(notfound).json({
+                    message : "Email Not Found"
+                });
+                return ;
+            };
+            const encryptedPassword = bcrypt.hashSync(password, SALT);
+            const changepassword = encryptedPassword;
+
+            const changePassword = await Users.update({
+                password : changepassword
+            },{
+                where : {
+                    email : email
+                }
+            })
+
+            const response = {
+                status: "SUCCESS",
+                message: "success Reset Password",
+                data: changePassword
+            }
+            res.status(ok).json(response)
+            return
+        
+    } catch (error) {
+        res.status(servererror).json({
+            message : error.message
+        });
+        return;
+    }
+}
 
 module.exports = {
     handlelogin,
-    handleregister
+    handleregister,
+    handlechangepassword
 }

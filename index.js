@@ -6,7 +6,7 @@ const upload = require('express-fileupload');
 // tableuser
 const { get, GetAllUser, DeleteUser, updateuser } = require("./routes/routeuser");
 
-const { register, login } = require("./routes/routeauth");
+const { register, login, changepassword, } = require("./routes/routeauth");
 
 const { getallolahraga, 
     getidolahraga, 
@@ -46,7 +46,7 @@ app.use(cors());
 app.use(get, GetAllUser, DeleteUser, updateuser);
 
 // authentikasi
-app.use(register, login);
+app.use(register, login, changepassword);
 
 // olahraga
 app.use(getallolahraga, getidolahraga, createolahraga, updateolahraga, deleteolahraga);

@@ -9,7 +9,7 @@ const get = app.get("/", (req, res) => {
     res.send("hallo anda berhasil menggunakan endpoint ini");
 });
 
-const GetAllUser = app.get("/users", Authorization, handleuserall);
+const GetAllUser = app.get("/users",  handleuserall);
 
 const getUserId = app.get('/users/:id', Authorization, handleUserId);
 
