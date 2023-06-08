@@ -7,18 +7,18 @@ module.exports = {
         allowNull: false,
         primaryKey: true
       },
-      name: {
-          type: Sequelize.DataTypes.STRING,
+      name:{
+        type: Sequelize.DataTypes.STRING,
       },
       email: {
-          type: Sequelize.DataTypes.STRING,
+        type: Sequelize.DataTypes.STRING,
       },
       pesan: {
-          type: Sequelize.DataTypes.STRING
-      }
+        type: Sequelize.DataTypes.STRING,
+      },
     }, {
       timestamps: false,
-    })
+    });
   },
 
   async down (queryInterface, Sequelize) {
