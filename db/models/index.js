@@ -33,7 +33,19 @@ Olahraga.hasMany(Comment_olahraga, {
     sourceKey: 'uuid',
     foreignKey: 'id_olahraga',
     as: 'comment_olahraga'
-})
+});
+
+Comment_makanan.hasOne(Makanan, {
+    sourceKey: 'id_makanan',
+    foreignKey: 'uuid',
+    as: 'makanan'
+});
+
+Makanan.hasMany(Comment_makanan, {
+    sourceKey: 'uuid',
+    foreignKey: 'id_makanan',
+    as: 'comment_makanan'
+});
 
 module.exports = {
     Users,

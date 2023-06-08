@@ -10,12 +10,12 @@ module.exports = function(connection) {
             allowNull: false,
             primaryKey: true
           },
-        id_olahraga:{
+        id_makanan:{
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4,
             references: {
                 model: {
-                    tableName: 'olahraga'
+                    tableName: 'makanan'
                 },
                 key: 'uuid'
             }
