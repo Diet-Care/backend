@@ -57,7 +57,6 @@ app.get("/", (req, res) => {
     res.send("hallo sir/miss, welcome you have successfully run this endpoint");
 });
 
-
 // user
 app.use(GetAllUser,getUserId, DeleteUser, updateuser);
 
