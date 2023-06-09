@@ -7,13 +7,14 @@ const {
   handleupdateolahraga 
 } = require('../controllers/handleolahraga');
 
-const { Authorization } = require('../middleware/authorization');
+const { auth } = require('../middleware/auth');
+
 
 const app = express();
 
-const getallolahraga = app.get("/olahraga", Authorization, handleolhragaall);
+const getallolahraga = app.get("/olahraga", auth, handleolhragaall);
 
-const getidolahraga = app.get("/olahraga/:id",  Authorization, handleolhragaid);
+const getidolahraga = app.get("/olahraga/:id",  auth, handleolhragaid);
 
 const createolahraga = app.post("/olahraga", handlecreateolhraga);
 

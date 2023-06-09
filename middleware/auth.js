@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const { unauthorized } = require('../controllers/statuscode');
 require('dotenv').config();
 
-const Authorization = (req, res, next) =>{
+const auth = (req, res, next) =>{
     let response = {}
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
@@ -31,5 +31,5 @@ const Authorization = (req, res, next) =>{
 }
 
 module.exports ={
-    Authorization
+    auth
 }

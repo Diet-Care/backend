@@ -4,9 +4,18 @@ const cors = require("cors");
 const upload = require('express-fileupload');
 
 // tableuser
-const { get, GetAllUser, DeleteUser, updateuser } = require("./routes/routeuser");
+const {  
+    GetAllUser,
+    getUserId , 
+    DeleteUser, 
+    updateuser, 
+} = require("./routes/routeuser");
 
-const { register, login, changepassword, } = require("./routes/routeauth");
+const { 
+    register, 
+    login, 
+    changepassword, 
+} = require("./routes/routeauth");
 
 const { getallolahraga, 
     getidolahraga, 
@@ -30,6 +39,7 @@ const { getallcommentolahraga,
     updatecommentolahraga, 
     deleteallcommentolahraga 
 } = require("./routes/routecommentolahraga");
+
 const { getallcommentmakanan, 
     getidcommentmakanan, 
     createcommentmakanan, 
@@ -38,6 +48,10 @@ const { getallcommentmakanan,
     updatecommentmakanan 
 } = require("./routes/routecommentmakanan");
 const { getallmessage, getmessagebyid, createmessage, updatemessage, deleteallmessage, deletemessagebyid } = require("./routes/routekontak");
+
+
+const { getallcommentmakanan, getidcommentmakanan, createcommentmakanan, deleteallcommentmakanan, deletecommentmakananid, updatecommentmakanan } = require("./routes/routecommentmakanan");
+
 
 
 dotenv.config();
@@ -49,8 +63,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
 app.use(cors());
 
+// endpoint before
+app.get("/", (req, res) => {
+    res.send("hallo sir/miss, welcome you have successfully run this endpoint");
+});
+
 // user
-app.use(get, GetAllUser, DeleteUser, updateuser);
+app.use(GetAllUser,getUserId, DeleteUser, updateuser);
 
 // authentikasi
 app.use(register, login, changepassword);

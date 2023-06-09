@@ -173,7 +173,6 @@ const handleDeleteMakanan = async function(req, res) {
             });
         } 
     } catch (error) {
-        console.error(error);
         return res.status(servererror).json({
             error: 'SERVER ERROR',
             message: error.message
@@ -189,7 +188,6 @@ const handleDeleteAllMakanan = async function(req, res) {
         });
         return res.status(ok).send();
     } catch(error) {
-        console.error(error);
         return res.status(servererror).json({
             error: 'Server Error',
             message: error.message

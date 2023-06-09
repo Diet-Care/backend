@@ -48,9 +48,9 @@ const handleCreateCommentOlahraga = async function(req, res) {
     let response = {}
     try {
     const newComment = await Comment_olahraga.create({
-        id_olahraga: req.body.id,
+        id_olahraga: req.params.id,
         bintang: req.body.bintang,
-        comment_review: req.body.comment_review
+        comment_review: req.body.deskripsi_review
     });
 
     response = {
@@ -115,7 +115,6 @@ const handleDeleteCommentOlahragaById = async function(req, res){
             });
         }
     }catch (error){
-        console.error(error);
         return res.status(servererror).json({
             error: 'Server error',
             message: error.message
@@ -129,7 +128,7 @@ const handleDeleteAllCommentOlahraga = async function(req, res){
             where: {},
             truncate: true,
         });
-        return res.status(ok).send();
+        return res.status(ok).json({message : "succesfuly delete all"});
     } catch (error){
         return res.status(servererror).json({
             error: 'Server Error',
