@@ -1,4 +1,4 @@
-const { DataTypes } = require("sequelize")
+const { Model, DataTypes } = require("sequelize")
 
 module.exports = function(connection) {
     class Jadwal_diet extends Model {}
