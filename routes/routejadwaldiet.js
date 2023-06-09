@@ -1,15 +1,15 @@
 const express = require('express');
-const { Authorization } = require('../middleware/authorization');
 const { handleScheduleAll, handleScheduleById, handleCreateSchedule, handleUpdateSchedule, handleDeleteScheduleById, handleDeleteAllSchedule } = require('../controllers/handleJadwalDiet');
+const { auth } = require('../middleware/auth');
 
 const app = express();
 
-const getAllSchedule = app.get("/jadwaldiet", Authorization, handleScheduleAll);
-const getScheduleById = app.get("/jadwaldiet/:id", Authorization, handleScheduleById);
-const createSchedule = app.post("jadwaldiet", Authorization, handleCreateSchedule);
-const updateSchedule = app.put("jadwaldiet", Authorization, handleUpdateSchedule);
-const deleteScheduleById = app.delete("jadwaldiet", Authorization, handleDeleteScheduleById);
-const deleteAllSchedule = app.delete("jadwaldiet", Authorization, handleDeleteAllSchedule);
+const getAllSchedule = app.get("/jadwaldiet", auth, handleScheduleAll);
+const getScheduleById = app.get("/jadwaldiet/:id", auth, handleScheduleById);
+const createSchedule = app.post("jadwaldiet", auth, handleCreateSchedule);
+const updateSchedule = app.put("jadwaldiet", auth, handleUpdateSchedule);
+const deleteScheduleById = app.delete("jadwaldiet", auth, handleDeleteScheduleById);
+const deleteAllSchedule = app.delete("jadwaldiet", auth, handleDeleteAllSchedule);
 
 module.exports = {
     getAllSchedule,

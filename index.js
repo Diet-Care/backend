@@ -51,6 +51,7 @@ const { getallcommentmakanan,
     deletecommentmakananid, 
     updatecommentmakanan 
 } = require("./routes/routecommentmakanan");
+
 const { getallmessage, 
     getmessagebyid, 
     createmessage, 
@@ -60,23 +61,13 @@ const { getallmessage,
 } = require("./routes/routekontak");
 
 
-const { getallcommentmakanan, 
-    getidcommentmakanan, 
-    createcommentmakanan, 
-    deleteallcommentmakanan, 
-    deletecommentmakananid, 
-    updatecommentmakanan 
-} = require("./routes/routecommentmakanan");
-
-
-const { getallmessage, 
-    getmessagebyid, 
-    createmessage, 
-    updatemessage, 
-    deleteallmessage,
-     deletemessagebyid 
-    } = require("./routes/routekontak");
-const { getAllSchedule, getScheduleById, createSchedule, updateSchedule, deleteAllSchedule, deleteScheduleById } = require("./routes/routejadwaldiet");
+const { getAllSchedule, 
+    getScheduleById, 
+    createSchedule, 
+    updateSchedule, 
+    deleteAllSchedule, 
+    deleteScheduleById 
+} = require("./routes/routejadwaldiet");
 
 // const { development } = require("./sequelize.config");
 
