@@ -40,13 +40,24 @@ const { getallcommentolahraga,
     deleteallcommentolahraga 
 } = require("./routes/routecommentolahraga");
 
+const { getallcommentmakanan, 
+    getidcommentmakanan, 
+    createcommentmakanan, 
+    deleteallcommentmakanan, 
+    deletecommentmakananid, 
+    updatecommentmakanan 
+} = require("./routes/routecommentmakanan");
+const { getallmessage, getmessagebyid, createmessage, updatemessage, deleteallmessage, deletemessagebyid } = require("./routes/routekontak");
+
+
 const { getallcommentmakanan, getidcommentmakanan, createcommentmakanan, deleteallcommentmakanan, deletecommentmakananid, updatecommentmakanan } = require("./routes/routecommentmakanan");
+
 
 
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 3050;
 app.use(upload());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
@@ -74,6 +85,9 @@ app.use(getallcommentolahraga, getidcommentolahraga, createcommentolahraga, dele
 
 //comment makanan
 app.use(getallcommentmakanan, getidcommentmakanan, createcommentmakanan, deleteallcommentmakanan, deletecommentmakananid, updatecommentmakanan);
+
+// kontak
+app.use(getallmessage, getmessagebyid, createmessage, updatemessage, deleteallmessage, deletemessagebyid);
 
 app.listen(port, '0.0.0.0', function() {
     console.log(`Your application is running on the port ${port}`);

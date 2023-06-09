@@ -7,12 +7,12 @@ module.exports = {
         allowNull: false,
         primaryKey: true
       },
-      id_olahraga:{
+      id_makanan:{
           type: Sequelize.DataTypes.UUID,
           defaultValue: Sequelize.DataTypes.UUIDV4,
           references: {
               model: {
-                  tableName: 'olahraga'
+                  tableName: 'makanan'
               },
               key: 'uuid'
           }
