@@ -95,5 +95,6 @@ module.exports = {
     Comment_makanan,
     Comment_olahraga,
     Kontak,
-    Jadwal_diet
+    Jadwal_diet,
+    connection
 };

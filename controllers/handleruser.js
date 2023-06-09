@@ -63,8 +63,7 @@ const handleUpdateuser= async(req, res) =>{
                 uuid : uuid
             }
         });
-        // console.log(user);
-        console.log(user);
+
         if(!user){
             return res.status(notfound).json({
                 message : "User Not Found"
@@ -124,7 +123,6 @@ const handleuserdelete = async(req,res) =>{
         return res.status(notfound).json({ error: 'User not found' });
     }
     } catch (error) {
-    console.error(error);
     return res.status(servererror).json({ error: 'Server error' });
     }
 }
