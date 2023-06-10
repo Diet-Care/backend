@@ -15,7 +15,7 @@ const handlecreateolhraga = async (req, res) =>{
     const kategori = 'olahraga';
     
     try {
-        const _base64 = Buffer.from(req.files.img_olahraga.data, 'base64').toString('base64');
+        const _base64 = Buffer.from(req.files.img.data, 'base64').toString('base64');
         const base64 = `data:image/jpeg;base64,${_base64}`;
         
         const cloudinaryResponse = await cloudinary.uploader.upload(base64,{folder: "edukasi/olahraga", public_id: new Date().getTime() });
@@ -23,11 +23,11 @@ const handlecreateolhraga = async (req, res) =>{
         const imgolahraga = cloudinaryResponse.secure_url;
         
         const createolahraga = await Olahraga.create({
-            judul_olahraga : body.judul_olahraga,
+            judul : body.judul,
             deskripsi_singkat : body.deskripsi_singkat,
             deskripsi_lengkap :body.deskripsi_lengkap,
-            tips_olahraga : body.tips_olahraga,
-            img_olahraga : imgolahraga,
+            tips : body.tips,
+            img : imgolahraga,
             jumlah_kalori: body.jumlah_kalori,
             level : body.level,
             kategori : kategori
@@ -124,13 +124,13 @@ const handleupdateolahraga = async(req, res) =>{
             });
         }
 
-        const imgPublicIdSplit = olahraga.img_olahraga.split('/');
+        const imgPublicIdSplit = olahraga.img.split('/');
 
         const imgPublicId = imgPublicIdSplit[imgPublicIdSplit.length - 1];
         const publicId = imgPublicId.split('.')[0];
         const updateid = `edukasi/olahraga/${publicId}`;
       
-        const _base64 = Buffer.from(req.files.img_olahraga.data, 'base64').toString('base64');
+        const _base64 = Buffer.from(req.files.img.data, 'base64').toString('base64');
         const base64 = `data:image/jpeg;base64,${_base64}`;
         
         const cloudinaryResponse = await cloudinary.uploader.upload(base64,{ public_id: updateid, overwrite: true });
@@ -138,20 +138,20 @@ const handleupdateolahraga = async(req, res) =>{
         const updateimgolahraga = cloudinaryResponse.secure_url;
 
         // fetch a request body
-        const judul_olahraga = body.judul_olahraga;
+        const judul = body.judul;
         const deskripsi_singkat = body.deskripsi_singkat;
         const deskripsi_lengkap = body.deskripsi_lengkap;
-        const tips_olahraga = body.tips_olahraga;
+        const tips = body.tips;
         const imgolahraga =  updateimgolahraga;
         const jumlah_kalori= body.jumlah_kalori;
         const level = body.level;
     
         const updateolahraga = await Olahraga.update({
-            judul_olahraga : judul_olahraga,
+            judul : judul,
             deskripsi_singkat : deskripsi_singkat,
             deskripsi_lengkap :deskripsi_lengkap,
-            tips_olahraga : tips_olahraga,
-            img_olahraga : imgolahraga,
+            tips : tips,
+            img : imgolahraga,
             jumlah_kalori: jumlah_kalori,
             level : level,
         },{
@@ -188,7 +188,7 @@ const handledeletolahraga = async (req,res) =>{
                 error: 'Olahraga Not Found'
             })
         }
-        const imgPublicIdSplit = fordeleteolahraga.img_olahraga.split('/');
+        const imgPublicIdSplit = fordeleteolahraga.img.split('/');
 
         const imgPublicId = imgPublicIdSplit[imgPublicIdSplit.length - 1];
         const publicId = imgPublicId.split('.')[0];

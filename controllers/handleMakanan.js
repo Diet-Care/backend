@@ -51,7 +51,7 @@ const handleCreateMakanan = async function(req, res) {
     const kategori = 'makanan';
 
     try {
-        const _base64 = Buffer.from(req.files.img_makanan.data, 'base64').toString('base64');
+        const _base64 = Buffer.from(req.files.img.data, 'base64').toString('base64');
         const base64 = `data:image/jpeg;base64,${_base64}`;
 
         const cloudinary_Response = await cloudinary.uploader.upload(base64, 
@@ -61,11 +61,11 @@ const handleCreateMakanan = async function(req, res) {
         const imgmakanan = cloudinary_Response.secure_url;
 
         const createMakanan = await Makanan.create({
-            judul_makanan : body.judul_makanan,
+            judul : body.judul,
             deskripsi_singkat: body.deskripsi_singkat,
             deskripsi_lengkap: body.deskripsi_lengkap,
-            tips_makanan: body.tips_makanan,
-            img_makanan: imgmakanan,
+            tips: body.tips,
+            img: imgmakanan,
             jumlah_kalori: body.jumlah_kalori,
             level: body.level,
             kategori: kategori
@@ -106,19 +106,19 @@ const handleUpdateMakanan = async function(req, res) {
         // const updateimg = await cloudinary.uploader.update(`edukasi/makanan/${updateimgmakanan}`, {type: "fetch", invalidate: true, folder: `edukasi/makanan/${updateimgmakanan}`});
         // console.log(updateimg);
 
-        const judul_makanan = body.judul_makanan;
+        const judul = body.judul;
         const deskripsi_singkat = body.deskripsi_singkat;
         const deskripsi_lengkap = body.deskripsi_lengkap;
-        const tips_makanan = body.tips_makanan;
+        const tips = body.tips;
         // const img_makanan = body.img_makanan;
         const jumlah_kalori = body.jumlah_kalori;
         const level = body.level;
 
         const updatemakanan = await Makanan.update({
-            judul_makanan: judul_makanan,
+            judul: judul,
             deskripsi_singkat: deskripsi_singkat,
             deskripsi_lengkap: deskripsi_lengkap,
-            tips_makanan: tips_makanan,
+            tips: tips,
             jumlah_kalori: jumlah_kalori,
             level: level,
         }, {
@@ -160,7 +160,7 @@ const handleDeleteMakanan = async function(req, res) {
             })
         }
 
-        const imgPublicIdSplit = fordeletemakanan.img_makanan.split('/');
+        const imgPublicIdSplit = fordeletemakanan.img.split('/');
 
         const imgPublicId = imgPublicIdSplit[imgPublicIdSplit.length - 1];
         const publicId = imgPublicId.split('.')[0]
