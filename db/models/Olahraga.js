@@ -10,7 +10,7 @@ module.exports = function(connection) {
             allowNull: false,
             primaryKey: true
           },
-        judul_olahraga:{
+        judul:{
             type: DataTypes.STRING,
         },
         deskripsi_singkat:{
@@ -19,11 +19,11 @@ module.exports = function(connection) {
         deskripsi_lengkap:{
             type: DataTypes.STRING,
         },
-        img_olahraga:{
+        img:{
             type: DataTypes.STRING,
             allowNull: true,
         },
-        tips_olahraga:{
+        tips:{
             type: DataTypes.STRING(255),
         },
         jumlah_kalori:{
