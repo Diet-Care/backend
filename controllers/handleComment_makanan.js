@@ -49,7 +49,7 @@ const handleCreateCommentMakanan = async(req,res) => {
     const body = req.body;
     try {
         const newComment = await Comment_makanan.create({
-            id_olahraga: body.id_olahraga,
+            id_makanan: body.id_makanan,
             bintang: body.bintang,
             comment_review: body.comment_review
         });
@@ -70,31 +70,47 @@ const handleCreateCommentMakanan = async(req,res) => {
 }
 
 const handleUpdateCommentMakanan = async function(req, res){
-    let response = {}
-    const comment_makanan = Comment_makanan.findOne({
-        where: {
-            uuid: req.params.id
-        }
-    });
+    try {
+        const uuid = req.params.id;
+        const body = req.body; 
 
-    if(!comment_makanan){
-        response = {
-            status: "SUCCESS",
-            message: "Comment not Found"
+        const comment_makanan = await Comment_makanan.findOne({
+            where: {
+                uuid: uuid
+            }
+        });
+
+        if(!comment_makanan){
+            return res.status(notfound).json({
+                message: "Message You Looking For Is Not Found"
+            });
         }
-        return;
-    }else{
-        comment_makanan.bintang = req.body.bintang
-        comment_makanan.comment_review
-        comment_makanan.save()
-        response = {
-            status: "SUCCESS",
-            message: "Comment Updated",
-            data: comment_makanan
+        const id_makanan = body.id_makanan;
+        const bintang = body.bintang;
+        const comment_review = body.comment_review;
+
+        const updatecommentmakanan = await Comment_makanan.update({
+            id_makanan: id_makanan,
+            bintang: bintang,
+            comment_review: comment_review,
+        }, {
+            where: {
+                uuid: uuid
+            }
+        });
+
+        if(updatecommentmakanan){
+            response = {
+                status: "SUCCESS",
+                message: "Update Success",
+            }
+            return res.status(created).json(response);
         }
-    }
-    res.status(created).json(response);
-    return;
+    } catch (error) {
+        return res.status(servererror).json({
+            error: error.message
+        });
+    };
 };
 
 const handleDeleteComentMakananById = async function(req, res){
@@ -106,7 +122,7 @@ const handleDeleteComentMakananById = async function(req, res){
             },
         });
         if(deleteCommentMakanan){
-            return res.tatus(ok).json({
+            return res.status(ok).json({
                 message: "Comment Has Been Deleted"
             });
         }else{

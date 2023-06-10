@@ -6,7 +6,7 @@ const app = express();
 const getallcommentmakanan = app.get("/makanan/:id/comment", handleCommentMakananAll);
 const getidcommentmakanan = app.get("/makanan/:id/comment/:id", handleCommentMakananById);
 const createcommentmakanan = app.post("/makanan/:id/comment", handleCreateCommentMakanan);
-const updatecommentmakanan = app.put("/makanan/id/comment/:id", handleUpdateCommentMakanan);
+const updatecommentmakanan = app.put("/makanan/:id/comment/:id", handleUpdateCommentMakanan);
 const deletecommentmakananid = app.delete("/makanan/:id/comment/:id", handleDeleteComentMakananById);
 const deleteallcommentmakanan = app.delete("/makanan/:id/comment", handleDeleteAllCommentMakanan);
 
