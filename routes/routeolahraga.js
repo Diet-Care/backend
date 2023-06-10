@@ -12,9 +12,9 @@ const { auth } = require('../middleware/auth');
 
 const app = express();
 
-const getallolahraga = app.get("/olahraga", auth, handleolhragaall);
+const getallolahraga = app.get("/olahraga", handleolhragaall);
 
-const getidolahraga = app.get("/olahraga/:id",  auth, handleolhragaid);
+const getidolahraga = app.get("/olahraga/:id", handleolhragaid);
 
 const createolahraga = app.post("/olahraga", handlecreateolhraga);
 
