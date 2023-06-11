@@ -54,7 +54,7 @@ const handleCreateCommentOlahraga = async function(req, res) {
         message: "Create New Comment",
         data: newComment
     }
-    return res.status(ok).json(response);
+    return res.status(created).json(response);
 } catch(error) {
     response = {
         status: "ERROR",
@@ -65,12 +65,20 @@ const handleCreateCommentOlahraga = async function(req, res) {
 }
 
 const handleUpdateCommentOlahraga = async function(req,res) {
+
+    let response = {}
+    const uuid = req.params.id;
+    const findcomment = Comment_olahraga.findOne({
+        where: {
+            uuid: uuid
+        }
+    });
+
     try {
         const uuid = req.params.id;
         const body = req.body; 
 
-
-    if(!comment_olahraga){
+    if(!findcomment){
         response = {
             message: "Comment not Found"
 
@@ -86,6 +94,26 @@ const handleUpdateCommentOlahraga = async function(req,res) {
             });
 
         }
+
+        return res.status(notfound).json(response);
+    } else {
+        const bintang = req.body.bintang
+        const comment_review = req.body.comment_review
+        
+        const updatecomment =await Comment_olahraga.update({
+            bintang : bintang,
+            comment_review : comment_review,
+        },
+        {
+            where: {
+                uuid : uuid
+            }
+        })
+        response = {
+            status: "SUCCESS",
+            message: "Update Comment",
+            data: updatecomment
+
         const id_olahraga = body.id_olahraga;
         const bintang = body.bintang;
         const comment_review = body.comment_review;
@@ -106,6 +134,7 @@ const handleUpdateCommentOlahraga = async function(req,res) {
                 message: "Update Success",
             }
             return res.status(created).json(response);
+
         }
     } catch (error) {
         return res.status(servererror).json({
