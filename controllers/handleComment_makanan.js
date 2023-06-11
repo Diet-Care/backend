@@ -11,11 +11,6 @@ const handleCommentMakananAll = async (req, res) => {
         }
     });
     const response = {
-        status: "SUCCESS",
-        message: "Get All Foods Comment",
-        meta: {
-            total: comment_makanan.length
-        },
         data: comment_makanan,
     }
     res.status(created).json(response);
@@ -30,8 +25,6 @@ const handleCommentMakananById = async(req, res) => {
         }
     });
     let response = {
-        status: "SUCCESS",
-        message: "Get Comment Detail",
         data: comment_makanan
     }
     if(!comment_makanan){
@@ -53,10 +46,7 @@ const handleCreateCommentMakanan = async(req,res) => {
             bintang: body.bintang,
             comment_review: body.comment_review
         });
-
         response = {
-            status: "SUCCESS",
-            message: "Create New Comment",
             data: newComment,
         };
         res.status(created).json(response);
@@ -65,7 +55,7 @@ const handleCreateCommentMakanan = async(req,res) => {
             status: "ERROR",
             message: error.message
         }
-        res.status(servererror).json(response);
+       return res.status(servererror).json(response);
     };
 }
 

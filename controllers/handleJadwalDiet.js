@@ -20,11 +20,6 @@ const handleScheduleAll = async (req, res) => {
         }
     });
     const response = {
-        status: "SUCCESS",
-        message: "Get Diet Schedule",
-        Meta: {
-            total: jadwal_diet.length
-        },
         data: jadwal_diet,
     }
     res.status(ok).json(response);
@@ -39,8 +34,6 @@ const handleScheduleById =  async (req, res) => {
         }
     });
     let response = {
-        status: "SUCCESS",
-        message: "Get Schedule Detail",
         data: jadwal_diet
     }
     if(!jadwal_diet){
@@ -96,6 +89,23 @@ const handleUpdateSchedule = async(req, res) => {
                 message: "Schedule You Looking For Is Not Found"
             });
         }
+
+        return res.status(notfound).json({
+            message : "jadwal_diet Not Found"
+        })
+    }else{
+        jadwal_diet.uuid_user = req.body.uuid_user
+        jadwal_diet.uuid_olahraga = req.body.uuid_olahraga
+        jadwal_diet.uuid_makanan = req.body.uuid_makanan
+        jadwal_diet.level = req.body.level
+        jadwal_diet.tgl_mulai = req.body.tgl_mulai
+        jadwal_diet.tgl_selesai = req.body.tgl_selesai
+        jadwal_diet.save()
+        response = {
+            status: "SUCCESS",
+            message: "Schedule Updated",
+            data: jadwal_diet
+
         const uuid_user = body.uuid_user;
         const uuid_olahraga = body.uuid_olahraga;
         const uuid_makanan = body.uuid_makanan;
@@ -122,6 +132,7 @@ const handleUpdateSchedule = async(req, res) => {
                 message: "Update Success",
             }
             return res.status(created).json(response);
+
         }
     } catch (error) {
         return res.status(servererror).json({

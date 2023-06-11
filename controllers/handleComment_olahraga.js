@@ -10,8 +10,6 @@ const handleCommentOlahragaAll = async (req, res) => {
         }
     });
     const response = {
-        status : "SUCCESS",
-        message: "Get All Sports Comment",
         meta: {
             total: comment_olahraga.length
         },
@@ -29,8 +27,6 @@ const handleCommentOlahragaById = async (req, res) => {
         }
     });
     let response = {
-        status: "SUCCESS",
-        message: "Get Comment Detail",
         data: comment_olahraga
     }
     if(!comment_olahraga){
@@ -73,6 +69,11 @@ const handleUpdateCommentOlahraga = async function(req,res) {
         const uuid = req.params.id;
         const body = req.body; 
 
+
+    if(!comment_olahraga){
+        response = {
+            message: "Comment not Found"
+
         const comment_olahraga = await Comment_olahraga.findOne({
             where: {
                 uuid: uuid
@@ -83,6 +84,7 @@ const handleUpdateCommentOlahraga = async function(req,res) {
             return res.status(notfound).json({
                 message: "Message You Looking For Is Not Found"
             });
+
         }
         const id_olahraga = body.id_olahraga;
         const bintang = body.bintang;
@@ -132,7 +134,6 @@ const handleDeleteCommentOlahragaById = async function(req, res){
         }
     }catch (error){
         return res.status(servererror).json({
-            error: 'Server error',
             message: error.message
         });
     }
@@ -147,7 +148,6 @@ const handleDeleteAllCommentOlahraga = async function(req, res){
         return res.status(ok).json({message : "succesfuly delete all"});
     } catch (error){
         return res.status(servererror).json({
-            error: 'Server Error',
             message: error.message
         });
     }

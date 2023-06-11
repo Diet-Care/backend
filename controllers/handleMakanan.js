@@ -10,16 +10,8 @@ cloudinaryconf();
 
 
 const handleMakananGetAll = async function(req, res) {
-    const makanan = await Makanan.findAll();
-    const response = {
-        status: "SUCCESS",
-        message: "Get All Foods",
-        meta: {
-            total: makanan.length
-        },
-        data: makanan,
-    }
-    res.status(created).json(response)
+    const response = await Makanan.findAll();
+    res.status(ok).json(response)
     return;
 };
 
@@ -32,8 +24,6 @@ const handleMakananGetById = async function(req,res) {
         }
     });
     let response = {
-        status: "SUCCESS",
-        message: "Get Food Detail",
         data: makanan
     }
     if(!makanan){
@@ -41,6 +31,7 @@ const handleMakananGetById = async function(req,res) {
         res.json({
             message: 'Foods not Found'
         });
+        return;
     }
     res.statu(created).json(response)
     return;
@@ -81,7 +72,7 @@ const handleCreateMakanan = async function(req, res) {
             status: "Bad Request",
             message: error.message
         }
-        res.status(bad).json(response)
+        return res.status(bad).json(response);
     } 
 }
 
@@ -102,11 +93,15 @@ const handleUpdateMakanan = async function(req, res) {
             });
         }
 
+
+        const judul_makanan = body.judul_makanan;
+
         // const updateimgmakanan = req.params.img_makanan;
         // const updateimg = await cloudinary.uploader.update(`edukasi/makanan/${updateimgmakanan}`, {type: "fetch", invalidate: true, folder: `edukasi/makanan/${updateimgmakanan}`});
         // console.log(updateimg);
 
         const judul = body.judul;
+
         const deskripsi_singkat = body.deskripsi_singkat;
         const deskripsi_lengkap = body.deskripsi_lengkap;
         const tips = body.tips;

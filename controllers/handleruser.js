@@ -8,11 +8,6 @@ const { servererror } = require("./statuscode");
 const handleuserall = async (req, res) => {
     const users = await Users.findAll();
     const response = {
-                status: "SUCCESS",
-                message: "Get All Users",
-                meta: {
-                    total: users.length
-                },
                 data: users
         }
 
@@ -39,8 +34,6 @@ const handleUserId = async(req,res) =>{
             return;
         }
         let response = {
-            status : "Success",
-            message : "Get Detail Users",
             data : User
         }
         res.status(ok).json(response);
