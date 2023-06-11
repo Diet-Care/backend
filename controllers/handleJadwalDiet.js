@@ -76,20 +76,8 @@ const handleCreateSchedule = async(req, res)=>{
 const handleUpdateSchedule = async(req, res) => {
 
     let response = {};
-    const uuid = req.params.id;
-    const jadwal_diet = Jadwal_diet.findOne({
-        where: {
-            uuid: uuid
-        }
-    });
-    if(!jadwal_diet){
-        response = {
-            status: "SUCCESS",
-            message: "Schedule Not Found"
-
     try {
         const uuid = req.params.id;
-        const body = req.body; 
 
         const jadwal = await Jadwal_diet.findOne({
             where: {
@@ -97,69 +85,36 @@ const handleUpdateSchedule = async(req, res) => {
             }
         });
 
-        if(!jadwal_diet){
+        if(!jadwal){
             return res.status(notfound).json({
                 message: "Schedule You Looking For Is Not Found"
             });
 
-        }
-
-        return res.status(notfound).json({
-            message : "jadwal_diet Not Found"
-        })
-    }else{
-        const uuid_user = req.body.uuid_user
-        const uuid_olahraga = req.body.uuid_olahraga
-        const uuid_makanan = req.body.uuid_makanan
-        const level = req.body.level
-        const tgl_mulai = req.body.tgl_mulai
-        const tgl_selesai = req.body.tgl_selesai
-        
-        const updatejdawal = await Jadwal_diet.update({
-            uuid_user : uuid_user,
-            uuid_olahraga : uuid_olahraga,
-            uuid_makanan : uuid_makanan,
-            level : level,
-            tgl_mulai : tgl_mulai,
-            tgl_selesai : tgl_selesai
-        })
-        response = {
-            status: "SUCCESS",
-            message: "Schedule Updated",
-
-            data: updatejdawal
-
-            data: jadwal_diet
-
-        const uuid_user = body.uuid_user;
-        const uuid_olahraga = body.uuid_olahraga;
-        const uuid_makanan = body.uuid_makanan;
-        const level = body.level;
-        const tgl_mulai = body.tgl_mulai;
-        const tgl_selesai = body.tgl_selesai;
-
-        const updatejadwal = await Kontak.update({
-            uuid_user: uuid_user,
-            uuid_olahraga: uuid_olahraga,
-            uuid_makanan: uuid_makanan,
-            level: level,
-            tgl_mulai: tgl_mulai,
-            tgl_selesai: tgl_selesai
-        }, {
-            where: {
-                uuid: uuid
+        } else {
+            const uuid_user = req.body.uuid_user
+            const uuid_olahraga = req.body.uuid_olahraga
+            const uuid_makanan = req.body.uuid_makanan
+            const level = req.body.level
+            const tgl_mulai = req.body.tgl_mulai
+            const tgl_selesai = req.body.tgl_selesai
+            
+            const updatejadwal = await Jadwal_diet.update({
+                uuid_user : uuid_user,
+                uuid_olahraga : uuid_olahraga,
+                uuid_makanan : uuid_makanan,
+                level : level,
+                tgl_mulai : tgl_mulai,
+                tgl_selesai : tgl_selesai
+            })
+            
+            if(updatejadwal){
+                response = {
+                    status: "SUCCESS",
+                    message: "Update Success",
+                }
+                return res.status(created).json(response);
             }
-        });
-
-        if(updatejadwal){
-            response = {
-                status: "SUCCESS",
-                message: "Update Success",
-            }
-            return res.status(created).json(response);
-
-
-        }
+        } 
     } catch (error) {
         return res.status(servererror).json({
             error: error.message

@@ -62,12 +62,6 @@ const handleCreateCommentMakanan = async(req,res) => {
 const handleUpdateCommentMakanan = async function(req, res){
 
     let response = {};
-    const uuid = req.params.id;
-    const comment_makanan = Comment_makanan.findOne({
-        where: {
-            uuid: uuid
-        }
-    });
     try {
         const uuid = req.params.id;
         const body = req.body; 
@@ -83,48 +77,29 @@ const handleUpdateCommentMakanan = async function(req, res){
                 message: "Message You Looking For Is Not Found"
             });
         }
-        return res.status(notfound).json(response);
-    }else{
-        const bintang = req.body.bintang;
-        const comment_review = req.body.comment_review;
-
-        const updatecomment =await Comment_makanan.update({
-            bintang : bintang,
-            comment_review : comment_review,
-        },
-        {
-            where: {
-                uuid : uuid
+        else{
+            const bintang = req.body.bintang;
+            const comment_review = req.body.comment_review;
+    
+            const updatecomment =await Comment_makanan.update({
+                bintang : bintang,
+                comment_review : comment_review,
+            },{
+                where: {
+                    uuid : uuid
+                }
+            });
+    
+            if(updatecomment){
+                response = {
+                    status: "SUCCESS",
+                    message: "Update Success",
+                    data: updatecomment
+                }
+                return res.status(created).json(response);
             }
-        });
-
-        response = {
-            status: "SUCCESS",
-            message: "Comment Updated",
-            data: updatecomment
-
-        const id_makanan = body.id_makanan;
-        const bintang = body.bintang;
-        const comment_review = body.comment_review;
-
-        const updatecommentmakanan = await Comment_makanan.update({
-            id_makanan: id_makanan,
-            bintang: bintang,
-            comment_review: comment_review,
-        }, {
-            where: {
-                uuid: uuid
-            }
-        });
-
-        if(updatecommentmakanan){
-            response = {
-                status: "SUCCESS",
-                message: "Update Success",
-            }
-            return res.status(created).json(response);
-        }
-    } catch (error) {
+        } 
+    }catch (error) {
         return res.status(servererror).json({
             error: error.message
         });
