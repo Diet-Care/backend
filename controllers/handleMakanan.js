@@ -45,7 +45,7 @@ const handleMakananGetById = async function(req,res) {
         let response = {
             data: makanan
         }
-        res.status(created).json(response)
+        res.status(ok).json(response)
         return;
     } catch (error) {
         res.status(servererror).json({
@@ -84,7 +84,7 @@ const handleCreateMakanan = async function(req, res) {
             message: "Create Makanan",
             data: createMakanan,
         }
-        return res.status(ok).json(response);
+        return res.status(created).json(response);
     } catch (error){
         response = {
             status: "Bad Request",
