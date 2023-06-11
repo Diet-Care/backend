@@ -60,10 +60,11 @@ const handleCreateCommentMakanan = async(req,res) => {
 }
 
 const handleUpdateCommentMakanan = async function(req, res){
-    let response = {}
+    let response = {};
+    const uuid = req.params.id;
     const comment_makanan = Comment_makanan.findOne({
         where: {
-            uuid: req.params.id
+            uuid: uuid
         }
     });
 
@@ -72,15 +73,25 @@ const handleUpdateCommentMakanan = async function(req, res){
             status: "SUCCESS",
             message: "Comment not Found"
         }
-        return;
+        return res.status(notfound).json(response);
     }else{
-        comment_makanan.bintang = req.body.bintang
-        comment_makanan.comment_review
-        comment_makanan.save()
+        const bintang = req.body.bintang;
+        const comment_review = req.body.comment_review;
+
+        const updatecomment =await Comment_makanan.update({
+            bintang : bintang,
+            comment_review : comment_review,
+        },
+        {
+            where: {
+                uuid : uuid
+            }
+        });
+
         response = {
             status: "SUCCESS",
             message: "Comment Updated",
-            data: comment_makanan
+            data: updatecomment
         }
     }
     res.status(created).json(response);

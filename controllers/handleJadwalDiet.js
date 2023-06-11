@@ -62,7 +62,7 @@ const handleCreateSchedule = async(req, res)=>{
             message: "Schedule Was Created",
             data: newSchedule
         }
-        return res.status(ok).json(response);
+        return res.status(created).json(response);
     }catch(error){
         response = {
             status: "ERROR",
@@ -73,10 +73,11 @@ const handleCreateSchedule = async(req, res)=>{
 }
 
 const handleUpdateSchedule = async(req, res) => {
-    let response = {}
+    let response = {};
+    const uuid = req.params.id;
     const jadwal_diet = Jadwal_diet.findOne({
         where: {
-            uuid: req.params.id
+            uuid: uuid
         }
     });
     if(!jadwal_diet){
@@ -88,17 +89,25 @@ const handleUpdateSchedule = async(req, res) => {
             message : "jadwal_diet Not Found"
         })
     }else{
-        jadwal_diet.uuid_user = req.body.uuid_user
-        jadwal_diet.uuid_olahraga = req.body.uuid_olahraga
-        jadwal_diet.uuid_makanan = req.body.uuid_makanan
-        jadwal_diet.level = req.body.level
-        jadwal_diet.tgl_mulai = req.body.tgl_mulai
-        jadwal_diet.tgl_selesai = req.body.tgl_selesai
-        jadwal_diet.save()
+        const uuid_user = req.body.uuid_user
+        const uuid_olahraga = req.body.uuid_olahraga
+        const uuid_makanan = req.body.uuid_makanan
+        const level = req.body.level
+        const tgl_mulai = req.body.tgl_mulai
+        const tgl_selesai = req.body.tgl_selesai
+        
+        const updatejdawal = await Jadwal_diet.update({
+            uuid_user : uuid_user,
+            uuid_olahraga : uuid_olahraga,
+            uuid_makanan : uuid_makanan,
+            level : level,
+            tgl_mulai : tgl_mulai,
+            tgl_selesai : tgl_selesai
+        })
         response = {
             status: "SUCCESS",
             message: "Schedule Updated",
-            data: jadwal_diet
+            data: updatejdawal
         }
     }
     res.status(created).json(response)
