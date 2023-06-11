@@ -10,31 +10,49 @@ cloudinaryconf();
 
 
 const handleMakananGetAll = async function(req, res) {
-    const response = await Makanan.findAll();
-    res.status(ok).json(response)
-    return;
+    try {
+        const olahraga = await Makanan.findAll();
+        const response = {
+            data: olahraga,
+        };
+        res.status(ok).json(response);
+        return;
+   } catch (error) {
+        res.status(servererror).json({
+            message : error.message
+        });
+        return;
+   };
 };
 
 const handleMakananGetById = async function(req,res) {
-    const uuid = req.params.id;
+    try {
+        const uuid = req.params.id;
 
-    const makanan = await Makanan.findAll({
-        where:{
-            uuid: uuid
+        const makanan = await Makanan.findAll({
+            where:{
+                uuid: uuid
+            }
+        });
+        if(!makanan){
+            res.status(notfound);
+            res.json({
+                message: 'Foods not Found'
+            });
+            return;
         }
-    });
-    let response = {
-        data: makanan
-    }
-    if(!makanan){
-        res.status(notfound);
-        res.json({
-            message: 'Foods not Found'
+
+        let response = {
+            data: makanan
+        }
+        res.status(ok).json(response)
+        return;
+    } catch (error) {
+        res.status(servererror).json({
+            message : error.message
         });
         return;
     }
-    res.statu(created).json(response)
-    return;
 };
 
 const handleCreateMakanan = async function(req, res) {
@@ -66,7 +84,7 @@ const handleCreateMakanan = async function(req, res) {
             message: "Create Makanan",
             data: createMakanan,
         }
-        return res.status(ok).json(response);
+        return res.status(created).json(response);
     } catch (error){
         response = {
             status: "Bad Request",
@@ -93,15 +111,7 @@ const handleUpdateMakanan = async function(req, res) {
             });
         }
 
-
-        const judul_makanan = body.judul_makanan;
-
-        // const updateimgmakanan = req.params.img_makanan;
-        // const updateimg = await cloudinary.uploader.update(`edukasi/makanan/${updateimgmakanan}`, {type: "fetch", invalidate: true, folder: `edukasi/makanan/${updateimgmakanan}`});
-        // console.log(updateimg);
-
         const judul = body.judul;
-
         const deskripsi_singkat = body.deskripsi_singkat;
         const deskripsi_lengkap = body.deskripsi_lengkap;
         const tips = body.tips;
