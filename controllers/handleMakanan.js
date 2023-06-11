@@ -111,11 +111,26 @@ const handleUpdateMakanan = async function(req, res) {
             });
         }
 
+        // edit image
+
+        const imgPublicIdSplit = makanan.img.split('/');
+
+        const imgPublicId = imgPublicIdSplit[imgPublicIdSplit.length - 1];
+        const publicId = imgPublicId.split('.')[0];
+        const updateid = `edukasi/makanan/${publicId}`;
+      
+        const _base64 = Buffer.from(req.files.img.data, 'base64').toString('base64');
+        const base64 = `data:image/jpeg;base64,${_base64}`;
+        
+        const cloudinaryResponse = await cloudinary.uploader.upload(base64,{ public_id: updateid, overwrite: true });
+
+        const updateimgmakanan = cloudinaryResponse.secure_url;
+
         const judul = body.judul;
         const deskripsi_singkat = body.deskripsi_singkat;
         const deskripsi_lengkap = body.deskripsi_lengkap;
         const tips = body.tips;
-        // const img_makanan = body.img_makanan;
+        const imgmakanan = updateimgmakanan;
         const jumlah_kalori = body.jumlah_kalori;
         const level = body.level;
 
@@ -124,6 +139,7 @@ const handleUpdateMakanan = async function(req, res) {
             deskripsi_singkat: deskripsi_singkat,
             deskripsi_lengkap: deskripsi_lengkap,
             tips: tips,
+            img : imgmakanan,
             jumlah_kalori: jumlah_kalori,
             level: level,
         }, {
