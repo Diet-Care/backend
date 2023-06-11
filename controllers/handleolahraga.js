@@ -39,13 +39,13 @@ const handlecreateolhraga = async (req, res) =>{
             data : createolahraga,
         };
 
-        res.status(created).json(response);
+        return res.status(created).json(response);
     } catch (error) {
         response ={
             status : "ERROR",
             message : error.message
         }
-        res.status(servererror).json(response);
+        return res.status(servererror).json(response);
     };
 }
 
@@ -53,12 +53,7 @@ const handleolhragaall = async (req, res) => {
    try {
         const olahraga = await Olahraga.findAll();
         const response = {
-                    status: "SUCCESS",
-                    message: "Get All sport",
-                    meta: {
-                        total: olahraga.length
-                    },
-                    data: olahraga,
+            data: olahraga,
         };
 
         res.status(ok).json(response);
@@ -67,6 +62,7 @@ const handleolhragaall = async (req, res) => {
         res.status(servererror).json({
             message : error.message
         });
+        return;
    };
 };
 
@@ -90,8 +86,6 @@ const handleolhragaid = async (req, res) => {
         }
 
         let response = {
-            status: "SUCCESS",
-            message: "Get Detail sport",
             data: olahraga
         }
 
@@ -101,6 +95,7 @@ const handleolhragaid = async (req, res) => {
         res.status(servererror).json({
             message : error.message
         });
+        return;
     };
 };
 
@@ -168,7 +163,7 @@ const handleupdateolahraga = async(req, res) =>{
             return res.status(created).json(response);
         }
     } catch (error) {
-        res.status(servererror).json({ 
+        return res.status(servererror).json({ 
             error: error.message });
     };
 }
@@ -202,7 +197,7 @@ const handledeletolahraga = async (req,res) =>{
             });
         }
     } catch (error) {
-        res.status(servererror).json({ 
+       return res.status(servererror).json({ 
             error: error.message });
     };
 }

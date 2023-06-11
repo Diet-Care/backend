@@ -19,11 +19,6 @@ const handleScheduleAll = async (req, res) => {
         }
     });
     const response = {
-        status: "SUCCESS",
-        message: "Get Diet Schedule",
-        Meta: {
-            total: jadwal_diet.length
-        },
         data: jadwal_diet,
     }
     res.status(ok).json(response);
@@ -38,8 +33,6 @@ const handleScheduleById =  async (req, res) => {
         }
     });
     let response = {
-        status: "SUCCESS",
-        message: "Get Schedule Detail",
         data: jadwal_diet
     }
     if(!jadwal_diet){
@@ -91,7 +84,9 @@ const handleUpdateSchedule = async(req, res) => {
             status: "SUCCESS",
             message: "Schedule Not Found"
         }
-        return
+        return res.status(notfound).json({
+            message : "jadwal_diet Not Found"
+        })
     }else{
         jadwal_diet.uuid_user = req.body.uuid_user
         jadwal_diet.uuid_olahraga = req.body.uuid_olahraga

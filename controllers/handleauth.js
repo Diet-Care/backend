@@ -51,6 +51,7 @@ const handlelogin = async(req, res) =>{
         message : "Login Success",
         data : token
     });
+    return
 }
 
 const handleregister = async (req,res) =>{
@@ -89,8 +90,9 @@ const handleregister = async (req,res) =>{
             message : "successfuly",
             data : createuser
         });
+        return;
     } catch (error) {
-        res.status(bad).json(error);
+       return res.status(bad).json(error);
     }
     
 }
