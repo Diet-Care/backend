@@ -10,7 +10,7 @@ module.exports = function(connection) {
             allowNull: false,
             primaryKey: true
           },
-        judul_makanan:{
+        judul:{
             type: DataTypes.STRING,
         },
         deskripsi_singkat:{
@@ -19,11 +19,11 @@ module.exports = function(connection) {
         deskripsi_lengkap:{
             type: DataTypes.STRING(255),
         },
-        img_makanan:{
+        img:{
             type: DataTypes.STRING,
             allowNull: true,
         },
-        tips_makanan:{
+        tips:{
             type: DataTypes.STRING(255),
         },
         jumlah_kalori:{

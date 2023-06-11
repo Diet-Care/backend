@@ -46,7 +46,7 @@ const handleCreateCommentOlahraga = async function(req, res) {
     const newComment = await Comment_olahraga.create({
         id_olahraga: req.params.id,
         bintang: req.body.bintang,
-        comment_review: req.body.deskripsi_review
+        comment_review: req.body.comment_review
     });
 
     response = {
@@ -65,30 +65,53 @@ const handleCreateCommentOlahraga = async function(req, res) {
 }
 
 const handleUpdateCommentOlahraga = async function(req,res) {
-    let response = {}
-    const comment_olahraga = Comment_olahraga.findOne({
-        where: {
-            uuid: req.params.id
-        }
-    });
+    try {
+        const uuid = req.params.id;
+        const body = req.body; 
+
 
     if(!comment_olahraga){
         response = {
             message: "Comment not Found"
+
+        const comment_olahraga = await Comment_olahraga.findOne({
+            where: {
+                uuid: uuid
+            }
+        });
+
+        if(!comment_olahraga){
+            return res.status(notfound).json({
+                message: "Message You Looking For Is Not Found"
+            });
+
         }
-        return;
-    } else {
-        comment_olahraga.bintang = req.body.bintang
-        comment_olahraga.comment_review = req.body.comment_review
-        comment_olahraga.save()
-        response = {
-            status: "SUCCESS",
-            message: "Update Comment",
-            data: comment_olahraga
+        const id_olahraga = body.id_olahraga;
+        const bintang = body.bintang;
+        const comment_review = body.comment_review;
+
+        const updatecommentolahraga = await Comment_olahraga.update({
+            id_olahraga: id_olahraga,
+            bintang: bintang,
+            comment_review: comment_review,
+        }, {
+            where: {
+                uuid: uuid
+            }
+        });
+
+        if(updatecommentolahraga){
+            response = {
+                status: "SUCCESS",
+                message: "Update Success",
+            }
+            return res.status(created).json(response);
         }
-    }
-    res.status(created).json(response)
-    return
+    } catch (error) {
+        return res.status(servererror).json({
+            error: error.message
+        });
+    };
 }
 
 const handleDeleteCommentOlahragaById = async function(req, res){

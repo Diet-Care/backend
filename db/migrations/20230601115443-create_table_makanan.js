@@ -7,7 +7,7 @@
         allowNull: false,
         primaryKey: true
       },
-      judul_makanan:{
+      judul:{
           type: Sequelize.DataTypes.STRING,
       },
       deskripsi_singkat:{
@@ -16,11 +16,11 @@
       deskripsi_lengkap:{
           type: Sequelize.DataTypes.STRING(255),
       },
-      img_makanan:{
+      img:{
           type: Sequelize.DataTypes.STRING,
           allowNull: true,
       },
-      tips_makanan:{
+      tips:{
           type: Sequelize.DataTypes.STRING(255),
       },
       jumlah_kalori:{

@@ -64,31 +64,47 @@ const hanldeCreateKontak = async(req, res) => {
 }
 
 const handleUpdateKontak = async (req, res) => {
-    let response = {}
-    const kontak = Kontak.findOne({
-        where: {
-            uuid: req.params.id
+    try {
+        const uuid = req.params.id;
+        const body = req.body; 
+
+        const kontak = await Kontak.findOne({
+            where: {
+                uuid: uuid
+            }
+        });
+
+        if(!kontak){
+            return res.status(notfound).json({
+                message: "Message You Looking For Is Not Found"
+            });
         }
-    });
-    if(!kontak){
-        response = {
-            status: "SUCCESS",
-            message: "Message Not Found"
+        const name = body.name;
+        const email = body.email;
+        const pesan = body.pesan;
+
+        const updatekontak = await Kontak.update({
+            name: name,
+            email: email,
+            pesan: pesan,
+        }, {
+            where: {
+                uuid: uuid
+            }
+        });
+
+        if(updatekontak){
+            response = {
+                status: "SUCCESS",
+                message: "Update Success",
+            }
+            return res.status(created).json(response);
         }
-        return;
-    } else {
-        kontak.name = req.body.name
-        kontak.email = req.body.email
-        kontak.pesan = req.body.pesan
-        kontak.save()
-        response = {
-            status: "SUCCESS",
-            message: "Message Updated",
-            data: kontak
-        }
-    }
-    res.status(created).json(response)
-    return
+    } catch (error) {
+        return res.status(servererror).json({
+            error: error.message
+        });
+    };
 }
 
 const handleDeleteKontakById = async (req, res) => {
