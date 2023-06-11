@@ -80,7 +80,7 @@ const handleUpdateCommentOlahraga = async function(req,res) {
         return res.status(notfound).json(response);
     } else {
         const bintang = req.body.bintang;
-        const comment_review = req.body.comment_review
+        const comment_review = req.body.comment_review;
         
         const updatecomment =await Comment_olahraga.update({
             bintang : bintang,
