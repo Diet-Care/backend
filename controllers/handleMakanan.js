@@ -11,9 +11,9 @@ cloudinaryconf();
 
 const handleMakananGetAll = async function(req, res) {
     try {
-        const olahraga = await Makanan.findAll();
+        const makanan = await Makanan.findAll();
         const response = {
-            data: olahraga,
+            data: makanan,
         };
         res.status(ok).json(response);
         return;

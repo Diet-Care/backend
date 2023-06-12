@@ -6,13 +6,21 @@ const { servererror } = require("./statuscode");
 
 
 const handleuserall = async (req, res) => {
-    const users = await Users.findAll();
-    const response = {
-                data: users
-        }
+    try {
+        const users = await Users.findAll();
+        const response = {
+                    data: users
+            }
 
-    res.status(ok).json(response)
-    return
+        res.status(ok).json(response)
+        return
+    } catch (error) {
+        res.status(servererror).json({
+            message : error.message
+        });
+        return;
+    }
+   
 };
 
 const handleUserId = async(req,res) =>{

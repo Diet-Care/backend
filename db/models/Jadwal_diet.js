@@ -13,6 +13,7 @@ module.exports = function(connection) {
         uuid_user: {
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4,
+            allowNull: false,
             references: {
                 model: {
                     tableName: 'users'
