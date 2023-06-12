@@ -36,7 +36,7 @@ const handleScheduleAll = async (req, res) => {
 const handleScheduleById =  async (req, res) => {
     try {
         const uuid = req.params.id;
-        const jadwal_diet = await Jadwal_diet.findAll({
+        const jadwal_diet = await Jadwal_diet.findOne({
             where: {
                 uuid: uuid
             }

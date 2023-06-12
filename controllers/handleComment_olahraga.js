@@ -21,7 +21,7 @@ const handleCommentOlahragaAll = async (req, res) => {
 
 const handleCommentOlahragaById = async (req, res) => {
     const uuid = req.params.id;
-    const comment_olahraga = await Comment_olahraga.findAll({
+    const comment_olahraga = await Comment_olahraga.findOne({
         where: {
             uuid: uuid
         }

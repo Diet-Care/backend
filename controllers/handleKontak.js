@@ -19,7 +19,7 @@ const handleKontakAll = async (req,res) => {
 
 const handleKontakById = async (req, res) => {
     const uuid = req.params.id;
-    const kontak = await Kontak.findAll({
+    const kontak = await Kontak.findOne({
         where: {
             uuid: uuid
         }
