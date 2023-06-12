@@ -29,7 +29,7 @@ const handleMakananGetById = async function(req,res) {
     try {
         const uuid = req.params.id;
 
-        const makanan = await Makanan.findAll({
+        const makanan = await Makanan.findOne({
             where:{
                 uuid: uuid
             }

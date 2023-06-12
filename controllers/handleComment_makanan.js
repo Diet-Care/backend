@@ -19,7 +19,7 @@ const handleCommentMakananAll = async (req, res) => {
 
 const handleCommentMakananById = async(req, res) => {
     const uuid = req.params.id;
-    const comment_makanan = await Comment_makanan.findAll({
+    const comment_makanan = await Comment_makanan.findOne({
         where: {
             uuid: uuid
         }
