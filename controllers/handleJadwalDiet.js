@@ -34,28 +34,12 @@ const handleScheduleAll = async (req, res) => {
 };
 
 const handleScheduleById =  async (req, res) => {
-<<<<<<< HEAD
-    const uuid = req.params.id;
-    const jadwal_diet = await Jadwal_diet.findOne({
-        where: {
-            uuid: uuid
-        }
-    });
-    let response = {
-        data: jadwal_diet
-    }
-    if(!jadwal_diet){
-        res.status(notfound);
-        res.json({
-            message: "Schedule Not Found"
-=======
     try {
         const uuid = req.params.id;
-        const jadwal_diet = await Jadwal_diet.findAll({
+        const jadwal_diet = await Jadwal_diet.findOne({
             where: {
                 uuid: uuid
             }
->>>>>>> 6106b5797caa5a879f281c90b1dca12e3c7e47f7
         });
         let response = {
             data: jadwal_diet
