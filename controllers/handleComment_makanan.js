@@ -42,7 +42,7 @@ const handleCreateCommentMakanan = async(req,res) => {
     const body = req.body;
     try {
         const newComment = await Comment_makanan.create({
-            id_makanan: body.id_makanan,
+            id_makanan: req.params.id,
             bintang: body.bintang,
             comment_review: body.comment_review
         });
@@ -94,7 +94,6 @@ const handleUpdateCommentMakanan = async function(req, res){
                 response = {
                     status: "SUCCESS",
                     message: "Update Success",
-                    data: updatecomment
                 }
                 return res.status(created).json(response);
             }

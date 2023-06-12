@@ -1,63 +1,79 @@
-const { CHAR, UUID } = require("sequelize");
 const { Jadwal_diet, Users, Olahraga, Makanan } = require("../db/models");
 const { ok, notfound, bad, created, servererror } = require("./statuscode");
 
 require("dotenv").config;
 
 const handleScheduleAll = async (req, res) => {
-    const jadwal_diet = await Jadwal_diet.findAll({
-        include: {
-            model: Users,
-            as: 'user'
-        },
-        include: {
-            model: Olahraga,
-            as: 'olahraga'
-        },
-        include: {
-            model: Makanan,
-            as: 'makanan'
+    try {
+        const jadwal_diet = await Jadwal_diet.findAll({
+            include: {
+                model: Users,
+                as: 'user'
+            },
+            include: {
+                model: Olahraga,
+                as: 'olahraga'
+            },
+            include: {
+                model: Makanan,
+                as: 'makanan'
+            }
+        });
+        const response = {
+            data: jadwal_diet,
         }
-    });
-    const response = {
-        data: jadwal_diet,
+        res.status(ok).json(response);
+        return;
+    } catch (error) {
+        response = {
+            status: "ERROR",
+            message: error.message
+        }
+        return res.status(bad).json(response)
     }
-    res.status(ok).json(response);
-    return;
 };
 
 const handleScheduleById =  async (req, res) => {
-    const uuid = req.params.id;
-    const jadwal_diet = await Jadwal_diet.findAll({
-        where: {
-            uuid: uuid
-        }
-    });
-    let response = {
-        data: jadwal_diet
-    }
-    if(!jadwal_diet){
-        res.status(notfound);
-        res.json({
-            message: "Schedule Not Found"
+    try {
+        const uuid = req.params.id;
+        const jadwal_diet = await Jadwal_diet.findAll({
+            where: {
+                uuid: uuid
+            }
         });
+        let response = {
+            data: jadwal_diet
+        }
+        if(!jadwal_diet){
+            res.status(notfound);
+            res.json({
+                message: "Schedule Not Found"
+            });
+            return;
+        }
+        res.status(ok).json(response);
         return;
+    } catch (error) {
+        response = {
+            status: "ERROR",
+            message: error.message
+        }
+        return res.status(bad).json(response)
     }
-    res.status(ok).json(response);
-    return;
 };
 
 const handleCreateSchedule = async(req, res)=>{
     let response = {}
     try {
         const newSchedule = await Jadwal_diet.create({
-            uuid_user: UUID(req.body.uuid_user),
-            uuid_olahraga: UUID(req.body.uuid_olahraga),
-            uuid_makanan: UUID(req.body.uuid_makanan),
+            uuid_user: req.body.uuid_user,
+            uuid_olahraga: req.body.uuid_olahraga,
+            uuid_makanan: req.body.uuid_makanan,
             level: req.body.level,
-            tgl_mulai: req.body.tgl_mulai,
-            tgl_selesai: req.body.tgl_selesai
+            tgl_mulai: new Date(req.body.tgl_mulai),
+            tgl_selesai: new Date(req.body.tgl_selesai)
         });
+        console.log(newSchedule);
         response = {
             status: "SUCCESS",
             message: "Schedule Has Been Created",
@@ -67,7 +83,7 @@ const handleCreateSchedule = async(req, res)=>{
     }catch(error){
         response = {
             status: "ERROR",
-            message: error.parent.sqlMessage
+            message: error.message
         }
         return res.status(bad).json(response)
     }
