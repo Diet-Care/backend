@@ -6,18 +6,20 @@ require("dotenv").config;
 const handleScheduleAll = async (req, res) => {
     try {
         const jadwal_diet = await Jadwal_diet.findAll({
-            include: {
-                model: Users,
-                as: 'user'
-            },
-            include: {
-                model: Olahraga,
-                as: 'olahraga'
-            },
-            include: {
-                model: Makanan,
-                as: 'makanan'
-            }
+            include: [
+                {
+                    model: Users,
+                    as: 'users'
+                },
+                {
+                    model: Olahraga,
+                    as: 'olahraga'
+                },
+                {
+                    model: Makanan,
+                    as: 'makanan'
+                }
+            ]
         });
         const response = {
             data: jadwal_diet,
