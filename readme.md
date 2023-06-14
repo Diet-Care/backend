@@ -34,18 +34,50 @@ ini bagian authentikasi :
 ### olahraga
 1. getallolahraga = method get = https://backend-production-2c47.up.railway.app/olahraga
 2. getidolahraga = method get = https://backend-production-2c47.up.railway.app/olahraga/{uuid_olahraga}
-3. createolahraga = method put = https://backend-production-2c47.up.railway.app/olahraga
-4. updateolahraga = method delete = https://backend-production-2c47.up.railway.app/olahraga/{uuid_olahraga}
+3. createolahraga = method post = https://backend-production-2c47.up.railway.app/olahraga
+4. updateolahraga = method put = https://backend-production-2c47.up.railway.app/olahraga/{uuid_olahraga}
 5. deleteolahraga = method delete = https://backend-production-2c47.up.railway.app/olahraga/{uuid_olahraga}
 5. deleteallkategori = method delete = https://backend-production-2c47.up.railway.app/olahraga
 
 ### makanan
 1. getallmakanan = method get = https://backend-production-2c47.up.railway.app/makanan
 2. getidmakanan = method get = https://backend-production-2c47.up.railway.app/makanan/{uuid_makanan}
-3. createmakanan = method put = https://backend-production-2c47.up.railway.app/makanan
-4. updatemakanan = method delete = https://backend-production-2c47.up.railway.app/makanan/{uuid_makanan}
+3. createmakanan = method post = https://backend-production-2c47.up.railway.app/makanan
+4. updatemakanan = method put = https://backend-production-2c47.up.railway.app/makanan/{uuid_makanan}
 5. deletemakanan = method delete = https://backend-production-2c47.up.railway.app/makanan/{uuid_makanan}
 5. deleteallmakanan = method delete = https://backend-production-2c47.up.railway.app/makanan
+
+### comment olahraga
+1. getallcomment = method get = https://backend-production-2c47.up.railway.app/olahraga/{uuid_olahraga}/comment
+2. getidcomment = method get = https://backend-production-2c47.up.railway.app/olahraga/{uuid_olahraga}/comment/{uuid_comment}
+3. createcomment = method post = https://backend-production-2c47.up.railway.app/olahraga/{uuid_olahraga}/comment
+4. updatecomment = method put = https://backend-production-2c47.up.railway.app/olahraga/{uuid_olahraga}/comment/{uuid_comment}
+5. deletecommentbyid = method delete = https://backend-production-2c47.up.railway.app/olahraga/{uuid_olahraga}/comment/{uuid_comment}
+6. deleteallcomment = methode delete = https://backend-production-2c47.up.railway.app/olahraga/{uuid_olahraga}/comment
+
+### comment makanan
+1. getallcomment = method get = https://backend-production-2c47.up.railway.app/makanan/{uuid_makanan}/comment
+2. getidcomment = method get = https://backend-production-2c47.up.railway.app/makanan/{uuid_makanan}/comment/{uuid_comment}
+3. createcomment = method post = https://backend-production-2c47.up.railway.app/makanan/{uuid_makanan}/comment
+4. updatecomment = method put = https://backend-production-2c47.up.railway.app/makanan/{uuid_makanan}/comment/{uuid_comment}
+5. deletecommentbyid = method delete = https://backend-production-2c47.up.railway.app/makanan/{uuid_makanan}/comment/{uuid_comment}
+6. deleteallcomment = methode delete = https://backend-production-2c47.up.railway.app/makanan/{uuid_makanan}/comment
+
+### contact us
+1. getallpesan = method get = https://backend-production-2c47.up.railway.app/kontak
+2. getidpesan = method get = https://backend-production-2c47.up.railway.app/kontak/{uuid_kontak}
+3. createpesan = method post = https://backend-production-2c47.up.railway.app/kontak
+4. updatepesan = method put = https://backend-production-2c47.up.railway.app/kontak/{uuid_kontak}
+5. deletepesanbyid = method delete = https://backend-production-2c47.up.railway.app/kontak/{uuid_kontak}
+6. deleteallpesan = method delete = https://backend-production-2c47.up.railway.app/kontak
+
+### jadwal diet
+1. getalljadwal = method get = https://backend-production-2c47.up.railway.app/jadwaldiet
+2. getidjadwal = method get = https://backend-production-2c47.up.railway.app/jadwaldiet/{uuid_jadwal}
+3. createjadwal = method post = https://backend-production-2c47.up.railway.app/jadwaldiet
+4. updatejadwal = method put = https://backend-production-2c47.up.railway.app/jadwaldiet/{uuid_jadwal}
+5. deletejadwalbyid = method delete = https://backend-production-2c47.up.railway.app/jadwaldiet/{uuid_jadwal}
+6. deletealljadwal = method delete = https://backend-production-2c47.up.railway.app/jadwaldiet
 
 <!-- tambahin lagi bang ali seperti comment, jadwaldiet, kontak  -->
 ## AUTHORIZATION
@@ -422,7 +454,7 @@ Request :
 
 Request :
 
-- Method : CREATE
+- Method : POST
 - Endpoint : https://backend-production-2c47.up.railway.app/makanan
     - Content-Type: application/json
     - Accept: application/json
@@ -580,4 +612,694 @@ Request :
   }
 ```
 
-# Not Authrozation    
+## Get All Comment Olahraga = role Admin && User
+Request :
+
+- Method : GET
+- Endpoint : https://backend-production-2c47.up.railway.app/olahraga/{uuid_olahraga}/comment
+- Header :
+    - Content-Type: application/json
+    - Accept: application/json
+    - Authorization : Bearer <token>
+    
+Response : 
+    
+```json
+  {
+     "meta": {
+              "integer"
+    },
+      "data": {
+        "bintang": "string",
+        "comment_review": "string"
+    }
+  }
+```
+
+## Get Id Comment Olahraga = role Admin
+Request :
+
+- Method : GET
+- Endpoint : https://backend-production-2c47.up.railway.app/olahraga/{uuid_olahraga}/comment/{uuid_comment}
+- Header :
+    - Content-Type: application/json
+    - Accept: application/json
+    - Authorization : Bearer <token>
+    
+Response : 
+```json
+  {
+      "data": {
+        "bintang": "string",
+        "comment_review": "string"
+    }
+  }
+```
+
+## Create Comment Olahraga = User && Admin
+- Method : POST
+- Endpoint : https://backend-production-2c47.up.railway.app/olahraga/{uuid_olahraga}/comment
+    - Content-Type: application/json
+    - Accept: application/json
+    - Authorization : Bearer <token>
+- Request Body : 
+    - form-data
+    ```json
+        { 
+            "bintang": "string",
+            "comment_review": "string"
+        }
+    ```
+    
+- Response Body : 
+    
+```json
+  {
+    "status": "Success",
+    "message": "Create Comment",
+    "data": {
+        "bintang": "string",
+        "comment_review": "string"
+    }
+  }
+  ```
+
+## Update Comment Olahraga = User && Admin
+- Method : PUT
+- Endpoint : https://backend-production-2c47.up.railway.app/olahraga/{uuid_olahraga}/comment/{uuid_comment}
+    - Content-Type: application/json
+    - Accept: application/json
+    - Authorization : Bearer <token>
+- Request Body : 
+    - form-data
+    ```json
+        { 
+            "bintang": "string",
+            "comment_review": "string"
+        }
+    ```
+    
+- Response Body : 
+    
+```json
+  {
+    "status": "Success",
+    "message": "Comment Updated",
+    "data": {
+        "bintang": "string",
+        "comment_review": "string"
+    }
+  }
+  ```
+
+  ## Delete Comment Olahraga By Id = role User && Admin
+  Request : 
+  - Method : DELETE
+  - Endpoint : https://backend-production-2c47.up.railway.app/olahraga/{uuid_olahraga}/comment/{uuid_comment}
+    - Content-Type: application/json
+    - Accept: application/json
+    - Authorization : Bearer <token>
+  
+  Response : 
+
+```json
+  {
+    "message": "Comment Has Been Deleted",
+    "result" : "ok"
+  }
+```
+
+## Delete All Comment Olahraga = Admin
+  Request : 
+  - Method : DELETE
+  - Endpoint : https://backend-production-2c47.up.railway.app/olahraga/{uuid_olahraga}/comment
+    - Content-Type: application/json
+    - Accept: application/json
+    - Authorization : Bearer <token>
+  
+  Response : 
+
+```json
+  {
+    "message": "succesfuly delete all",
+    "result" : "ok"
+  }
+```
+
+## Get All Comment Makanan = role Admin && User
+Request :
+
+- Method : GET
+- Endpoint : https://backend-production-2c47.up.railway.app/makanan/{uuid_makanan}/comment
+- Header :
+    - Content-Type: application/json
+    - Accept: application/json
+    - Authorization : Bearer <token>
+    
+Response : 
+    
+```json
+  {
+     "meta": {
+              "integer"
+    },
+      "data": {
+        "bintang": "string",
+        "comment_review": "string"
+    }
+  }
+```
+
+## Get Id Comment Makanan = role Admin
+Request :
+
+- Method : GET
+- Endpoint : https://backend-production-2c47.up.railway.app/makanan/{uuid_makanan}/comment/{uuid_comment}
+- Header :
+    - Content-Type: application/json
+    - Accept: application/json
+    - Authorization : Bearer <token>
+    
+Response : 
+```json
+  {
+      "data": {
+        "bintang": "string",
+        "comment_review": "string"
+    }
+  }
+```
+
+## Create Comment Makanan = User && Admin
+- Method : POST
+- Endpoint : https://backend-production-2c47.up.railway.app/makanan/{uuid_makanan}/comment
+    - Content-Type: application/json
+    - Accept: application/json
+    - Authorization : Bearer <token>
+- Request Body : 
+    - form-data
+    ```json
+        { 
+            "bintang": "string",
+            "comment_review": "string"
+        }
+    ```
+    
+- Response Body : 
+    
+```json
+  {
+    "status": "Success",
+    "message": "Create Comment",
+    "data": {
+        "bintang": "string",
+        "comment_review": "string"
+    }
+  }
+  ```
+
+## Update Comment Makanan = User && Admin
+- Method : PUT
+- Endpoint : https://backend-production-2c47.up.railway.app/makanan/{uuid_makanan}/comment/{uuid_comment}
+    - Content-Type: application/json
+    - Accept: application/json
+    - Authorization : Bearer <token>
+- Request Body : 
+    - form-data
+    ```json
+        { 
+            "bintang": "string",
+            "comment_review": "string"
+        }
+    ```
+    
+- Response Body : 
+    
+```json
+  {
+    "status": "Success",
+    "message": "Comment Updated",
+    "data": {
+        "bintang": "string",
+        "comment_review": "string"
+    }
+  }
+  ```
+
+  ## Delete Comment Makanan By Id = role User && Admin
+  Request : 
+  - Method : DELETE
+  - Endpoint : https://backend-production-2c47.up.railway.app/makanan/{uuid_makanan}/comment/{uuid_comment}
+    - Content-Type: application/json
+    - Accept: application/json
+    - Authorization : Bearer <token>
+  
+  Response : 
+
+```json
+  {
+    "message": "Comment Has Been Deleted",
+    "result" : "ok"
+  }
+```
+
+## Delete All Comment Makanan = Admin
+  Request : 
+  - Method : DELETE
+  - Endpoint : https://backend-production-2c47.up.railway.app/makanan/{uuid_makanan}/comment
+    - Content-Type: application/json
+    - Accept: application/json
+    - Authorization : Bearer <token>
+  
+  Response : 
+
+```json
+  {
+    "message": "succesfuly delete all",
+    "result" : "ok"
+  }
+```
+## Get All Jadwal Diet = role Admin && User
+Request :
+
+- Method : GET
+- Endpoint : https://backend-production-2c47.up.railway.app/jadwaldiet
+- Header :
+    - Content-Type: application/json
+    - Accept: application/json
+    - Authorization : Bearer <token>
+    
+Response : 
+    
+```json
+  {
+    "data": [
+        {
+            "uuid": "{uuid_jadwal}",
+            "uuid_user": "{uuid_user}",
+            "uuid_olahraga": "{uuid_olahraga}",
+            "uuid_makanan": "{uuid_makanan}",
+            "level": "STRING",
+            "tgl_mulai": "DATE",
+            "tgl_selesai": "DATE",
+            "users": {
+                "uuid": "{uuid_user}",
+                "name": "STRING",
+                "email": "STRING",
+                "password": "STRING",
+                "role": "USER/ADMIN",
+                "gender": "STRING",
+                "umur": "STRING",
+                "geografis": "STRING",
+                "profesi": "STRING",
+                "alamat": "STRING",
+                "img_profile": "FILE"
+            },
+            "olahraga": [
+                {
+                    "uuid": "{uuid_olahraga}",
+                    "judul": "STRING",
+                    "deskripsi_singkat": "STRING",
+                    "deskripsi_lengkap": "STRING",
+                    "img": "LINK CLOUDINARY",
+                    "tips": "STRING",
+                    "jumlah_kalori": "STRING",
+                    "level": "STRING",
+                    "kategori": "STRING"
+                }
+            ],
+            "makanan": [
+                {
+                    "uuid": "{uuid_makanan}",
+                    "judul": "STRING",
+                    "deskripsi_singkat": "STRING",
+                    "deskripsi_lengkap": "STRING",
+                    "img": "LINK CLOUDINARY",
+                    "tips": "STRING",
+                    "jumlah_kalori": "STRING",
+                    "level": "STRING",
+                    "kategori": "STRING"
+                }
+            ]
+        },
+        {
+            "uuid": "{uuid_jadwal}",
+            "uuid_user": "{uuid_user}",
+            "uuid_olahraga": "{uuid_olahraga}",
+            "uuid_makanan": "{uuid_makanan}",
+            "level": "STRING",
+            "tgl_mulai": "DATE",
+            "tgl_selesai": "DATE",
+            "users": {
+                "uuid": "{uuid_user}",
+                "name": "STRING",
+                "email": "STRING",
+                "password": "STRING",
+                "role": "USER/ADMIN",
+                "gender": "STRING",
+                "umur": "STRING",
+                "geografis": "STRING",
+                "profesi": "STRING",
+                "alamat": "STRING",
+                "img_profile": "FILE"
+            },
+            "olahraga": [
+                {
+                    "uuid": "{uuid_olahraga}",
+                    "judul": "STRING",
+                    "deskripsi_singkat": "STRING",
+                    "deskripsi_lengkap": "STRING",
+                    "img": "LINK CLOUDINARY",
+                    "tips": "STRING",
+                    "jumlah_kalori": "STRING",
+                    "level": "STRING",
+                    "kategori": "STRING"
+                }
+            ],
+            "makanan": [
+                {
+                    "uuid": "{uuid_makanan}",
+                    "judul": "STRING",
+                    "deskripsi_singkat": "STRING",
+                    "deskripsi_lengkap": "STRING",
+                    "img": "LINK CLOUDINARY",
+                    "tips": "STRING",
+                    "jumlah_kalori": "STRING",
+                    "level": "STRING",
+                    "kategori": "STRING"
+                }
+            ]
+        }
+    ]
+}
+```
+## Get Id Jadwal Diet = role Admin
+Request :
+
+- Method : GET
+- Endpoint : https://backend-production-2c47.up.railway.app/jadwaldiet/{uuid_jadwal}
+- Header :
+    - Content-Type: application/json
+    - Accept: application/json
+    - Authorization : Bearer <token>
+    
+Response : 
+```json
+  {
+    "data": [
+        {
+            "uuid": "{uuid_jadwal}",
+            "uuid_user": "{uuid_user}",
+            "uuid_olahraga": "{uuid_olahraga}",
+            "uuid_makanan": "{uuid_makanan}",
+            "level": "STRING",
+            "tgl_mulai": "DATE",
+            "tgl_selesai": "DATE",
+            "users": {
+                "uuid": "{uuid_user}",
+                "name": "STRING",
+                "email": "STRING",
+                "password": "STRING",
+                "role": "USER/ADMIN",
+                "gender": "STRING",
+                "umur": "STRING",
+                "geografis": "STRING",
+                "profesi": "STRING",
+                "alamat": "STRING",
+                "img_profile": "FILE"
+            },
+            "olahraga": [
+                {
+                    "uuid": "{uuid_olahraga}",
+                    "judul": "STRING",
+                    "deskripsi_singkat": "STRING",
+                    "deskripsi_lengkap": "STRING",
+                    "img": "LINK CLOUDINARY",
+                    "tips": "STRING",
+                    "jumlah_kalori": "STRING",
+                    "level": "STRING",
+                    "kategori": "STRING"
+                }
+            ],
+            "makanan": [
+                {
+                    "uuid": "{uuid_makanan}",
+                    "judul": "STRING",
+                    "deskripsi_singkat": "STRING",
+                    "deskripsi_lengkap": "STRING",
+                    "img": "LINK CLOUDINARY",
+                    "tips": "STRING",
+                    "jumlah_kalori": "STRING",
+                    "level": "STRING",
+                    "kategori": "STRING"
+                }
+            ]
+        }
+    ]
+}
+```
+## Create Jadwal Diet = User && Admin
+- Method : POST
+- Endpoint : https://backend-production-2c47.up.railway.app/jadwaldiet
+    - Content-Type: application/json
+    - Accept: application/json
+    - Authorization : Bearer <token>
+- Request Body : 
+    - form-data
+    ```json
+        { 
+            "uuid": "{uuid_jadwal}",
+            "uuid_user": "{uuid_user}",
+            "uuid_olahraga": "{uuid_olahraga}",
+            "uuid_makanan": "{uuid_makanan}",
+            "level": "STRING",
+            "tgl_mulai": "DATE",
+            "tgl_selesai": "DATE"
+        }
+    ```
+    
+- Response Body : 
+    
+```json
+  {
+    "status": "SUCCESS",
+    "message": "Schedule Has Been Created",
+    "data": {
+            "uuid": "{uuid_jadwal}",
+            "uuid_user": "{uuid_user}",
+            "uuid_olahraga": "{uuid_olahraga}",
+            "uuid_makanan": "{uuid_makanan}",
+            "level": "STRING",
+            "tgl_mulai": "DATE",
+            "tgl_selesai": "DATE",
+            "users": {
+                "uuid": "{uuid_user}",
+                "name": "STRING",
+                "email": "STRING",
+                "password": "STRING",
+                "role": "USER/ADMIN",
+                "gender": "STRING",
+                "umur": "STRING",
+                "geografis": "STRING",
+                "profesi": "STRING",
+                "alamat": "STRING",
+                "img_profile": "FILE"
+            },
+            "olahraga": [
+                {
+                    "uuid": "{uuid_olahraga}",
+                    "judul": "STRING",
+                    "deskripsi_singkat": "STRING",
+                    "deskripsi_lengkap": "STRING",
+                    "img": "LINK CLOUDINARY",
+                    "tips": "STRING",
+                    "jumlah_kalori": "STRING",
+                    "level": "STRING",
+                    "kategori": "STRING"
+                }
+            ],
+            "makanan": [
+                {
+                    "uuid": "{uuid_makanan}",
+                    "judul": "STRING",
+                    "deskripsi_singkat": "STRING",
+                    "deskripsi_lengkap": "STRING",
+                    "img": "LINK CLOUDINARY",
+                    "tips": "STRING",
+                    "jumlah_kalori": "STRING",
+                    "level": "STRING",
+                    "kategori": "STRING"
+                }
+            ]
+        }
+  }
+  ```
+## Update Jadwal Diet = User && Admin
+- Method : PUT
+- Endpoint : https://backend-production-2c47.up.railway.app/jadwaldiet
+    - Content-Type: application/json
+    - Accept: application/json
+    - Authorization : Bearer <token>
+- Request Body : 
+    - form-data
+    ```json
+        { 
+            "uuid": "{uuid_jadwal}",
+            "uuid_user": "{uuid_user}",
+            "uuid_olahraga": "{uuid_olahraga}",
+            "uuid_makanan": "{uuid_makanan}",
+            "level": "STRING",
+            "tgl_mulai": "DATE",
+            "tgl_selesai": "DATE"
+        }
+    ```
+- Response Body : 
+```json
+  {
+    "status": "SUCCESS",
+    "message": "Update Success"
+}
+```
+ ## Delete Jadwal Diet By Id = role User && Admin
+  Request : 
+  - Method : DELETE
+  - Endpoint : https://backend-production-2c47.up.railway.app/jadwaldiet/{uuid_jadwal}
+    - Content-Type: application/json
+    - Accept: application/json
+    - Authorization : Bearer <token>
+  Response : 
+
+```json
+  {
+    "message": "Schedule Deleted"
+  }
+```
+
+## Delete All Jadwal Diet = role Admin
+Request : 
+  - Method : DELETE
+  - Endpoint : https://backend-production-2c47.up.railway.app/jadwaldiet/{uuid_jadwal}
+    - Content-Type: application/json
+    - Accept: application/json
+    - Authorization : Bearer <token>
+Response : 
+
+```json
+  true
+```
+
+
+
+
+
+
+# Not Authrozation
+
+## Get All Kontak = role Admin 
+**Request** : 
+- **Method** : GET
+- **URL** : https://backend-production-2c47.up.railway.app/kontak
+**Response** : 
+```json
+  {
+    "status": "SUCCESS",
+    "message": "Get All Message",
+    "meta": {
+        "total": 2
+    },
+    "data": [
+        {
+            "uuid": "{uuid_pesan}",
+            "name": "STRING",
+            "email": "STRING",
+            "pesan": "STRING"
+        },
+        {
+            "uuid": "{uuid_pesan}",
+            "name": "STRING",
+            "email": "STRING",
+            "pesan": "STRING"
+        }
+    ]
+}
+```
+## Get Kontak By Id = role Admin 
+**Request** : 
+- **Method** : GET
+- **URL** : https://backend-production-2c47.up.railway.app/kontak/{uuid_pesan}
+**Response** : 
+```json
+ {
+    "status": "SUCCESS",
+    "message": "Get Message Detail",
+    "data": {
+        "uuid": "uuid_pesan",
+        "name": "STRING",
+        "email": "STRING",
+        "pesan": "STRING"
+    }
+}
+```
+
+
+## Create Kontak = role User
+- **Method** : POST
+- **URL** : https://backend-production-2c47.up.railway.app/kontak
+- **Request - Body** : 
+```json
+  {
+    "name": "STRING",
+    "email": "STRING",
+    "pesan":"STRING"
+}
+```
+- **Response - Body** : 
+```json
+  {
+    "status": "SUCCESS",
+    "message": "Message Has Been Created",
+    "data": {
+        "uuid": "{uuid_pesan}",
+        "name": "STRING",
+        "email": "STRING",
+        "pesan": "STRING"
+    }
+}
+```
+## Update Kontak =  role User && Admin 
+- **Method** : PUT
+- **URL** : https://backend-production-2c47.up.railway.app/kontak/{uuid_pesan}
+- **Request - Body** : 
+```json
+  {
+    "name": "STRING",
+    "email": "STRING",
+    "pesan":"STRING"
+}
+```
+- **Response - Body** : 
+```json
+  {
+    "status": "SUCCESS",
+    "message": "Update Success"
+}
+```
+
+## Delete Kontak By Id = role User && Admin
+- **Method** : DELETE
+- **URL** : https://backend-production-2c47.up.railway.app/kontak/{uuid_pesan}
+- **Response - Body** : 
+```json
+  {
+    "message": "Message Has Been Deleted"
+}
+```
+## Delete All Kontak = role Admin
+- **Method** : DELETE
+- **URL** : https://backend-production-2c47.up.railway.app/kontak
+- **Response - Body** : 
+```json
+  {
+    "message": "Message Has Been Deleted"
+}
+```
