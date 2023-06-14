@@ -9,46 +9,6 @@ const { created, ok, notfound, servererror } = require("./statuscode");
 // Configuration 
 cloudinaryconf();
 
-const handlecreateolhraga = async (req, res) =>{
-    const body = req.body;
-
-    const kategori = 'olahraga';
-    
-    try {
-        const _base64 = Buffer.from(req.files.img.data, 'base64').toString('base64');
-        const base64 = `data:image/jpeg;base64,${_base64}`;
-        
-        const cloudinaryResponse = await cloudinary.uploader.upload(base64,{folder: "edukasi/olahraga", public_id: new Date().getTime() });
-
-        const imgolahraga = cloudinaryResponse.secure_url;
-        
-        const createolahraga = await Olahraga.create({
-            judul : body.judul,
-            deskripsi_singkat : body.deskripsi_singkat,
-            deskripsi_lengkap :body.deskripsi_lengkap,
-            tips : body.tips,
-            img : imgolahraga,
-            jumlah_kalori: body.jumlah_kalori,
-            level : body.level,
-            kategori : kategori
-        });
-
-        response = {
-            status : "Success",
-            message : "Create Sport",
-            data : createolahraga,
-        };
-
-        return res.status(created).json(response);
-    } catch (error) {
-        response ={
-            status : "ERROR",
-            message : error.message
-        }
-        return res.status(servererror).json(response);
-    };
-}
-
 const handleolhragaall = async (req, res) => {
    try {
         const olahraga = await Olahraga.findAll();
@@ -99,7 +59,45 @@ const handleolhragaid = async (req, res) => {
     };
 };
 
+const handlecreateolhraga = async (req, res) =>{
+    const body = req.body;
 
+    const kategori = 'olahraga';
+    
+    try {
+        const _base64 = Buffer.from(req.files.img.data, 'base64').toString('base64');
+        const base64 = `data:image/jpeg;base64,${_base64}`;
+        
+        const cloudinaryResponse = await cloudinary.uploader.upload(base64,{folder: "edukasi/olahraga", public_id: new Date().getTime() });
+
+        const imgolahraga = cloudinaryResponse.secure_url;
+        
+        const createolahraga = await Olahraga.create({
+            judul : body.judul,
+            deskripsi_singkat : body.deskripsi_singkat,
+            deskripsi_lengkap :body.deskripsi_lengkap,
+            tips : body.tips,
+            img : imgolahraga,
+            jumlah_kalori: body.jumlah_kalori,
+            level : body.level,
+            kategori : kategori
+        });
+
+        response = {
+            status : "Success",
+            message : "Create Sport",
+            data : createolahraga,
+        };
+
+        return res.status(created).json(response);
+    } catch (error) {
+        response ={
+            status : "ERROR",
+            message : error.message
+        }
+        return res.status(servererror).json(response);
+    };
+}
 
 const handleupdateolahraga = async(req, res) =>{
    

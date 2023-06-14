@@ -1,8 +1,6 @@
 const { Jadwal_diet, Users, Olahraga, Makanan } = require("../db/models");
 const { ok, notfound, bad, created, servererror } = require("./statuscode");
 
-require("dotenv").config;
-
 const handleScheduleAll = async (req, res) => {
     try {
         const jadwal_diet = await Jadwal_diet.findAll({

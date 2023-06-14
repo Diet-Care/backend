@@ -1,41 +1,57 @@
 const { Comment_makanan, Makanan } = require("../db/models");
 const { notfound, created, servererror, ok } = require("./statuscode");
 
-require("dotenv").config;
+
 
 const handleCommentMakananAll = async (req, res) => {
-    const comment_makanan = await Comment_makanan.findAll({
-        include: {
-            model: Makanan,
-            as: 'makanan'
+    try {
+        const comment_makanan = await Comment_makanan.findAll({
+            include: {
+                model: Makanan,
+                as: 'makanan'
+            }
+        });
+        const response = {
+            data: comment_makanan,
         }
-    });
-    const response = {
-        data: comment_makanan,
+        res.status(ok).json(response);
+        return;
+    } catch (error) {
+        response = {
+            status: "ERROR",
+            message: error.message
+        }
+       return res.status(servererror).json(response);
     }
-    res.status(created).json(response);
-    return;
 };
 
 const handleCommentMakananById = async(req, res) => {
     const uuid = req.params.id;
-    const comment_makanan = await Comment_makanan.findOne({
-        where: {
-            uuid: uuid
-        }
-    });
-    let response = {
-        data: comment_makanan
-    }
-    if(!comment_makanan){
-        res.status(notfound);
-        res.json({
-            message: "Comment not Found"
+    try {
+        const comment_makanan = await Comment_makanan.findOne({
+            where: {
+                uuid: uuid
+            }
         });
+        let response = {
+            data: comment_makanan
+        }
+        if(!comment_makanan){
+            res.status(notfound);
+            res.json({
+                message: "Comment not Found"
+            });
+            return;
+        }
+        res.status(ok).json(response);
         return;
-    }
-    res.status(created).json(response);
-    return;
+    } catch (error) {
+        response = {
+            status: "ERROR",
+            message: error.message
+        }
+       return res.status(servererror).json(response);
+    } 
 };
 
 const handleCreateCommentMakanan = async(req,res) => {
