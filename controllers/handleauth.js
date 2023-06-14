@@ -109,12 +109,14 @@ const handlechangepassword = async (req,res, next) =>{
                     email,
                 }
             });
+
             if(!user){
                 res.status(notfound).json({
                     message : "Email Not Found"
                 });
                 return ;
             };
+
             const encryptedPassword = bcrypt.hashSync(password, SALT);
             const changepassword = encryptedPassword;
 
@@ -125,11 +127,10 @@ const handlechangepassword = async (req,res, next) =>{
                     email : email
                 }
             })
-
+            
             const response = {
                 status: "SUCCESS",
-                message: "success Reset Password",
-                data: changePassword
+                message: "success Reset Password"
             }
             res.status(ok).json(response)
             return

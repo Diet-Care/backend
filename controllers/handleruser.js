@@ -9,7 +9,10 @@ const handleuserall = async (req, res) => {
     try {
         const users = await Users.findAll();
         const response = {
-                    data: users,
+            meta: {
+                total: users.length
+            },
+            data: users,
             }
 
         res.status(ok).json(response)
@@ -31,7 +34,7 @@ const handleUserId = async(req,res) =>{
             where: {
                 uuid : uuid
             },
-            attributes : ['name', 'email', 'gender', 'umur',  'alamat', 'img_profile', 'profesi', ]
+            attributes : ['name', 'email', 'gender', 'umur',  'alamat', 'geografis', 'profesi', 'img_profile', 'profesi', ]
         });
 
         if(!User) {
