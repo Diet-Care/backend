@@ -13,6 +13,9 @@ const handleolhragaall = async (req, res) => {
    try {
         const olahraga = await Olahraga.findAll();
         const response = {
+            meta : {
+                total: olahraga.length
+            },
             data: olahraga,
         };
 
