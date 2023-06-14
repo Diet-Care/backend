@@ -29,7 +29,6 @@ const { getallmakanan,
     createmakanan, 
     deletemakanan, 
     updatemakanan, 
-    deleteallmakanan 
 } = require("./routes/routeMakanan.js");
 
 const { getallcommentolahraga, 
@@ -100,7 +99,7 @@ app.use(register, login, changepassword);
 app.use(getallolahraga, getidolahraga, createolahraga, updateolahraga, deleteolahraga);
 
 // makanan
-app.use(getallmakanan, getidmakanan, createmakanan, deletemakanan, updatemakanan, deleteallmakanan);
+app.use(getallmakanan, getidmakanan, createmakanan, deletemakanan, updatemakanan);
 
 // comment olahraga
 app.use(getallcommentolahraga, getidcommentolahraga, createcommentolahraga, deletecommentolahraga, updatecommentolahraga, deleteallcommentolahraga);

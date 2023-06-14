@@ -150,9 +150,6 @@ Request :
     - Accept: application/json
     - Authorization : Bearer <token>
     
-- gambar masukkan token 
-![image](https://github.com/mr-exploit/tugas-TPA-5/assets/65493711/62e8fc93-ca7d-474e-a95b-e3c3135e61da)
-
 - Response : 
     
 ```json
@@ -187,9 +184,6 @@ Request :
     - Accept: application/json
     - Authorization : Bearer <token>
     
-- gambar masukkan token 
-![image](https://github.com/mr-exploit/tugas-TPA-5/assets/65493711/62e8fc93-ca7d-474e-a95b-e3c3135e61da)
-
 - Response : 
     
 ```json
@@ -317,9 +311,6 @@ Request :
     - Accept: application/json
     - Authorization : Bearer <token>
     
-- gambar masukkan token 
-![image](https://github.com/mr-exploit/tugas-TPA-5/assets/65493711/62e8fc93-ca7d-474e-a95b-e3c3135e61da)
-
 - Response : 
     
 ```json
@@ -352,9 +343,6 @@ Request :
     - Accept: application/json
     - Authorization : Bearer <token>
     
-- gambar masukkan token 
-![image](https://github.com/mr-exploit/tugas-TPA-5/assets/65493711/62e8fc93-ca7d-474e-a95b-e3c3135e61da)
-
 - Response : 
     
 ```json
@@ -424,6 +412,168 @@ Request :
 ```json
   {
     "message": "Sport Has Been Delete",
+    "img": {
+        "result": "ok"
+    }
+  }
+```
+
+## create makanan = role admin
+
+Request :
+
+- Method : CREATE
+- Endpoint : https://backend-production-2c47.up.railway.app/makanan
+    - Content-Type: application/json
+    - Accept: application/json
+    - Authorization : Bearer <token>
+- Body : 
+    - form-data
+    ```json
+        { 
+            "judul": "string",
+            "deskripsi_singkat": "string",
+            "deskripsi_lengkap": "string",
+            "img": "file",
+            "tips": "string",
+            "jumlah_kalori": "integer",
+            "level": "string",
+            "kategori": "string"
+        }
+    ```
+    
+- Response : 
+    
+```json
+  {
+    "status": "Success",
+    "message": "Create Foods",
+    "data": {
+        "uuid": "string",
+        "judul": "string",
+        "deskripsi_singkat": "string",
+        "deskripsi_lengkap": "string",
+        "tips": "string",
+        "img": "string",
+        "jumlah_kalori": "integer",
+        "level": "string",
+        "kategori": "string"
+    }
+  }
+```
+
+## GET ALL makanan = role admin && user
+
+Request :
+
+- Method : GET
+- Endpoint : https://backend-production-2c47.up.railway.app/makanan
+- Header :
+    - Content-Type: application/json
+    - Accept: application/json
+    - Authorization : Bearer <token>
+    
+- Response : 
+    
+```json
+  {
+     "meta": {
+              "integer"
+    },
+      "data": {
+        "uuid": "string",
+        "judul": "string",
+        "deskripsi_singkat": "string",
+        "deskripsi_lengkap": "string",
+        "img": "string",
+        "tips": "string",
+        "jumlah_kalori": "integer",
+        "level": "string",
+        "kategori": "string"
+    }
+  }
+```
+
+## GET id makanan role = admin && user
+
+Request :
+
+- Method : GET
+- Endpoint : https://backend-production-2c47.up.railway.app/makanan/{makanan_id}
+- Header :
+    - Content-Type: application/json
+    - Accept: application/json
+    - Authorization : Bearer <token>
+    
+- Response : 
+    
+```json
+  {
+      "data": {
+        "uuid": "string",
+        "judul": "string",
+        "deskripsi_singkat": "string",
+        "deskripsi_lengkap": "string",
+        "img": "string",
+        "tips": "string",
+        "jumlah_kalori": "integer",
+        "level": "string",
+        "kategori": "string"
+    }
+  }
+```
+
+
+
+## Update makanan = role admin
+
+Request :
+
+- Method : PUT
+- Endpoint : https://backend-production-2c47.up.railway.app/makanan/{makanan_id}
+- Header :
+    - Content-Type: application/json
+    - Accept: application/json
+    - Authorization : Bearer <token>
+- Body : 
+    - form-data
+    ```json
+        { 
+            "judul": "string",
+            "deskripsi_singkat": "string",
+            "deskripsi_lengkap": "string",
+            "img": "file",
+            "tips": "string",
+            "jumlah_kalori": "integer",
+            "level": "string",
+            "kategori": "string"
+        }
+    ```
+    
+- Response : 
+    
+```json
+  {
+    "status": "Success",
+    "message": "Update Foods Success"
+  }
+```
+
+## Delete makanan = role admin
+
+Request :
+
+- Method : DELETE
+- Endpoint : https://backend-production-2c47.up.railway.app/makanan/{makanan_id}
+- Header :
+    - Content-Type: application/json
+    - Accept: application/json
+    - Authorization : Bearer <token>
+- Response : 
+    
+```json
+  {
+    "message": "FOOD HAS BEEN DELETED",
     "img": {
         "result": "ok"
     }

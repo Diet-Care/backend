@@ -13,6 +13,9 @@ const handleMakananGetAll = async function(req, res) {
     try {
         const makanan = await Makanan.findAll();
         const response = {
+            meta : {
+                total: makanan.length
+            },
             data: makanan,
         };
         res.status(ok).json(response);
@@ -81,7 +84,7 @@ const handleCreateMakanan = async function(req, res) {
         });
         response = {
             status: "SUCCESS",
-            message: "Create Makanan",
+            message: "Create Foods",
             data: createMakanan,
         }
         return res.status(created).json(response);
@@ -151,7 +154,7 @@ const handleUpdateMakanan = async function(req, res) {
         if(updatemakanan){
             response = {
                 status: "SUCCESS",
-                message: "Update Success",
+                message: "Update Foods Success",
             }
             return res.status(created).json(response);
         }
@@ -177,7 +180,7 @@ const handleDeleteMakanan = async function(req, res) {
 
         if(!fordeletemakanan){
             return res.status(notfound).json({
-                error: 'Makanan Not Found'
+                error: 'Foods Not Found'
             })
         }
 
@@ -201,27 +204,10 @@ const handleDeleteMakanan = async function(req, res) {
     }
 }
 
-const handleDeleteAllMakanan = async function(req, res) {
-    try {
-        await Makanan.destroy({
-            where: {},
-            truncate: true,
-        });
-        return res.status(ok).send();
-    } catch(error) {
-        return res.status(servererror).json({
-            error: 'Server Error',
-            message: error.message
-        });
-    }
-};
-
-
 module.exports = {
     handleMakananGetAll,
     handleMakananGetById,
     handleCreateMakanan,
-    handleDeleteMakanan,
     handleUpdateMakanan,
-    handleDeleteAllMakanan
+    handleDeleteMakanan,
 }
