@@ -49,7 +49,7 @@ const handlelogin = async(req, res) =>{
     res.status(ok);
     res.json({
         message : "Login Success",
-        data : token
+        token : token
     });
     return
 }

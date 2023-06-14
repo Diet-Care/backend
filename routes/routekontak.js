@@ -8,10 +8,10 @@ const app = express();
 const getallmessage = app.get("/kontak",  handleKontakAll);
 const getmessagebyid = app.get("/kontak/:id",  handleKontakById);
 const createmessage = app.post("/kontak",  hanldeCreateKontak);
-const updatemessage = app.put("/kontak/:id", auth, handleUpdateKontak);
+const updatemessage = app.put("/kontak/:id", handleUpdateKontak);
 
-const deleteallmessage = app.delete("/kontak", auth, handleDeleteAllKontak);
-const deletemessagebyid = app.delete("/kontak/:id", auth, handleDeleteKontakById);
+const deleteallmessage = app.delete("/kontak", handleDeleteAllKontak);
+const deletemessagebyid = app.delete("/kontak/:id", handleDeleteKontakById);
 
 module.exports = {
     getallmessage,
