@@ -2,10 +2,6 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const upload = require('express-fileupload');
-// const session = require("express-session");
-// const sequelizeStore = require("connect-session-sequelize")(
-//     connect.session.Store
-//   );;
 
 // tableuser
 const {  
@@ -78,24 +74,7 @@ const port = process.env.PORT || 3050;
 dotenv.config();
 
 const app = express();
-// const sessionStore = sequelizeStore(session.Store);
 
-
-// (async() => {
-//     await development.sync();
-// })();
-
-// app.use(session({
-//     secret: process.env.SECRET_KEY,
-//     store: new sessionStore({
-//         db: development,
-// //         checkExpirationInterval: 15 * 60 * 1000, // The interval at which to cleanup expired sessions in milliseconds.
-// //   expiration: 24 * 60 * 60 * 1000  // The maximum age (in milliseconds) of a valid session.  
-//       }),
-//     resave: false,
-//     saveUninitialized: true,
-//     cookie: { secure: true }
-// }));
 
 app.use(upload());
 app.use(express.json());

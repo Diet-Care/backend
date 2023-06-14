@@ -9,7 +9,7 @@ const handleuserall = async (req, res) => {
     try {
         const users = await Users.findAll();
         const response = {
-                    data: users
+                    data: users,
             }
 
         res.status(ok).json(response)
