@@ -7,14 +7,14 @@ const {
   handleupdateolahraga 
 } = require('../controllers/handleolahraga');
 
-const { auth } = require('../middleware/auth');
+const { admin, auth } = require('../middleware/auth');
 
 
 const app = express();
 
-const getallolahraga = app.get("/olahraga", handleolhragaall);
+const getallolahraga = app.get("/olahraga",  handleolhragaall);
 
-const getidolahraga = app.get("/olahraga/:id", handleolhragaid);
+const getidolahraga = app.get("/olahraga/:id", admin, handleolhragaid);
 
 const createolahraga = app.post("/olahraga", handlecreateolhraga);
 

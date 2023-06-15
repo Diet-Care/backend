@@ -43,7 +43,7 @@ const admin =  async(req, res, next) =>{
             message : "User Tidak ditemukan"
         });
     }
-    if(user.role == "admin"){
+    if(user.role !== "admin"){
         return res.status(forbiden).json({
             message: "Akses Denied"
         })
