@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
-const { unauthorized } = require('../controllers/statuscode');
+const { unauthorized, notfound, forbiden } = require('../controllers/statuscode');
+const {Users} = require('../db/models');
 require('dotenv').config();
 
 const auth = (req, res, next) =>{
@@ -30,6 +31,27 @@ const auth = (req, res, next) =>{
     })
 }
 
+const admin =  async(req, res, next) =>{
+    const uuid = req.params.id;
+    const user = await Users.findOne({
+        where : {
+            uuid : uuid
+        }
+    });
+    if(!user){
+        return res.status(notfound).json({
+            message : "User Tidak ditemukan"
+        });
+    }
+    if(user.role == "admin"){
+        return res.status(forbiden).json({
+            message: "Akses Denied"
+        })
+    }
+    next();
+}
+
 module.exports ={
-    auth
+    auth,
+    admin
 }
