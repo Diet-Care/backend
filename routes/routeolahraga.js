@@ -20,7 +20,7 @@ const createolahraga = app.post("/olahraga", handlecreateolhraga);
 
 const updateolahraga = app.put("/olahraga/:id", handleupdateolahraga);
 
-const deleteolahraga = app.delete("/olahraga/:id", auth, admin, handledeletolahraga);
+const deleteolahraga = app.delete("/olahraga/:id", auth, handledeletolahraga);
 
 module.exports = {
   getallolahraga,
