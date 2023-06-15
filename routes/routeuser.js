@@ -9,7 +9,7 @@ const GetAllUser = app.get("/users",  handleuserall);
 
 const getUserId = app.get('/users/:id', auth, admin, handleUserId);
 
-const updateuser = app.put('/users/:id', handleUpdateuser);
+const updateuser = app.put('/users/:id', auth, admin, handleUpdateuser);
 const DeleteUser = app.delete('/users/:id',  auth, admin, handleuserdelete);
 
 module.exports = {

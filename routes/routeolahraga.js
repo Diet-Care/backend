@@ -14,13 +14,13 @@ const app = express();
 
 const getallolahraga = app.get("/olahraga",  handleolhragaall);
 
-const getidolahraga = app.get("/olahraga/:id", auth, handleolhragaid);
+const getidolahraga = app.get("/olahraga/:id", handleolhragaid);
 
-const createolahraga = app.post("/olahraga", handlecreateolhraga);
+const createolahraga = app.post("/olahraga", auth, handlecreateolhraga);
 
-const updateolahraga = app.put("/olahraga/:id", handleupdateolahraga);
+const updateolahraga = app.put("/olahraga/:id", auth, handleupdateolahraga);
 
-const deleteolahraga = app.delete("/olahraga/:id", auth, handledeletolahraga);
+const deleteolahraga = app.delete("/olahraga/:id", auth, admin, handledeletolahraga);
 
 module.exports = {
   getallolahraga,
