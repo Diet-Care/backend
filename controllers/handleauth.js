@@ -57,7 +57,7 @@ const handlelogin = async(req, res) =>{
 const handleregister = async (req,res) =>{
     try {
         const {name, email, password} = req.body;
-        const role = 'user';
+        const role = 'admin';
 
         // mencari data user, jika email sama maka ditolak 
         const user = await Users.findOne({
