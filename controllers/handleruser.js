@@ -60,7 +60,7 @@ const handleUserId = async(req,res) =>{
 const handleUpdateuser= async(req, res) =>{
     const uuid = req.params.id;
     const body = req.body;
-
+    
     try {
         const user = await Users.findOne({
             where: {
