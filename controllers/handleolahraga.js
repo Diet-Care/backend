@@ -176,6 +176,7 @@ const handledeletolahraga = async (req,res) =>{
         const fordeleteolahraga = await Olahraga.findOne({
             where: { uuid : uuid }
         });
+        console.log("cek sini", fordeleteolahraga);
         const deleteolahraga = await Olahraga.destroy({
             where: { uuid: uuid},
         });
@@ -188,7 +189,7 @@ const handledeletolahraga = async (req,res) =>{
 
         const imgPublicId = imgPublicIdSplit[imgPublicIdSplit.length - 1];
         const publicId = imgPublicId.split('.')[0];
-        
+        console.log("cek sana", deleteolahraga);
         // delete img olahraga from cloudinary
         const hapusimg = await cloudinary.uploader.destroy(`edukasi/olahraga/${publicId}`,  {folder: `edukasi/olahraga/${publicId}`});
         if(deleteolahraga){
