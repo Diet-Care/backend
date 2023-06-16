@@ -34,7 +34,7 @@ const handleUserId = async(req,res) =>{
             where: {
                 uuid : uuid
             },
-            attributes : ['name', 'email', 'gender', 'umur',  'alamat', 'geografis', 'profesi', 'img_profile', 'profesi', ]
+            attributes : ['name', 'email', 'gender', 'umur',  'alamat', 'geografis', 'profesi','role', 'img_profile', 'profesi', ]
         });
 
         if(!User) {
