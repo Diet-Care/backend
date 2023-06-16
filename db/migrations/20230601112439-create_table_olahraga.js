@@ -7,25 +7,25 @@ module.exports = {
         allowNull: false,
         primaryKey: true
       },
-      judul:{
-          type: Sequelize.DataTypes.STRING,
-      },
-      deskripsi_singkat:{
-          type: Sequelize.DataTypes.STRING,
-      },
-      deskripsi_lengkap:{
-          type: Sequelize.DataTypes.STRING,
-      },
-      img:{
-          type: Sequelize.DataTypes.STRING,
-          allowNull: true,
-      },
-      tips:{
-          type: Sequelize.DataTypes.STRING(255),
-      },
-      jumlah_kalori:{
-          type: Sequelize.DataTypes.STRING,
-      },
+    judul:{
+        type: Sequelize.DataTypes.STRING,
+    },
+    deskripsi_singkat:{
+        type: Sequelize.DataTypes.STRING,
+    },
+    deskripsi_lengkap:{
+        type: Sequelize.DataTypes.STRING,
+    },
+    img:{
+        type: Sequelize.DataTypes.STRING,
+        allowNull: true,
+    },
+    tips:{
+        type: Sequelize.DataTypes.STRING,
+    },
+    jumlah_kalori:{
+        type: Sequelize.DataTypes.STRING,
+    },
     level: {
         type: Sequelize.DataTypes.STRING,
     },

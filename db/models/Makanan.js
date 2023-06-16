@@ -17,14 +17,14 @@ module.exports = function(connection) {
             type: DataTypes.STRING,
         },
         deskripsi_lengkap:{
-            type: DataTypes.STRING(255),
+            type: DataTypes.STRING,
         },
         img:{
             type: DataTypes.STRING,
             allowNull: true,
         },
         tips:{
-            type: DataTypes.STRING(255),
+            type: DataTypes.STRING,
         },
         jumlah_kalori:{
             type: DataTypes.STRING,
