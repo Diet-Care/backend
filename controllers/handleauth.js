@@ -40,7 +40,7 @@ const handlelogin = async(req, res) =>{
     }
 
     const token = jwt.sign({
-        sub : user.id,
+        sub : user.uuid,
         iss : 'skilvul',
         aud : audience,
         exp : parseInt(((new Date()).getTime() / 1000) + 5 * 60 * 60),
@@ -57,7 +57,7 @@ const handlelogin = async(req, res) =>{
 const handleregister = async (req,res) =>{
     try {
         const {name, email, password} = req.body;
-        const role = 'admin';
+        const role = 'user';
 
         // mencari data user, jika email sama maka ditolak 
         const user = await Users.findOne({

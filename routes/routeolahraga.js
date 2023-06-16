@@ -7,20 +7,20 @@ const {
   handleupdateolahraga 
 } = require('../controllers/handleolahraga');
 
-const { auth } = require('../middleware/auth');
+const {  admin, auth } = require('../middleware/auth');
 
 
 const app = express();
 
-const getallolahraga = app.get("/olahraga", handleolhragaall);
+const getallolahraga = app.get("/olahraga",  handleolhragaall);
 
 const getidolahraga = app.get("/olahraga/:id", handleolhragaid);
 
-const createolahraga = app.post("/olahraga", handlecreateolhraga);
+const createolahraga = app.post("/olahraga", auth, admin, handlecreateolhraga);
 
-const updateolahraga = app.put("/olahraga/:id", handleupdateolahraga);
+const updateolahraga = app.put("/olahraga/:id", auth, admin, handleupdateolahraga);
 
-const deleteolahraga = app.delete("/olahraga/:id", handledeletolahraga);
+const deleteolahraga = app.delete("/olahraga/:id", auth, admin, handledeletolahraga);
 
 module.exports = {
   getallolahraga,
