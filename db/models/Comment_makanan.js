@@ -24,7 +24,7 @@ module.exports = function(connection) {
             type: DataTypes.CHAR,
         },
         comment_review:{
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
         }
     }, {
         sequelize: connection,
