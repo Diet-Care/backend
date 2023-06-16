@@ -24,7 +24,7 @@ module.exports = function(connection) {
             allowNull: true,
         },
         tips:{
-            type: DataTypes.STRING(255),
+            type: DataTypes.STRING,
         },
         jumlah_kalori:{
             type: DataTypes.STRING,
