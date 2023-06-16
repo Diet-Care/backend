@@ -11,7 +11,7 @@ module.exports = function(connection) {
             primaryKey: true
           },
         judul:{
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
         },
         deskripsi_singkat:{
             type: DataTypes.TEXT,
@@ -27,7 +27,7 @@ module.exports = function(connection) {
             type: DataTypes.TEXT,
         },
         jumlah_kalori:{
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
         },
         level: {
             type: DataTypes.STRING,

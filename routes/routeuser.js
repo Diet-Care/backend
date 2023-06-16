@@ -5,7 +5,7 @@ const { handleuserall, handleuserdelete, handleUserId, handleUpdateuser} = requi
 const { admin, auth } = require('../middleware/auth');
 
 
-const GetAllUser = app.get("/users", auth, admin, handleuserall);
+const GetAllUser = app.get("/users", auth, handleuserall);
 
 const getUserId = app.get('/users/:id', auth, handleUserId);
 

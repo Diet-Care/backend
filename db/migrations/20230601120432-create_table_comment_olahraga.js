@@ -21,7 +21,7 @@ module.exports = {
         type: Sequelize.DataTypes.CHAR,
     },
     comment_review:{
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.DataTypes.TEXT,
     }
     }, {
       timestamps: false,
