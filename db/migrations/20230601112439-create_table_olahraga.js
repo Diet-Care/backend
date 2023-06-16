@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true
       },
       judul:{
-          type: Sequelize.DataTypes.STRING,
+          type: Sequelize.DataTypes.TEXT,
       },
       deskripsi_singkat:{
           type: Sequelize.DataTypes.TEXT,
@@ -24,7 +24,7 @@ module.exports = {
           type: Sequelize.DataTypes.TEXT,
       },
       jumlah_kalori:{
-          type: Sequelize.DataTypes.STRING,
+          type: Sequelize.DataTypes.TEXT,
       },
       level: {
           type: Sequelize.DataTypes.STRING,

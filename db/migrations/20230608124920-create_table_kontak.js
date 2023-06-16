@@ -14,7 +14,7 @@ module.exports = {
         type: Sequelize.DataTypes.STRING,
       },
       pesan: {
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.DataTypes.TEXT,
       },
     }, {
       timestamps: false,

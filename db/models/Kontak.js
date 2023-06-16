@@ -16,7 +16,7 @@ module.exports = function(connection) {
             type: DataTypes.STRING,
           },
           pesan: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
           },
     }, {
         sequelize: connection,
