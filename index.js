@@ -80,7 +80,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
 app.use(cors({
     credentials: true,
-    origin: 'https://dicafebe.netlify.app'
+    origin: process.env.KEY_ORIGIN
 }));
 
 // endpoint before
