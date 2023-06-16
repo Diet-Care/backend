@@ -1,43 +1,59 @@
 const { Kontak } = require("../db/models");
 const { ok, notfound, created, bad, servererror } = require("./statuscode");
 
-require("dotenv").config;
 
 const handleKontakAll = async (req,res) => {
-    const kontak = await Kontak.findAll();
-    const response = {
-        status: "SUCCESS",
-        message: "Get All Message",
-        meta: {
-            total: kontak.length
-        },
-        data: kontak,
-    };
-    res.status(ok).json(response)
-    return
+    try {
+        const kontak = await Kontak.findAll();
+        const response = {
+            status: "SUCCESS",
+            message: "Get All Message",
+            meta: {
+                total: kontak.length
+            },
+            data: kontak,
+        };
+        res.status(ok).json(response)
+        return
+    } catch (error) {
+        response = {
+            status: "ERROR",
+            message: error.message
+        }
+       return res.status(servererror).json(response);
+    }
 }
 
 const handleKontakById = async (req, res) => {
-    const uuid = req.params.id;
-    const kontak = await Kontak.findAll({
-        where: {
-            uuid: uuid
-        }
-    });
-    let response = {
-        status: "SUCCESS",
-        message: "Get Message Detail",
-        data: kontak
-    }
-    if(!kontak){
-        res.status(notfound);
-        res.json({
-            message: "Message Not Found"
+    try {
+        const uuid = req.params.id;
+        const kontak = await Kontak.findOne({
+            where: {
+                uuid: uuid
+            }
         });
-        return;
+        let response = {
+            status: "SUCCESS",
+            message: "Get Message Detail",
+            data: kontak
+        }
+        if(!kontak){
+            res.status(notfound);
+            res.json({
+                message: "Message Not Found"
+            });
+            return;
+        }
+        res.status(ok).json(response)
+        return
+    } catch (error) {
+        response = {
+            status: "ERROR",
+            message: error.message
+        }
+       return res.status(servererror).json(response);
     }
-    res.status(created).json(response)
-    return
+   
 };
 
 const hanldeCreateKontak = async(req, res) => {
@@ -53,7 +69,7 @@ const hanldeCreateKontak = async(req, res) => {
             message: "Message Has Been Created",
             data: newMessage
         }
-        return res.status(ok).json(response);
+        return res.status(created).json(response);
     }catch(error){
         response = {
             status: "ERROR",
@@ -64,31 +80,47 @@ const hanldeCreateKontak = async(req, res) => {
 }
 
 const handleUpdateKontak = async (req, res) => {
-    let response = {}
-    const kontak = Kontak.findOne({
-        where: {
-            uuid: req.params.id
+    try {
+        const uuid = req.params.id;
+        const body = req.body; 
+
+        const kontak = await Kontak.findOne({
+            where: {
+                uuid: uuid
+            }
+        });
+
+        if(!kontak){
+            return res.status(notfound).json({
+                message: "Message You Looking For Is Not Found"
+            });
         }
-    });
-    if(!kontak){
-        response = {
-            status: "SUCCESS",
-            message: "Message Not Found"
+        const name = body.name;
+        const email = body.email;
+        const pesan = body.pesan;
+
+        const updatekontak = await Kontak.update({
+            name: name,
+            email: email,
+            pesan: pesan,
+        }, {
+            where: {
+                uuid: uuid
+            }
+        });
+
+        if(updatekontak){
+            response = {
+                status: "SUCCESS",
+                message: "Update Success",
+            }
+            return res.status(created).json(response);
         }
-        return;
-    } else {
-        kontak.name = req.body.name
-        kontak.email = req.body.email
-        kontak.pesan = req.body.pesan
-        kontak.save()
-        response = {
-            status: "SUCCESS",
-            message: "Message Updated",
-            data: kontak
-        }
-    }
-    res.status(created).json(response)
-    return
+    } catch (error) {
+        return res.status(bad).json({
+            error: error.message
+        });
+    };
 }
 
 const handleDeleteKontakById = async (req, res) => {

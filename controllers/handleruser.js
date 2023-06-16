@@ -6,18 +6,24 @@ const { servererror } = require("./statuscode");
 
 
 const handleuserall = async (req, res) => {
-    const users = await Users.findAll();
-    const response = {
-                status: "SUCCESS",
-                message: "Get All Users",
-                meta: {
-                    total: users.length
-                },
-                data: users
-        }
+    try {
+        const users = await Users.findAll();
+        const response = {
+            meta: {
+                total: users.length
+            },
+            data: users,
+            }
 
-    res.status(ok).json(response)
-    return
+        res.status(ok).json(response)
+        return
+    } catch (error) {
+        res.status(servererror).json({
+            message : error.message
+        });
+        return;
+    }
+   
 };
 
 const handleUserId = async(req,res) =>{
@@ -28,7 +34,7 @@ const handleUserId = async(req,res) =>{
             where: {
                 uuid : uuid
             },
-            attributes : ['name', 'email', 'gender', 'umur',  'alamat', 'img_profile', 'profesi', ]
+            attributes : ['name', 'email', 'gender', 'umur',  'alamat', 'geografis', 'profesi','role', 'img_profile', 'profesi', ]
         });
 
         if(!User) {
@@ -39,8 +45,6 @@ const handleUserId = async(req,res) =>{
             return;
         }
         let response = {
-            status : "Success",
-            message : "Get Detail Users",
             data : User
         }
         res.status(ok).json(response);
@@ -56,7 +60,7 @@ const handleUserId = async(req,res) =>{
 const handleUpdateuser= async(req, res) =>{
     const uuid = req.params.id;
     const body = req.body;
-
+    
     try {
         const user = await Users.findOne({
             where: {

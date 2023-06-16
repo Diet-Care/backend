@@ -3,45 +3,59 @@ require("dotenv").config;
 const { created, ok, notfound, bad, servererror } = require("./statuscode");
 
 const handleCommentOlahragaAll = async (req, res) => {
-    const comment_olahraga = await Comment_olahraga.findAll({
-        include: {
-            model: Olahraga,
-            as: 'olahraga'
+    try {
+        const comment_olahraga = await Comment_olahraga.findAll({
+            include: {
+                model: Olahraga,
+                as: 'olahraga'
+            }
+        });
+        const response = {
+            meta: {
+                total: comment_olahraga.length
+            },
+            data: comment_olahraga,
         }
-    });
-    const response = {
-        status : "SUCCESS",
-        message: "Get All Sports Comment",
-        meta: {
-            total: comment_olahraga.length
-        },
-        data: comment_olahraga,
+        res.status(ok).json(response);
+        return;
+    } catch (error) {
+         response = {
+            status: "ERROR",
+            message: error.message
+        }
+       return res.status(servererror).json(response);
     }
-    res.status(created).json(response);
-    return;
 };
 
 const handleCommentOlahragaById = async (req, res) => {
-    const uuid = req.params.id;
-    const comment_olahraga = await Comment_olahraga.findAll({
-        where: {
-            uuid: uuid
-        }
-    });
-    let response = {
-        status: "SUCCESS",
-        message: "Get Comment Detail",
-        data: comment_olahraga
-    }
-    if(!comment_olahraga){
-        res.status(notfound);
-        res.json({
-            message: 'Comment not Found'
+
+    try {
+        const uuid = req.params.id;
+        const comment_olahraga = await Comment_olahraga.findOne({
+            where: {
+                uuid: uuid
+            }
         });
-        return;
+        let response = {
+            data: comment_olahraga
+        }
+        if(!comment_olahraga){
+            res.status(notfound);
+            res.json({
+                message: 'Comment not Found'
+            });
+            return;
+        }
+        res.status(ok).json(response)
+        return 
+    } catch (error) {
+        response = {
+            status: "ERROR",
+            message: error.message
+        }
+       return res.status(servererror).json(response);
     }
-    res.status(created).json(response)
-    return
+    
 };
 
 const handleCreateCommentOlahraga = async function(req, res) {
@@ -58,7 +72,7 @@ const handleCreateCommentOlahraga = async function(req, res) {
         message: "Create New Comment",
         data: newComment
     }
-    return res.status(ok).json(response);
+    return res.status(created).json(response);
 } catch(error) {
     response = {
         status: "ERROR",
@@ -69,31 +83,48 @@ const handleCreateCommentOlahraga = async function(req, res) {
 }
 
 const handleUpdateCommentOlahraga = async function(req,res) {
-    let response = {}
-    const comment_olahraga = Comment_olahraga.findOne({
+
+    try {
+        let response = {};
+    const uuid = req.params.id;
+    const findcomment = Comment_olahraga.findOne({
         where: {
-            uuid: req.params.id
+            uuid: uuid
         }
     });
 
-    if(!comment_olahraga){
+    if(!findcomment){
         response = {
-            status: "SUCCESS",
             message: "Comment not Found"
         }
-        return;
+        return res.status(notfound).json(response);
     } else {
-        comment_olahraga.bintang = req.body.bintang
-        comment_olahraga.comment_review = req.body.comment_review
-        comment_olahraga.save()
+        const bintang = req.body.bintang;
+        const comment_review = req.body.comment_review;
+        
+        const updatecomment =await Comment_olahraga.update({
+            bintang : bintang,
+            comment_review : comment_review,
+        },
+        {
+            where: {
+                uuid : uuid
+            }
+        });
         response = {
             status: "SUCCESS",
             message: "Update Comment",
-            data: comment_olahraga
+            data: updatecomment
         }
     }
     res.status(created).json(response)
     return
+    } catch (error) {
+        return res.status(servererror).json({
+            error: error.message
+        }); 
+    }
+    
 }
 
 const handleDeleteCommentOlahragaById = async function(req, res){
@@ -116,7 +147,6 @@ const handleDeleteCommentOlahragaById = async function(req, res){
         }
     }catch (error){
         return res.status(servererror).json({
-            error: 'Server error',
             message: error.message
         });
     }
@@ -131,7 +161,6 @@ const handleDeleteAllCommentOlahraga = async function(req, res){
         return res.status(ok).json({message : "succesfuly delete all"});
     } catch (error){
         return res.status(servererror).json({
-            error: 'Server Error',
             message: error.message
         });
     }

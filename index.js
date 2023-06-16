@@ -29,7 +29,6 @@ const { getallmakanan,
     createmakanan, 
     deletemakanan, 
     updatemakanan, 
-    deleteallmakanan 
 } = require("./routes/routeMakanan.js");
 
 const { getallcommentolahraga, 
@@ -47,26 +46,48 @@ const { getallcommentmakanan,
     deletecommentmakananid, 
     updatecommentmakanan 
 } = require("./routes/routecommentmakanan");
-const { getallmessage, getmessagebyid, createmessage, updatemessage, deleteallmessage, deletemessagebyid } = require("./routes/routekontak");
+
+const { getallmessage, 
+    getmessagebyid, 
+    createmessage, 
+    updatemessage, 
+    deleteallmessage, 
+    deletemessagebyid 
+} = require("./routes/routekontak");
 
 
-const { getallcommentmakanan, getidcommentmakanan, createcommentmakanan, deleteallcommentmakanan, deletecommentmakananid, updatecommentmakanan } = require("./routes/routecommentmakanan");
+const { getAllSchedule, 
+    getScheduleById, 
+    createSchedule, 
+    updateSchedule, 
+    deleteAllSchedule, 
+    deleteScheduleById 
+} = require("./routes/routejadwaldiet");
+
+// const { development } = require("./sequelize.config");
 
 
+
+const port = process.env.PORT || 3050;
 
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 3050;
+
+
 app.use(upload());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
-app.use(cors());
+app.use(cors({
+    credentials: true,
+    origin: process.env.KEY_ORIGIN
+}));
 
 // endpoint before
 app.get("/", (req, res) => {
     res.send("hallo sir/miss, welcome you have successfully run this endpoint");
 });
+
 
 // user
 app.use(GetAllUser,getUserId, DeleteUser, updateuser);
@@ -78,7 +99,7 @@ app.use(register, login, changepassword);
 app.use(getallolahraga, getidolahraga, createolahraga, updateolahraga, deleteolahraga);
 
 // makanan
-app.use(getallmakanan, getidmakanan, createmakanan, deletemakanan, updatemakanan, deleteallmakanan);
+app.use(getallmakanan, getidmakanan, createmakanan, deletemakanan, updatemakanan);
 
 // comment olahraga
 app.use(getallcommentolahraga, getidcommentolahraga, createcommentolahraga, deletecommentolahraga, updatecommentolahraga, deleteallcommentolahraga);
@@ -88,6 +109,9 @@ app.use(getallcommentmakanan, getidcommentmakanan, createcommentmakanan, deletea
 
 // kontak
 app.use(getallmessage, getmessagebyid, createmessage, updatemessage, deleteallmessage, deletemessagebyid);
+
+// jadwal diet
+app.use(getAllSchedule, getScheduleById, createSchedule, updateSchedule, deleteAllSchedule, deleteScheduleById)
 
 app.listen(port, '0.0.0.0', function() {
     console.log(`Your application is running on the port ${port}`);

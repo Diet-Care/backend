@@ -7,24 +7,24 @@
         allowNull: false,
         primaryKey: true
       },
-      judul_makanan:{
-          type: Sequelize.DataTypes.STRING,
+      judul:{
+          type: Sequelize.DataTypes.TEXT,
       },
       deskripsi_singkat:{
-          type: Sequelize.DataTypes.STRING,
+          type: Sequelize.DataTypes.TEXT,
       },
       deskripsi_lengkap:{
-          type: Sequelize.DataTypes.STRING(255),
+          type: Sequelize.DataTypes.TEXT,
       },
-      img_makanan:{
+      img:{
           type: Sequelize.DataTypes.STRING,
           allowNull: true,
       },
-      tips_makanan:{
-          type: Sequelize.DataTypes.STRING(255),
+      tips:{
+          type: Sequelize.DataTypes.TEXT,
       },
       jumlah_kalori:{
-          type: Sequelize.DataTypes.STRING,
+          type: Sequelize.DataTypes.TEXT,
       },
       level: {
           type: Sequelize.DataTypes.STRING,

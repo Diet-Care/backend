@@ -1,62 +1,68 @@
 const { Comment_makanan, Makanan } = require("../db/models");
 const { notfound, created, servererror, ok } = require("./statuscode");
 
-require("dotenv").config;
+
 
 const handleCommentMakananAll = async (req, res) => {
-    const comment_makanan = await Comment_makanan.findAll({
-        include: {
-            model: Makanan,
-            as: 'makanan'
+    try {
+        const comment_makanan = await Comment_makanan.findAll({
+            include: {
+                model: Makanan,
+                as: 'makanan'
+            }
+        });
+        const response = {
+            data: comment_makanan,
         }
-    });
-    const response = {
-        status: "SUCCESS",
-        message: "Get All Foods Comment",
-        meta: {
-            total: comment_makanan.length
-        },
-        data: comment_makanan,
+        res.status(ok).json(response);
+        return;
+    } catch (error) {
+        response = {
+            status: "ERROR",
+            message: error.message
+        }
+       return res.status(servererror).json(response);
     }
-    res.status(created).json(response);
-    return;
 };
 
 const handleCommentMakananById = async(req, res) => {
     const uuid = req.params.id;
-    const comment_makanan = await Comment_makanan.findAll({
-        where: {
-            uuid: uuid
-        }
-    });
-    let response = {
-        status: "SUCCESS",
-        message: "Get Comment Detail",
-        data: comment_makanan
-    }
-    if(!comment_makanan){
-        res.status(notfound);
-        res.json({
-            message: "Comment not Found"
+    try {
+        const comment_makanan = await Comment_makanan.findOne({
+            where: {
+                uuid: uuid
+            }
         });
+        let response = {
+            data: comment_makanan
+        }
+        if(!comment_makanan){
+            res.status(notfound);
+            res.json({
+                message: "Comment not Found"
+            });
+            return;
+        }
+        res.status(ok).json(response);
         return;
-    }
-    res.status(created).json(response);
-    return;
+    } catch (error) {
+        response = {
+            status: "ERROR",
+            message: error.message
+        }
+       return res.status(servererror).json(response);
+    } 
 };
 
 const handleCreateCommentMakanan = async(req,res) => {
     const body = req.body;
     try {
         const newComment = await Comment_makanan.create({
-            id_olahraga: body.id_olahraga,
+            id_makanan: req.params.id,
             bintang: body.bintang,
             comment_review: body.comment_review
         });
-
         response = {
-            status: "SUCCESS",
-            message: "Create New Comment",
             data: newComment,
         };
         res.status(created).json(response);
@@ -65,36 +71,54 @@ const handleCreateCommentMakanan = async(req,res) => {
             status: "ERROR",
             message: error.message
         }
-        res.status(servererror).json(response);
+       return res.status(servererror).json(response);
     };
 }
 
 const handleUpdateCommentMakanan = async function(req, res){
-    let response = {}
-    const comment_makanan = Comment_makanan.findOne({
-        where: {
-            uuid: req.params.id
-        }
-    });
 
-    if(!comment_makanan){
-        response = {
-            status: "SUCCESS",
-            message: "Comment not Found"
+    let response = {};
+    try {
+        const uuid = req.params.id;
+        const body = req.body; 
+
+        const comment_makanan = await Comment_makanan.findOne({
+            where: {
+                uuid: uuid
+            }
+        });
+
+        if(!comment_makanan){
+            return res.status(notfound).json({
+                message: "Message You Looking For Is Not Found"
+            });
         }
-        return;
-    }else{
-        comment_makanan.bintang = req.body.bintang
-        comment_makanan.comment_review
-        comment_makanan.save()
-        response = {
-            status: "SUCCESS",
-            message: "Comment Updated",
-            data: comment_makanan
-        }
-    }
-    res.status(created).json(response);
-    return;
+        else{
+            const bintang = req.body.bintang;
+            const comment_review = req.body.comment_review;
+    
+            const updatecomment =await Comment_makanan.update({
+                bintang : bintang,
+                comment_review : comment_review,
+            },{
+                where: {
+                    uuid : uuid
+                }
+            });
+    
+            if(updatecomment){
+                response = {
+                    status: "SUCCESS",
+                    message: "Update Success",
+                }
+                return res.status(created).json(response);
+            }
+        } 
+    }catch (error) {
+        return res.status(servererror).json({
+            error: error.message
+        });
+    };
 };
 
 const handleDeleteComentMakananById = async function(req, res){
@@ -106,7 +130,7 @@ const handleDeleteComentMakananById = async function(req, res){
             },
         });
         if(deleteCommentMakanan){
-            return res.tatus(ok).json({
+            return res.status(ok).json({
                 message: "Comment Has Been Deleted"
             });
         }else{

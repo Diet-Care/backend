@@ -10,24 +10,24 @@ module.exports = function(connection) {
             allowNull: false,
             primaryKey: true
           },
-        judul_makanan:{
-            type: DataTypes.STRING,
+        judul:{
+            type: DataTypes.TEXT,
         },
         deskripsi_singkat:{
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
         },
         deskripsi_lengkap:{
-            type: DataTypes.STRING(255),
+            type: DataTypes.TEXT,
         },
-        img_makanan:{
+        img:{
             type: DataTypes.STRING,
             allowNull: true,
         },
-        tips_makanan:{
-            type: DataTypes.STRING(255),
+        tips:{
+            type: DataTypes.TEXT,
         },
         jumlah_kalori:{
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
         },
         level: {
             type: DataTypes.STRING,

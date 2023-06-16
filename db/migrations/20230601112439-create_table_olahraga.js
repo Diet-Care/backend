@@ -7,24 +7,24 @@ module.exports = {
         allowNull: false,
         primaryKey: true
       },
-      judul_olahraga:{
-          type: Sequelize.DataTypes.STRING,
+      judul:{
+          type: Sequelize.DataTypes.TEXT,
       },
       deskripsi_singkat:{
-          type: Sequelize.DataTypes.STRING,
+          type: Sequelize.DataTypes.TEXT,
       },
       deskripsi_lengkap:{
-          type: Sequelize.DataTypes.STRING,
+          type: Sequelize.DataTypes.TEXT,
       },
-      img_olahraga:{
+      img:{
           type: Sequelize.DataTypes.STRING,
           allowNull: true,
       },
-      tips_olahraga:{
-          type: Sequelize.DataTypes.STRING(255),
+      tips:{
+          type: Sequelize.DataTypes.TEXT,
       },
       jumlah_kalori:{
-          type: Sequelize.DataTypes.STRING,
+          type: Sequelize.DataTypes.TEXT,
       },
       level: {
           type: Sequelize.DataTypes.STRING,

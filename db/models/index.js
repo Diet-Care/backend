@@ -51,6 +51,45 @@ Makanan.hasMany(Comment_makanan, {
     as: 'comment_makanan'
 });
 
+
+
+Jadwal_diet.hasOne(Users, {
+    sourceKey: 'uuid_user',
+    foreignKey: 'uuid',
+    as: 'users'
+});
+Users.hasMany(Jadwal_diet, {
+    sourceKey: 'uuid',
+    foreignKey: 'uuid_user',
+    as: 'jadwal_diet'
+});
+
+Jadwal_diet.hasMany(Makanan, {
+    sourceKey: 'uuid_makanan',
+    foreignKey: 'uuid',
+    as: 'makanan'
+});
+Makanan.hasOne(Jadwal_diet, {
+    sourceKey: 'uuid',
+    foreignKey: 'uuid_makanan',
+    as: 'jadwal_diet'
+});
+
+Jadwal_diet.hasMany(Olahraga, {
+    sourceKey: 'uuid_olahraga',
+    foreignKey: 'uuid',
+    as: 'olahraga'
+});
+
+Olahraga.hasOne(Jadwal_diet, {
+    sourceKey: 'uuid',
+    foreignKey: 'uuid_olahraga',
+    as: 'jadwal_diet'
+});
+
+
+
+
 module.exports = {
     Users,
     Olahraga,
@@ -58,5 +97,6 @@ module.exports = {
     Comment_makanan,
     Comment_olahraga,
     Kontak,
-    Jadwal_diet
+    Jadwal_diet,
+    connection
 };

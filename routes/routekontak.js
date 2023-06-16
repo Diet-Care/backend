@@ -1,15 +1,17 @@
 const express = require('express');
-const { Authorization } = require('../middleware/authorization');
 const { handleKontakAll, handleKontakById, hanldeCreateKontak, handleUpdateKontak, handleDeleteAllKontak, handleDeleteKontakById } = require('../controllers/handleKontak');
+const { auth, admin } = require('../middleware/auth');
 
 const app = express();
 
-const getallmessage = app.get("/kontak", Authorization, handleKontakAll);
-const getmessagebyid = app.get("/kontak/:id", Authorization, handleKontakById);
-const createmessage = app.post("/kontak", Authorization, hanldeCreateKontak);
-const updatemessage = app.put("/kontak/:id", Authorization, handleUpdateKontak);
-const deleteallmessage = app.delete("/kontak", Authorization, handleDeleteAllKontak);
-const deletemessagebyid = app.delete("/kontak/:id", Authorization, handleDeleteKontakById);
+
+const getallmessage = app.get("/kontak",  auth, admin, handleKontakAll);
+const getmessagebyid = app.get("/kontak/:id", auth, admin, handleKontakById);
+const createmessage = app.post("/kontak",  hanldeCreateKontak);
+const updatemessage = app.put("/kontak/:id", handleUpdateKontak);
+
+const deleteallmessage = app.delete("/kontak", auth, admin, handleDeleteAllKontak);
+const deletemessagebyid = app.delete("/kontak/:id", auth, admin, handleDeleteKontakById);
 
 module.exports = {
     getallmessage,
