@@ -306,7 +306,7 @@ Request :
             "deskripsi_lengkap": "string",
             "img": "file",
             "tips": "string",
-            "jumlah_kalori": "integer",
+            "jumlah_kalori": "string",
             "level": "string",
             "kategori": "string"
         }
@@ -325,7 +325,7 @@ Request :
         "deskripsi_lengkap": "string",
         "tips": "string",
         "img": "string",
-        "jumlah_kalori": "integer",
+        "jumlah_kalori": "string",
         "level": "string",
         "kategori": "string"
     }
@@ -356,7 +356,7 @@ Request :
         "deskripsi_lengkap": "string",
         "img": "string",
         "tips": "string",
-        "jumlah_kalori": "integer",
+        "jumlah_kalori": "string",
         "level": "string",
         "kategori": "string"
     }
@@ -384,7 +384,7 @@ Request :
         "deskripsi_lengkap": "string",
         "img": "string",
         "tips": "string",
-        "jumlah_kalori": "integer",
+        "jumlah_kalori": "string",
         "level": "string",
         "kategori": "string"
     }
@@ -412,7 +412,7 @@ Request :
             "deskripsi_lengkap": "string",
             "img": "file",
             "tips": "string",
-            "jumlah_kalori": "integer",
+            "jumlah_kalori": "string",
             "level": "string",
             "kategori": "string"
         }
@@ -466,7 +466,7 @@ Request :
             "deskripsi_lengkap": "string",
             "img": "file",
             "tips": "string",
-            "jumlah_kalori": "integer",
+            "jumlah_kalori": "string",
             "level": "string",
             "kategori": "string"
         }
@@ -485,7 +485,7 @@ Request :
         "deskripsi_lengkap": "string",
         "tips": "string",
         "img": "string",
-        "jumlah_kalori": "integer",
+        "jumlah_kalori": "string",
         "level": "string",
         "kategori": "string"
     }
@@ -516,7 +516,7 @@ Request :
         "deskripsi_lengkap": "string",
         "img": "string",
         "tips": "string",
-        "jumlah_kalori": "integer",
+        "jumlah_kalori": "string",
         "level": "string",
         "kategori": "string"
     }
@@ -544,7 +544,7 @@ Request :
         "deskripsi_lengkap": "string",
         "img": "string",
         "tips": "string",
-        "jumlah_kalori": "integer",
+        "jumlah_kalori": "string",
         "level": "string",
         "kategori": "string"
     }
@@ -572,7 +572,7 @@ Request :
             "deskripsi_lengkap": "string",
             "img": "file",
             "tips": "string",
-            "jumlah_kalori": "integer",
+            "jumlah_kalori": "string",
             "level": "string",
             "kategori": "string"
         }
