@@ -9,7 +9,7 @@ const getidcommentmakanan = app.get("/makanan/:id/comment/:id", auth, handleComm
 const createcommentmakanan = app.post("/makanan/:id/comment", auth, handleCreateCommentMakanan);
 const updatecommentmakanan = app.put("/makanan/:id/comment/:id", auth, handleUpdateCommentMakanan);
 const deletecommentmakananid = app.delete("/makanan/:id/comment/:id", auth,handleDeleteComentMakananById);
-const deleteallcommentmakanan = app.delete("/makanan/:id/comment", auth,admin, handleDeleteAllCommentMakanan);
+const deleteallcommentmakanan = app.delete("/makanan/:id/comment", auth, admin, handleDeleteAllCommentMakanan);
 
 module.exports = {
     getallcommentmakanan,

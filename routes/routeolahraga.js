@@ -16,9 +16,9 @@ const getallolahraga = app.get("/olahraga",  handleolhragaall);
 
 const getidolahraga = app.get("/olahraga/:id", handleolhragaid);
 
-const createolahraga = app.post("/olahraga", auth, handlecreateolhraga);
+const createolahraga = app.post("/olahraga", auth, admin, handlecreateolhraga);
 
-const updateolahraga = app.put("/olahraga/:id", auth, handleupdateolahraga);
+const updateolahraga = app.put("/olahraga/:id", auth, admin, handleupdateolahraga);
 
 const deleteolahraga = app.delete("/olahraga/:id", auth, admin, handledeletolahraga);
 
