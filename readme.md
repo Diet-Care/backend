@@ -83,7 +83,7 @@ ini bagian authentikasi :
 ## AUTHORIZATION
 Request :
 - Header :
-    - "Authorization" : "Bearer <token>"
+    - "Authorization" : "Bearer token"
 
 
 ## register
@@ -180,7 +180,7 @@ Request :
 - Header :
     - Content-Type: application/json
     - Accept: application/json
-    - Authorization : Bearer <token>
+    - Authorization : Bearer {<token>}
     
 - Response : 
     
@@ -214,7 +214,7 @@ Request :
 - Header :
     - Content-Type: application/json
     - Accept: application/json
-    - Authorization : Bearer <token>
+    - Authorization : Bearer {<token>}
     
 - Response : 
     
@@ -243,7 +243,7 @@ Request :
 - Header :
     - Content-Type: application/json
     - Accept: application/json
-    - Authorization : Bearer <token>
+    - Authorization : Bearer {<token>}
     
 - Body : 
 ```json
@@ -278,7 +278,7 @@ Request :
 - Header :
     - Content-Type: application/json
     - Accept: application/json
-    - Authorization : Bearer <token>
+    - Authorization : Bearer {<token>}
      
 - Response : 
     
@@ -296,7 +296,7 @@ Request :
 - Endpoint : https://backend-production-2c47.up.railway.app/olahraga
     - Content-Type: application/json
     - Accept: application/json
-    - Authorization : Bearer <token>
+    - Authorization : Bearer {<token>}
 - Body : 
     - form-data
     ```json
@@ -341,7 +341,6 @@ Request :
 - Header :
     - Content-Type: application/json
     - Accept: application/json
-    - Authorization : Bearer <token>
     
 - Response : 
     
@@ -373,7 +372,6 @@ Request :
 - Header :
     - Content-Type: application/json
     - Accept: application/json
-    - Authorization : Bearer <token>
     
 - Response : 
     
@@ -404,7 +402,7 @@ Request :
 - Header :
     - Content-Type: application/json
     - Accept: application/json
-    - Authorization : Bearer <token>
+    - Authorization : Bearer {<token>}
 - Body : 
     - form-data
     ```json
@@ -438,7 +436,7 @@ Request :
 - Header :
     - Content-Type: application/json
     - Accept: application/json
-    - Authorization : Bearer <token>
+    - Authorization : Bearer {<token>}
 - Response : 
     
 ```json
@@ -458,7 +456,7 @@ Request :
 - Endpoint : https://backend-production-2c47.up.railway.app/makanan
     - Content-Type: application/json
     - Accept: application/json
-    - Authorization : Bearer <token>
+    - Authorization : Bearer {<token>}
 - Body : 
     - form-data
     ```json
@@ -503,7 +501,6 @@ Request :
 - Header :
     - Content-Type: application/json
     - Accept: application/json
-    - Authorization : Bearer <token>
     
 - Response : 
     
@@ -535,7 +532,6 @@ Request :
 - Header :
     - Content-Type: application/json
     - Accept: application/json
-    - Authorization : Bearer <token>
     
 - Response : 
     
@@ -566,7 +562,7 @@ Request :
 - Header :
     - Content-Type: application/json
     - Accept: application/json
-    - Authorization : Bearer <token>
+    - Authorization : Bearer {<token>}
 - Body : 
     - form-data
     ```json
@@ -600,7 +596,7 @@ Request :
 - Header :
     - Content-Type: application/json
     - Accept: application/json
-    - Authorization : Bearer <token>
+    - Authorization : Bearer {<token>}
 - Response : 
     
 ```json
@@ -620,7 +616,7 @@ Request :
 - Header :
     - Content-Type: application/json
     - Accept: application/json
-    - Authorization : Bearer <token>
+    - Authorization : Bearer {<token>}
     
 Response : 
     
@@ -644,7 +640,7 @@ Request :
 - Header :
     - Content-Type: application/json
     - Accept: application/json
-    - Authorization : Bearer <token>
+    - Authorization : Bearer {<token>}
     
 Response : 
 ```json
@@ -661,7 +657,7 @@ Response :
 - Endpoint : https://backend-production-2c47.up.railway.app/olahraga/{uuid_olahraga}/comment
     - Content-Type: application/json
     - Accept: application/json
-    - Authorization : Bearer <token>
+    - Authorization : Bearer {<token>}
 - Request Body : 
     - form-data
     ```json
@@ -689,7 +685,7 @@ Response :
 - Endpoint : https://backend-production-2c47.up.railway.app/olahraga/{uuid_olahraga}/comment/{uuid_comment}
     - Content-Type: application/json
     - Accept: application/json
-    - Authorization : Bearer <token>
+    - Authorization : Bearer {<token>}
 - Request Body : 
     - form-data
     ```json
@@ -718,7 +714,7 @@ Response :
   - Endpoint : https://backend-production-2c47.up.railway.app/olahraga/{uuid_olahraga}/comment/{uuid_comment}
     - Content-Type: application/json
     - Accept: application/json
-    - Authorization : Bearer <token>
+    - Authorization : Bearer{<token>}
   
   Response : 
 
@@ -735,7 +731,7 @@ Response :
   - Endpoint : https://backend-production-2c47.up.railway.app/olahraga/{uuid_olahraga}/comment
     - Content-Type: application/json
     - Accept: application/json
-    - Authorization : Bearer <token>
+    - Authorization : Bearer {<token>}
   
   Response : 
 
@@ -754,7 +750,7 @@ Request :
 - Header :
     - Content-Type: application/json
     - Accept: application/json
-    - Authorization : Bearer <token>
+    - Authorization : Bearer {<token>}
     
 Response : 
     
@@ -778,7 +774,7 @@ Request :
 - Header :
     - Content-Type: application/json
     - Accept: application/json
-    - Authorization : Bearer <token>
+    - Authorization : Bearer {<token>}
     
 Response : 
 ```json
@@ -795,7 +791,7 @@ Response :
 - Endpoint : https://backend-production-2c47.up.railway.app/makanan/{uuid_makanan}/comment
     - Content-Type: application/json
     - Accept: application/json
-    - Authorization : Bearer <token>
+    - Authorization : Bearer {<token>}
 - Request Body : 
     - form-data
     ```json
@@ -823,7 +819,7 @@ Response :
 - Endpoint : https://backend-production-2c47.up.railway.app/makanan/{uuid_makanan}/comment/{uuid_comment}
     - Content-Type: application/json
     - Accept: application/json
-    - Authorization : Bearer <token>
+    - Authorization : Bearer {<token>}
 - Request Body : 
     - form-data
     ```json
@@ -852,7 +848,7 @@ Response :
   - Endpoint : https://backend-production-2c47.up.railway.app/makanan/{uuid_makanan}/comment/{uuid_comment}
     - Content-Type: application/json
     - Accept: application/json
-    - Authorization : Bearer <token>
+    - Authorization : Bearer {<token>}
   
   Response : 
 
@@ -869,7 +865,7 @@ Response :
   - Endpoint : https://backend-production-2c47.up.railway.app/makanan/{uuid_makanan}/comment
     - Content-Type: application/json
     - Accept: application/json
-    - Authorization : Bearer <token>
+    - Authorization : Bearer {<token>}
   
   Response : 
 
@@ -887,7 +883,7 @@ Request :
 - Header :
     - Content-Type: application/json
     - Accept: application/json
-    - Authorization : Bearer <token>
+    - Authorization : Bearer {<token>}
     
 Response : 
     
@@ -993,7 +989,7 @@ Response :
     ]
 }
 ```
-## Get Id Jadwal Diet = role Admin
+## Get Id Jadwal Diet 
 Request :
 
 - Method : GET
@@ -1001,7 +997,7 @@ Request :
 - Header :
     - Content-Type: application/json
     - Accept: application/json
-    - Authorization : Bearer <token>
+    - Authorization : Bearer {<token>}
     
 Response : 
 ```json
@@ -1058,12 +1054,12 @@ Response :
     ]
 }
 ```
-## Create Jadwal Diet = User && Admin
+## Create Jadwal Diet 
 - Method : POST
 - Endpoint : https://backend-production-2c47.up.railway.app/jadwaldiet
     - Content-Type: application/json
     - Accept: application/json
-    - Authorization : Bearer <token>
+    - Authorization : Bearer {<token>}
 - Request Body : 
     - form-data
     ```json
@@ -1134,12 +1130,12 @@ Response :
         }
   }
   ```
-## Update Jadwal Diet = User && Admin
+## Update Jadwal Diet
 - Method : PUT
 - Endpoint : https://backend-production-2c47.up.railway.app/jadwaldiet
     - Content-Type: application/json
     - Accept: application/json
-    - Authorization : Bearer <token>
+    - Authorization : Bearer {<token>}
 - Request Body : 
     - form-data
     ```json
@@ -1160,13 +1156,13 @@ Response :
     "message": "Update Success"
 }
 ```
- ## Delete Jadwal Diet By Id = role User && Admin
+ ## Delete Jadwal Diet By Id 
   Request : 
   - Method : DELETE
   - Endpoint : https://backend-production-2c47.up.railway.app/jadwaldiet/{uuid_jadwal}
     - Content-Type: application/json
     - Accept: application/json
-    - Authorization : Bearer <token>
+    - Authorization : Bearer {<token>}
   Response : 
 
 ```json
@@ -1181,7 +1177,7 @@ Request :
   - Endpoint : https://backend-production-2c47.up.railway.app/jadwaldiet/{uuid_jadwal}
     - Content-Type: application/json
     - Accept: application/json
-    - Authorization : Bearer <token>
+    - Authorization : Bearer {<token>}
 Response : 
 
 ```json
