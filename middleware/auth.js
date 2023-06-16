@@ -27,12 +27,13 @@ const auth = (req, res, next) =>{
             return
         }
         req.user = user
+        console.log("ini masuk sebagai role : ",user);
         next()
     })
 }
 
 const admin =  async(req, res, next) =>{
-    const uuid = req.params.id;
+    const uuid = req.user.sub;
     const user = await Users.findOne({
         where : {
             uuid : uuid
@@ -43,7 +44,8 @@ const admin =  async(req, res, next) =>{
             message : "User Tidak ditemukan"
         });
     }
-    if(user.role == "admin"){
+    console.log("ini role = ",user.role);
+    if(user.role !== "admin"){
         return res.status(forbiden).json({
             message: "Akses Denied"
         })

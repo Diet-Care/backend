@@ -34,7 +34,7 @@ const handleUserId = async(req,res) =>{
             where: {
                 uuid : uuid
             },
-            attributes : ['name', 'email', 'gender', 'umur',  'alamat', 'geografis', 'profesi', 'img_profile', 'profesi', ]
+            attributes : ['name', 'email', 'gender', 'umur',  'alamat', 'geografis', 'profesi','role', 'img_profile', 'profesi', ]
         });
 
         if(!User) {
@@ -60,7 +60,7 @@ const handleUserId = async(req,res) =>{
 const handleUpdateuser= async(req, res) =>{
     const uuid = req.params.id;
     const body = req.body;
-
+    
     try {
         const user = await Users.findOne({
             where: {

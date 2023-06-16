@@ -100,7 +100,7 @@ Request :
 - Body :
 ```json  
 {
-    "username": "string",
+    "name": "string",
     "email": "string",
     "password": "string"
 }
@@ -221,16 +221,16 @@ Request :
 ```json
   {
       "data": {
-              "name": "string",
-              "email": "string",
-              "role": "string",
-              "gender": "string",
-              "umur": "string",
-              "geografis": "string",
-              "profesi": "string",
-              "alamat": "string",
-              "img_profile": "string"
-    }
+          "name": "string",
+          "email": "string",
+          "role": "string",
+          "gender": "string",
+          "umur": "string",
+          "geografis": "string",
+          "profesi": "string",
+          "alamat": "string",
+          "img_profile": "string"
+      }
   }
 ```
 

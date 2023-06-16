@@ -7,10 +7,10 @@ const { admin, auth } = require('../middleware/auth');
 
 const GetAllUser = app.get("/users",  handleuserall);
 
-const getUserId = app.get('/users/:id', auth, admin, handleUserId);
+const getUserId = app.get('/users/:id', handleUserId);
 
-const updateuser = app.put('/users/:id', handleUpdateuser);
-const DeleteUser = app.delete('/users/:id',  handleuserdelete);
+const updateuser = app.put('/users/:id', auth,  handleUpdateuser);
+const DeleteUser = app.delete('/users/:id',  auth, admin, handleuserdelete);
 
 module.exports = {
     GetAllUser,

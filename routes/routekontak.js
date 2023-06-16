@@ -5,7 +5,7 @@ const { auth } = require('../middleware/auth');
 const app = express();
 
 
-const getallmessage = app.get("/kontak",  handleKontakAll);
+const getallmessage = app.get("/kontak",   handleKontakAll);
 const getmessagebyid = app.get("/kontak/:id",  handleKontakById);
 const createmessage = app.post("/kontak",  hanldeCreateKontak);
 const updatemessage = app.put("/kontak/:id", handleUpdateKontak);
