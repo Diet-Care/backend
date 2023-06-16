@@ -7,31 +7,31 @@ module.exports = {
         allowNull: false,
         primaryKey: true
       },
-    judul:{
-        type: Sequelize.DataTypes.STRING,
-    },
-    deskripsi_singkat:{
-        type: Sequelize.DataTypes.STRING,
-    },
-    deskripsi_lengkap:{
-        type: Sequelize.DataTypes.STRING,
-    },
-    img:{
-        type: Sequelize.DataTypes.STRING,
-        allowNull: true,
-    },
-    tips:{
-        type: Sequelize.DataTypes.STRING,
-    },
-    jumlah_kalori:{
-        type: Sequelize.DataTypes.STRING,
-    },
-    level: {
-        type: Sequelize.DataTypes.STRING,
-    },
-    kategori: {
-        type: Sequelize.DataTypes.ENUM('makanan', 'olahraga'),
-    }
+      judul:{
+          type: Sequelize.DataTypes.STRING,
+      },
+      deskripsi_singkat:{
+          type: Sequelize.DataTypes.TEXT,
+      },
+      deskripsi_lengkap:{
+          type: Sequelize.DataTypes.TEXT,
+      },
+      img:{
+          type: Sequelize.DataTypes.STRING,
+          allowNull: true,
+      },
+      tips:{
+          type: Sequelize.DataTypes.TEXT,
+      },
+      jumlah_kalori:{
+          type: Sequelize.DataTypes.STRING,
+      },
+      level: {
+          type: Sequelize.DataTypes.STRING,
+      },
+      kategori: {
+          type: Sequelize.DataTypes.ENUM('makanan', 'olahraga'),
+      }
     }, {
       timestamps: false,
     })

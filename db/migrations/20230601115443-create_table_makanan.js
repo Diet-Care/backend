@@ -11,17 +11,17 @@
           type: Sequelize.DataTypes.STRING,
       },
       deskripsi_singkat:{
-          type: Sequelize.DataTypes.STRING,
+          type: Sequelize.DataTypes.TEXT,
       },
       deskripsi_lengkap:{
-          type: Sequelize.DataTypes.STRING,
+          type: Sequelize.DataTypes.TEXT,
       },
       img:{
           type: Sequelize.DataTypes.STRING,
           allowNull: true,
       },
       tips:{
-          type: Sequelize.DataTypes.STRING,
+          type: Sequelize.DataTypes.TEXT,
       },
       jumlah_kalori:{
           type: Sequelize.DataTypes.STRING,
